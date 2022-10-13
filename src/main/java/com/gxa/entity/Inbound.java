@@ -24,8 +24,6 @@ public class Inbound {
 
     @ApiModelProperty("入库类型")
     private Integer type;
-    @ApiModelProperty("1")
-    private Supplier supplier;
 
 //    private
 //
