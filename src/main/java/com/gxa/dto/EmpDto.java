@@ -19,4 +19,7 @@ public class EmpDto {
 
     @ApiModelProperty("员工状态")
     private Integer status;
+
+    @ApiModelProperty("员工编号")
+    private Integer eid;
 }
