@@ -44,7 +44,7 @@ public class GoodsDetailsController {
 
     //添加
     @PostMapping("/goodsdetails/add")
-    @ApiOperation("商品添加操作")
+    @ApiOperation("商品添加l操作")
     public R addDetail(){
 
         return  R.ok();
