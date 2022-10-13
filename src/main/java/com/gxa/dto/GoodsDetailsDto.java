@@ -14,7 +14,7 @@ import lombok.Data;
  **/
 @Data
 @ApiModel("商品详情")
-public class DetailsDto {
+public class GoodsDetailsDto {
     @ApiModelProperty("id")
     private Integer id;
 }
