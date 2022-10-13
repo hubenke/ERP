@@ -50,7 +50,7 @@ public class MyOrderController {
 
     @PostMapping("/orders/add")
     @ApiOperation("添加销售订单")
-    public R addUser(MyOrder myOrder){
+    public R addUser(@RequestBody MyOrder myOrder){
         try {
             return R.ok("添加成功");
         } catch (Exception e) {
