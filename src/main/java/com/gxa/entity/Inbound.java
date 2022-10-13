@@ -24,13 +24,14 @@ public class Inbound {
 
     @ApiModelProperty("入库类型")
     private Integer type;
-    @ApiModelProperty("1")
-    private Supplier supplier;
 
-//    private
-//
-//    private
-//
-//    private
+    @ApiModelProperty("采购单")
+    private Purchase purchase;
+
+    @ApiModelProperty("员工")
+    private Emp emp;
+
+    @ApiModelProperty("仓库")
+    private Repository repository;
 
 }
