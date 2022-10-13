@@ -8,29 +8,30 @@ import java.util.Date;
 
 @Data
 @ApiModel("入库表实体类")
-public class InBound {
+public class Inbound {
 
     @ApiModelProperty("入库表id")
-    private Integer wid;
+    private Integer id;
 
     @ApiModelProperty("入库时间")
-    private Date n;
+    private Date inTime;
 
     @ApiModelProperty("入库编号")
-    private String c;
+    private String inboundno;
 
     @ApiModelProperty("入库状态")
-    private String b;
+    private String status;
 
     @ApiModelProperty("入库类型")
-    private Integer a;
-//
-//    private
-//
-//    private
-//
-//    private
-//
-//    private
+    private Integer type;
+
+    @ApiModelProperty("采购单")
+    private Purchase purchase;
+
+    @ApiModelProperty("员工")
+    private Emp emp;
+
+    @ApiModelProperty("仓库")
+    private Repository repository;
 
 }
