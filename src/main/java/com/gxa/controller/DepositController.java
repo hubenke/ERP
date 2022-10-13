@@ -32,6 +32,8 @@ public class DepositController {
 //      list.add("准备");
 //      list.add("接收");
 
+
+
       PageHelper.startPage(page, limit);  //使用此方法进行分页
 
       List<Inbound> inbounds = this.inBoundService.queryAll(); //调用Service
