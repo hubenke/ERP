@@ -2,11 +2,14 @@ package com.gxa.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+
 @Data
+
 @TableName("emp")
 @ApiModel("员工表实体类")
 public class Emp {
@@ -41,3 +44,5 @@ public class Emp {
 //    @TableField("user_id")
 //    private User userId;
 }
+
+

@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.InboundDto;
@@ -25,22 +26,31 @@ public class DepositController {
    //查询
    @ApiOperation("入库页面查询接口")
    @GetMapping("/ware/dep")
-   public R query(@ApiParam("接收参数的dto")InboundDto inboundDto, @ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
-//      List list  = new ArrayList();
-//      list.add("数据");
-//      list.add("来了");
-//      list.add("准备");
-//      list.add("接收");
-
-      PageHelper.startPage(page, limit);  //使用此方法进行分页
-
-      List<Inbound> inbounds = this.inBoundService.queryAll(); //调用Service
-
-      Map map = new HashMap();
-      map.put("inbounds",inbounds);
+   public R query(@ApiParam("接收参数的dto") InboundDto inboundDto, @ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
 
 
-      return R.ok(map);
+      try {
+//               PageHelper.startPage(page, limit);  //使用此方法进行分页
+
+//      List<Inbound> inbounds = this.inBoundService.queryAll(); //调用Service
+//
+         List list  = new ArrayList();
+         list.add("数据");
+         list.add("来了");
+         list.add("准备");
+         list.add("接收");
+
+         Map map = new HashMap();
+         map.put("inbounds",list);
+
+         return R.ok(map);
+      }catch (Exception e){
+         e.printStackTrace();
+
+         return R.error("查询失败");
+      }
+
+
    }
 
    //完成入库
