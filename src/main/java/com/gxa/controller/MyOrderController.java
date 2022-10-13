@@ -2,12 +2,14 @@ package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gxa.common.uitls.R;
+import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.Goods;
 import com.gxa.entity.MyOrder;
 import com.gxa.service.MyOrderService;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +26,12 @@ public class MyOrderController {
     private  MyOrderService myOrderService;
 
     // @RequiresPermissions("order:list") 权限控制注解
-    @GetMapping("/orders/{current}/{limit}")
+    @GetMapping("/orders")
     @ApiOperation("查询所有销售订单")
-    public R list(@PathVariable("current") int current,@PathVariable("limit") int limit){
+    public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
 //        List<MyOrder> myOrders = myOrderService.queryAll();
         Goods goods = new Goods(8,"ppp","lll",20.0,"kkk",0);
         MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
-
 
         try {
 
@@ -49,7 +50,7 @@ public class MyOrderController {
 
     @PostMapping("/orders/add")
     @ApiOperation("添加销售订单")
-    public R addUser(MyOrder myOrder){
+    public R addUser(@RequestBody MyOrder myOrder){
         try {
             return R.ok("添加成功");
         } catch (Exception e) {
@@ -59,10 +60,11 @@ public class MyOrderController {
         }
     }
 
-    @GetMapping("/orders/queryByCondition/{current}/{limit}")
+    @GetMapping("/orders/queryByCondition")
     @ApiOperation("根据条件查询销售订单")
-    public R queryByCondition(@PathVariable("current") int current, @PathVariable("limit") int limit, @RequestBody MyOrder myOrder){
+    public R queryByCondition(@RequestBody MyOrderDto myOrderDto){
         try {
+            System.out.println("myOrderDto------------------" + myOrderDto.toString());
             Map<String,Object> map = new HashMap<>();
             List<MyOrder> orders = new ArrayList<>();
             map.put("result", orders);
