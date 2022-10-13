@@ -1,16 +1,9 @@
 package com.gxa.controller;
 
-import com.gxa.dto.GoodsDto;
-import com.gxa.entity.Goods;
-import com.gxa.utils.R;
-import io.swagger.annotations.Api;
+import com.gxa.common.uitls.R;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author:
@@ -21,51 +14,33 @@ import java.util.Map;
  * @Version:
  **/
 @RestController
-@Api(tags = "商品列表接口")
 public class GoodsController {
     //查询
     @GetMapping("/goods/list")
-    @ApiOperation("商品列表")
     public R queryAll(){
-        Goods goods =new Goods(1120,"神仙水",null,1200.00,800.00,"sk-2",1);
-        List<Goods> list =new ArrayList<>();
-        list.add(goods);
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
-
-        return R.ok(map);
-
-
-//        R r =new R(0,"查询操作",null,null);
-//        return r;
+//        Result result =new Result(0,"查询操作",null,null);
+        return R.ok();
     }
 
     //  添加商品
-    @ApiOperation("添加商品")
     @PostMapping("/goods/add")
     public R insert(){
+//        Result result=new Result(0,"增加操作",null,null);
         return  R.ok();
     }
     //根据id编辑
-    @ApiOperation("商品编辑操作")
-    @PostMapping("/goods/updats")
-    public R update(Integer gid,@RequestBody Goods goods){
+    @PostMapping("goods/updats")
+    public R update(Integer gid){
+//        Result result =new Result(0,"修改操作",null,null);
         return R.ok();
     }
-
 
     //根据id删除
-    @ApiOperation("商品删除操作")
     @DeleteMapping("/goods/del")
     public R delete(Integer gid){
+//        Result result =new Result(0,"删除操作",null,null);
         return R.ok();
 
-    }
-    @GetMapping("/goods/querybytest")
-    @ApiOperation("根据商品条件查询")
-    public R queryById(GoodsDto goodsDto){
-
-        return R.ok();
     }
 
 

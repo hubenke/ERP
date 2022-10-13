@@ -20,4 +20,8 @@ public class MyOrderDto {
     private Integer status;
     @ApiModelProperty("提交时间")
     private Date submitTime;
+    @ApiModelProperty("收货人/用户账号")
+    private String receiver;
+    @ApiModelProperty("订单来源")
+    private String source;
 }

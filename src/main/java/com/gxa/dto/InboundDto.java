@@ -1,4 +1,4 @@
-package com.gxa.entity;
+package com.gxa.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,8 +7,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@ApiModel("入库表实体类")
-public class Inbound {
+@ApiModel("入库数据传输模型")
+public class InboundDto {
 
     @ApiModelProperty("入库表id")
     private Integer id;
@@ -25,13 +25,5 @@ public class Inbound {
     @ApiModelProperty("入库类型")
     private Integer type;
 
-    @ApiModelProperty("采购单")
-    private Purchase purchase;
-
-    @ApiModelProperty("员工")
-    private Emp emp;
-
-    @ApiModelProperty("仓库")
-    private Repository repository;
 
 }

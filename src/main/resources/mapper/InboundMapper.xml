@@ -20,14 +20,8 @@
         UPDATE inbound SET emp_id = null where emp_id=#{emp_id}
     </delete>
     <select id="queryAll" resultMap="inBoundResultMap">
-     SELECT b.id,b.in_time,b.inboundno,b.`status`,b.type,s.sname,r.rname,e.ename,emp.ename as staff
+     SELECT b.id,b.in_time,b.inboundno,b.`status`,b.type
      FROM inbound b
-     left join repository r on b.repository_id = r.rid
-     left join purchase p on b.purchase_id = P.id
-     left join supplier s on b.supplier_id = s.sid
-     left join emp e on b.emp_id = e.eid
-     left join repository rep on b.repository_id = rep.rid
-     left join emp  on emp.eid = rep.eid
     </select>
 
 </mapper>

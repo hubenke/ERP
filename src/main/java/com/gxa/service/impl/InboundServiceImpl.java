@@ -1,5 +1,6 @@
 package com.gxa.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.entity.Inbound;
 import com.gxa.mapper.InboundMapper;
 import com.gxa.service.InBoundService;
@@ -16,6 +17,7 @@ public class InboundServiceImpl implements InBoundService {
 
     @Override
     public List<Inbound> queryAll() {
+
         List<Inbound> inbounds = this.inBoundMapper.queryAll();
         return inbounds;
     }

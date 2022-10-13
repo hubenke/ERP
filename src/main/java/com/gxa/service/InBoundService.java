@@ -1,5 +1,6 @@
 package com.gxa.service;
 
+import com.gxa.dto.InboundDto;
 import com.gxa.entity.Inbound;
 
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 public interface InBoundService {
     List<Inbound> queryAll(); //查询所以
 
+
+//    Integer count(InboundDto inboundDto); 查询条数
 
     void add();  //入库  添加操作
 

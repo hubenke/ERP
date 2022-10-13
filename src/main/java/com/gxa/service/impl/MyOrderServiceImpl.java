@@ -2,11 +2,14 @@ package com.gxa.service.impl;
 
 import com.gxa.entity.MyOrder;
 import com.gxa.service.MyOrderService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MyOrderServiceImpl  implements MyOrderService {
     @Override
+
     public List<MyOrder> queryAll() {
         return null;
     }
