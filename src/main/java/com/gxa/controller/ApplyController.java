@@ -2,6 +2,8 @@ package com.gxa.controller;
 
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
+import com.gxa.entity.Apply;
+import com.gxa.entity.ApplyDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -67,7 +69,7 @@ public class ApplyController {
 //        return r;
 //    }
 
-    /*@PostMapping("/apply/add/goodsAdd")
+    @PostMapping("/apply/add/goodsAdd")
     @ApiOperation(value = "添加请购单的商品添加保存")
     public R applyGoodsAdd(@RequestBody ApplyDetail applyDetail){
         List list =new ArrayList();
@@ -75,12 +77,12 @@ public class ApplyController {
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
-需要
+
         return R.ok(map);
-    }*/
+    }
 
 
-    /*@PostMapping("/apply/add/infoAdd")
+    @PostMapping("/apply/add/infoAdd")
     @ApiOperation(value = "请购单添加保存")
     public R applyAdd(@RequestBody Apply apply){
         List list =new ArrayList();
@@ -89,10 +91,10 @@ public class ApplyController {
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
-需要
+
 
         return R.ok(map);
-    }*/
+    }
 
 //    @ApiOperation(value = "点击编辑，返回请购单编号，展示请购单信息")
 //    @GetMapping("/apply/update/info/{sid}")
@@ -106,7 +108,7 @@ public class ApplyController {
 //
 //    }
 
-    /*@ApiOperation("请购单编辑保存")
+    @ApiOperation("请购单编辑保存")
     @PutMapping("/apply/update")
     public R applyupdate(@RequestBody Apply apply) {
         List list =new ArrayList();
@@ -114,10 +116,10 @@ public class ApplyController {
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
-需要
+
 
         return R.ok(map);
-    }*/
+    }
 
 
 
@@ -158,7 +160,7 @@ public class ApplyController {
 
 
 
-    /*@ApiOperation("指派员工保存，返回当前请购单编号和指派的员工姓名")
+    @ApiOperation("指派员工保存，返回当前请购单编号和指派的员工姓名")
     @PutMapping("/apply/edit/{applyno}")
     public R updateEmp(@PathVariable("applyno") Integer applyno, @ApiParam("指派的员工姓名") String ename) {
 
@@ -167,7 +169,7 @@ public class ApplyController {
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
-需要
+
 
         return R.ok(map);
     }
@@ -211,5 +213,5 @@ public class ApplyController {
 
 
         return R.ok(map);
-    }*/
+    }
 }
