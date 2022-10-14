@@ -17,17 +17,17 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public List<Supplier> queryAll() {
 
-        List<Supplier> suppliers = this.supplierMapper.queryAll();
+//        List<Supplier> suppliers = this.supplierMapper.queryAll();
 
-        return suppliers;
+        return null;
     }
 
     @Override
     public List<Region> querySite() {
 
-         this.supplierMapper.selectList(null);
+        List<Region> regionList = this.supplierMapper.queryRegions();
 
-        return null;
+        return regionList;
     }
 
 

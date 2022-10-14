@@ -27,7 +27,7 @@ public class CompanyController {
         list.add("销售代表-销售经理-总经理-财务");
 
         Map map = new HashMap();
-        map.put("公司架构",list);
+        map.put("Company",list);
 
         return R.ok(map);
     }

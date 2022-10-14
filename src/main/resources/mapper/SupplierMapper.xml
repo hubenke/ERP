@@ -10,5 +10,9 @@
         SELECT s.sid,s.origin,s.sname,s.`range`,e .ename,s.wcreate_time
         FROM `supplier`s,emp e
     </select>
+    <select id="queryRegions" resultType="Region">
+        SELECT r.id,r.province,r.town,r.address
+        FROM region r
+    </select>
 
 </mapper>
