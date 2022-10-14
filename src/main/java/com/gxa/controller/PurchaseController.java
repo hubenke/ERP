@@ -3,6 +3,7 @@ package com.gxa.controller;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseDto;
 import com.gxa.entity.Purchase;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@ApiModel("采购单接口")
 public class PurchaseController {
     @GetMapping("/purchase/list")
     @ApiOperation("查询所有采购单")

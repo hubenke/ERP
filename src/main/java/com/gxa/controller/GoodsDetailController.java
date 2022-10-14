@@ -16,23 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author:
- * @ClassName:DetailsController
- * @Package:com.gxa.controller.DetailsController
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
+
 @RestController
 @Api(tags = "销售详情接口")
-public class GoodsDetailsController {
+public class GoodsDetailController {
 
     //查询
     @GetMapping("/goodsdetail/query")
     @ApiOperation("查询列表商品")
     public R queryAllDetail(){
-        GoodsDetail goodsDetail = new GoodsDetail(1,"鞋子","男鞋","黑色",39,"板鞋","双",1170);
+        GoodsDetail goodsDetail = new GoodsDetail(1,1,"男鞋","黑色",39,"板鞋","双",1170);
         List<GoodsDetail> lists = new ArrayList<>();
         lists.add(goodsDetail);
         Map<String,Object> map = new HashMap<>();

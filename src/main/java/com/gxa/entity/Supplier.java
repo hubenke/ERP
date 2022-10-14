@@ -42,8 +42,9 @@ class Supplier {
     private    String qq;
 
 
-//    @ApiModelProperty(value = "区域",name = "区域")
-//    private Region region;
+    @ApiModelProperty(value = "区域",name = "区域")
+    private Region region;
+
     @ApiModelProperty(value = "商品id",name = "商品id")
          private String goods;
 

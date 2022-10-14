@@ -2,6 +2,7 @@ package com.gxa.controller;
 
 
 import com.gxa.common.uitls.R;
+import io.swagger.annotations.ApiModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

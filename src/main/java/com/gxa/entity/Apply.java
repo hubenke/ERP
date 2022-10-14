@@ -16,17 +16,28 @@ class Apply {
     @ApiModelProperty("请购单编号")
     private Integer applyno;
 
+
+
     @ApiModelProperty(value = "创建时间",name = "创建时间")
-    private Date createTime;
+    private
+    Date createTime;
+
 
     @ApiModelProperty(value = "备注",name = "备注")
     private String remark;
 
+
+
+    @ApiModelProperty(value = "请购发起人",name = "请购发起人")
+    private String apply_launch;
+
+
+
     @ApiModelProperty(value = "负责人",name = "负责人")
-    private String launchMan;
+    private String principal;
 
     @ApiModelProperty(value = "审核人",name = "审核人")
-    private String checkMan;
+    private String apply_checker;
 
     @ApiModelProperty(value = "员工",name = "员工")
     private Emp emp;

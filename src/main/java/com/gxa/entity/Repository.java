@@ -28,8 +28,7 @@ public class Repository {
     @TableField("shelves_num")
     private Integer shelvesNum;
 
-    @ApiModelProperty("员工id")
-    @TableField("emp_id")
-    private Emp empId;
+    @ApiModelProperty("仓库管理员")
+    private Emp storeManager;
 }
 

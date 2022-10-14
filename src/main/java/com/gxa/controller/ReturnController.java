@@ -3,6 +3,8 @@ package com.gxa.controller;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ReturnBillDto;
 import com.gxa.entity.ReturnBill;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@ApiModel("退货单接口")
 public class ReturnController {
     @GetMapping("/return/list")
     @ApiOperation("查询所有退货单")
