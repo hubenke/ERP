@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.PurchaseMapper">
+
+    <resultMap id="purchaseResultMap" type="purchase">
+        <id property="id" column="id"></id>
+        <result property="purchaseNo" column="purchaseno"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="status" column="status"></result>
+        <result property="supplier.sid" column="sid"></result>
+        <result property="supplier.sname" column="sname"></result>
+        <result property="emp.ename" column="principal"></result>
+        <result property="emp.ename" column="purchase_handler"></result>
+        <result property="emp.ename" column="purchase_checker"></result>
+        <result property="emp.ename" column="finance_checker"></result>
+    </resultMap>
+    <select id="queryAll" resultMap="purchaseResultMap">
+        select p.id,p.create_time,p.purchaseno,p.status,s.sid,s.sname,e.ename principal,e1.ename purchase_handler,e2.ename purchase_checker,e3.ename finance_checker
+        from purchase p
+        left join emp e1 on e1.eid = p.purchase_handler
+        left join emp e2 on e2.eid = p.purchase_checker
+        left join emp e3 on e3.eid = p.finance_checker
+        left join supplier s on p.supplier_id = s.sid
+        left join apply a on p.apply_id = a.id
+        left join emp e on a.principal = e.eid
+        <where>
+                <if test="status != null ">
+                    p.status = #{status}
+                </if>
+                <if test="createTime != null">
+                    p.create_time = #{createTime}
+                </if>
+                <if test="sname != null and sname != ''">
+                    s.sname = #{sname}
+                </if>
+                <if test="principal != null">
+                    a.principal = #{principal}
+                </if>
+        </where>
+    </select>
+
+</mapper>

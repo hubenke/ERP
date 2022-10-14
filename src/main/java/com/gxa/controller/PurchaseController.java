@@ -3,8 +3,10 @@ package com.gxa.controller;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseDto;
 import com.gxa.entity.Purchase;
+import com.gxa.service.PurchaseService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,6 +17,10 @@ import java.util.Map;
 @RestController
 @ApiModel("采购单接口")
 public class PurchaseController {
+
+    @Autowired
+    private PurchaseService purchaseService;
+
     @GetMapping("/purchase/list")
     @ApiOperation("查询所有采购单")
     public R queryAll(){
@@ -34,14 +40,13 @@ public class PurchaseController {
         }
     }
 
-    @GetMapping("/queryPurchaseByCondition/list")
+    @GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
     public R queryPurchaseByCondition(PurchaseDto purchaseDto){
-        Purchase purchase = new Purchase();
 
         try{
-            List<Purchase> purchases = new ArrayList<>();
-            purchases.add(purchase);
+            List<Purchase> purchases = this.purchaseService.queryAll(purchaseDto);
+
             Map<String,Object> map = new HashMap<>();
             map.put("purchases",purchases);
 
