@@ -23,12 +23,12 @@ public class Repository {
     @ApiModelProperty("区域数量")
     @TableField("area_num")
     private Integer areaNum;
+    
+    @ApiModelProperty("仓库管理员")
+    private Integer storemanager;
 
     @ApiModelProperty("货架数量")
     @TableField("shelves_num")
     private Integer shelvesNum;
-
-    @ApiModelProperty("仓库对象")
-    private Repository repository;
 }
 
