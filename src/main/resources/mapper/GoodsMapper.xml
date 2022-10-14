@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.GoodsMapper">
+    <resultMap id="GoodsResultMap" type="goods">
+        <id column="gid" property="gid"/>
+        <result column="gname" property="gname"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="buy_price" property="buyPrice"/>
+        <result column="brand" property="brand"/>
+        <result column="status" property="status"/>
+        <result column="color" property="goodsDetail.color"/>
+        <result column="size" property="goodsDetail.size"/>
+        <result column="spec" property="goodsDetail.spec"/>
+        <result column="realqty" property="stock.realQty"/>
+    </resultMap>
+
+
+    <select id="queryGoods" resultMap="GoodsResultMap">
+        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty
+        FROM goods g
+        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid
+        LEFT JOIN stock s ON  s.goods_id = g.gid
+
+    </select>
+    <select id="queryAllByGoodsDto" resultMap="GoodsResultMap">
+        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty
+        FROM goods g
+        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid
+        LEFT JOIN stock s ON  s.goods_id = g.gid
+        <where>
+            <if test="gid != null">
+                g.gid = #{gid}
+            </if>
+            <if test="gname != null and gname != ''">
+                g.gname = #{gname}
+            </if>
+            <if test="brand != null and brand != ''">
+                g.brand = #{brand}
+            </if>
+            <if test="status != null">
+                g.status = #{status}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -4,9 +4,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("库存模型")
 @TableName("stock")
 public class Stock {
@@ -31,6 +35,5 @@ public class Stock {
 
     @ApiModelProperty("商品实体类")
     private Goods goods;
-
 
 }

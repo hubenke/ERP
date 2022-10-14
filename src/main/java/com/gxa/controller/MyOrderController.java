@@ -1,9 +1,6 @@
 package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.Goods;
@@ -32,12 +29,7 @@ public class MyOrderController {
     @GetMapping("/orders")
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
-        //Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
-        //MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
         try {
-            //List<MyOrder> orders = new ArrayList<>();
-            //orders.add(myOrder);
-           PageHelper.startPage(page, limit);
             List<MyOrder> myOrders = this.myOrderService.queryAll();
             System.out.println("myOrders:----------"+myOrders.toString());
             Map<String,Object> map = new HashMap<>();
@@ -70,7 +62,6 @@ public class MyOrderController {
             List<MyOrder> queryByConditionMyOrders = this.myOrderService.queryByCondition(myOrderDto);
             System.out.println("myOrderDto------------------" + myOrderDto.toString());
             Map<String,Object> map = new HashMap<>();
-            List<MyOrder> orders = new ArrayList<>();
             map.put("result", queryByConditionMyOrders);
 
             R r = R.ok(map);

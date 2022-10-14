@@ -1,5 +1,6 @@
 package com.gxa.service.impl;
 
+import com.gxa.dto.GoodsDto;
 import com.gxa.entity.Goods;
 import com.gxa.mapper.GoodsMapper;
 import com.gxa.service.GoodsService;
@@ -8,14 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author:
- * @ClassName:GoodsServiceImpl
- * @Package:com.gxa.service.impl.GoodsServiceImpl
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
 
 @Service
 public class GoodsServiceImpl  implements GoodsService {
@@ -25,6 +18,12 @@ public class GoodsServiceImpl  implements GoodsService {
     public List<Goods> queryGoods() { //查询所有
         List<Goods> goods = this.goodsMapper.queryGoods();
         return goods;
+    }
+
+    @Override
+    public List<Goods> queryAllByGoodsDto(GoodsDto goodsDto) {
+        List<Goods> goodsList = this.goodsMapper.queryAllByGoodsDto(goodsDto);
+        return goodsList;
     }
 
     @Override
