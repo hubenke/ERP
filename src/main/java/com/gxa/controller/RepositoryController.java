@@ -17,9 +17,9 @@ public class RepositoryController {
 //    @Autowired
 //    private RepositoryService repositoryService;
 
-    @GetMapping("/repository/list")
-    @ApiOperation("查询仓库数据")
-    public R empList(){
+    @GetMapping("/repository/structure")
+    @ApiOperation("点击仓库结构，呈现数据")
+    public R queryStructure(){
         List repositories = new ArrayList();
         repositories.add("s");
         repositories.add("2");
@@ -28,9 +28,9 @@ public class RepositoryController {
         map.put("repositories",repositories);
         return R.ok(map);
     }
-    @PostMapping("/repository/add")
-    @ApiOperation("添加仓库数据")
-    public R addRepository(@RequestBody Repository repository){
+    @PostMapping("/repository/regionAdd")
+    @ApiOperation("添加仓库结构区域数据")
+    public R addRegion(@RequestBody Repository repository){
         try {
             return R.ok("添加成功");
         }catch (Exception e){
@@ -38,6 +38,19 @@ public class RepositoryController {
             return R.error("添加失败");
         }
     }
+
+    @PostMapping("/repository/cargoAdd")
+    @ApiOperation("添加仓库结构货架数据")
+    public R addCargo(@RequestBody Repository repository){
+        try {
+            return R.ok("添加成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("添加失败");
+        }
+    }
+
+
     @PutMapping("/repository/{rid}")
     @ApiOperation("根据id修改仓库数据")
     public R updateRepository(@PathVariable("rid") Integer rid){
@@ -48,5 +61,40 @@ public class RepositoryController {
             return R.error("修改失败");
         }
     }
+
+
+
+
+    @GetMapping("/repository/warehouse")
+    @ApiOperation("点击仓储管理，呈现数据")
+    public R  queryWarehouse(){
+        List repositories = new ArrayList();
+        repositories.add("s");
+        repositories.add("2");
+        repositories.add("p");
+        Map map = new HashMap();
+        map.put("repositories",repositories);
+        return R.ok(map);
+    }
+
+
+
+    @GetMapping("/repository/sift")
+    @ApiOperation("仓促管理数据筛选")
+    public R  queryDto(){
+        List repositories = new ArrayList();
+        repositories.add("s");
+        repositories.add("2");
+        repositories.add("p");
+        Map map = new HashMap();
+        map.put("repositories",repositories);
+        return R.ok(map);
+    }
+
+
+
+
+
+
 
 }
