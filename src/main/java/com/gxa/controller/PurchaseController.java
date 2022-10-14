@@ -78,10 +78,15 @@ public class PurchaseController {
 
     @PutMapping("/purchase/edit")
     @ApiOperation("修改采购单")
-    public R updatePurchaseById(@RequestBody Purchase purchase){
+    public R updatePurchaseById(Purchase purchase){
 
         try{
-            return R.ok("修改成功");
+            int i = this.purchaseService.update(purchase);
+            if(i == 0) {
+                return R.ok("修改成功");
+            }else{
+                return R.error(1,"修改失败");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return R.error("修改失败");

@@ -9,4 +9,6 @@ public interface PurchaseService {
     List<Purchase> queryAll(PurchaseDto purchaseDto);
 
     int add(Purchase purchase);
+
+    int update(Purchase purchase);
 }
