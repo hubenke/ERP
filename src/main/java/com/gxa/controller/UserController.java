@@ -37,6 +37,10 @@ public class UserController {
     @ApiOperation("用户登录")
     @PostMapping("/user/login")
     public R login(User user){
+
+
+
+
         //Subject subject = SecurityUtils.getSubject();
         //根据传过来的用户名 和 密码创建一个token
         //String jwtToken = JwtUtil.getJwtToken(user.getUname(),user.getPassword());

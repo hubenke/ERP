@@ -15,14 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author:
- * @ClassName:GoodsController
- * @Package:com.gxa.controller.GoodsController
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
+
 @RestController
 @Api(tags = "商品列表")
 public class GoodsController {
