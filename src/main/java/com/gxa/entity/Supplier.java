@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @ApiModel("供应商")
 public
@@ -41,11 +43,17 @@ class Supplier {
     @ApiModelProperty(value = "qq",name = "qq")
     private    String qq;
 
+    @ApiModelProperty("供应商引进人")
+    private Integer introducer;
+
+    @ApiModelProperty("建档时间")
+    private Date createTime;
 
     @ApiModelProperty(value = "区域",name = "区域")
     private Region region;
 
     @ApiModelProperty(value = "商品id",name = "商品id")
          private String goods;
+
 
 }

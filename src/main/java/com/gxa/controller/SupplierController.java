@@ -21,13 +21,14 @@ public
 class SupplierController {
     @ApiOperation(value = "点击供应商，供应商页面数据展示")
     @GetMapping("/suppiler/slist/")
-    public
-    R queryAll() {
+    public R queryAll() {
 
         List list =new ArrayList();
         list.add("可以传");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
+
+
 
 
 
