@@ -1,5 +1,7 @@
 package com.gxa.dto;
 
+import com.gxa.entity.Purchase;
+import com.gxa.entity.Repository;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,6 +26,12 @@ public class InboundDto {
 
     @ApiModelProperty("入库类型")
     private Integer type;
+
+    @ApiModelProperty("采购单引用")
+    private Purchase purchase;
+
+    @ApiModelProperty("仓库引用")
+    private Repository repository;
 
 
 }
