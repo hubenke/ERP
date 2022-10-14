@@ -25,7 +25,7 @@ public class GoodsDetailController {
     @GetMapping("/goodsdetail/query")
     @ApiOperation("查询列表商品")
     public R queryAllDetail(){
-        GoodsDetail goodsDetail = new GoodsDetail(1,"鞋子","男鞋","黑色",39,"板鞋","双",1170);
+        GoodsDetail goodsDetail = new GoodsDetail(1,1,"男鞋","黑色",39,"板鞋","双",1170);
         List<GoodsDetail> lists = new ArrayList<>();
         lists.add(goodsDetail);
         Map<String,Object> map = new HashMap<>();

@@ -22,8 +22,8 @@ public class GoodsDetail {
     @ApiModelProperty("id")
     private Integer did;
 
-    @ApiModelProperty("商品一级类别")
-    private String  typeA;
+    @ApiModelProperty("商品一级类别  ，1对应鞋子 2对应化妆品，3对应手机"  )
+    private Integer  typeA;
 
     @ApiModelProperty("商品二级类别")
     private String  typeB;

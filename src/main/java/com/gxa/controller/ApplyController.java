@@ -19,7 +19,7 @@ import java.util.Map;
 public class ApplyController {
 
     @ApiOperation(value = "点击请购单，请购单页面数据展示")
-    @GetMapping("/apply/alist")
+    @GetMapping("/apply/applylist")
     public
     R queryAll() {
 
