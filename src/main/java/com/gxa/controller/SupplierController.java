@@ -113,7 +113,8 @@ class SupplierController {
     public R queryGoods() {
 
         List list =new ArrayList();
-        list.add(11);
+        list.add(1111);
+        list.add(2222);
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
