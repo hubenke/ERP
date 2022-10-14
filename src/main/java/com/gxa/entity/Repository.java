@@ -28,7 +28,7 @@ public class Repository {
     @TableField("shelves_num")
     private Integer shelvesNum;
 
-    @ApiModelProperty("仓库管理员")
-    private Emp storeManager;
+    @ApiModelProperty("仓库对象")
+    private Repository repository;
 }
 
