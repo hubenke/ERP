@@ -1,6 +1,9 @@
 package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.Goods;
@@ -29,17 +32,16 @@ public class MyOrderController {
     @GetMapping("/orders")
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
-//        List<MyOrder> myOrders = myOrderService.queryAll();
-        Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
-        MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
-
+        //Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
+        //MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
         try {
-
-            List<MyOrder> orders = new ArrayList<>();
-            orders.add(myOrder);
-            System.out.println("orders:----------"+orders.toString());
+            //List<MyOrder> orders = new ArrayList<>();
+            //orders.add(myOrder);
+           PageHelper.startPage(page, limit);
+            List<MyOrder> myOrders = this.myOrderService.queryAll();
+            System.out.println("myOrders:----------"+myOrders.toString());
             Map<String,Object> map = new HashMap<>();
-            map.put("orders",orders);
+            map.put("myOrders",myOrders);
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,6 +54,7 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
+            this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {
 
