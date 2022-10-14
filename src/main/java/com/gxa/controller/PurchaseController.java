@@ -42,7 +42,7 @@ public class PurchaseController {
 
     @GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryPurchaseByCondition(PurchaseDto purchaseDto){
+    public R queryByCondition(PurchaseDto purchaseDto){
 
         try{
             List<Purchase> purchases = this.purchaseService.queryAll(purchaseDto);
@@ -60,10 +60,15 @@ public class PurchaseController {
 
     @PostMapping("/purchase/add")
     @ApiOperation("添加采购单")
-    public  R addPurchase(@RequestBody Purchase purchase){
+    public  R addPurchase(Purchase purchase){
 
         try{
-            return R.ok("添加成功");
+            int i = this.purchaseService.add(purchase);
+            if(i == 0) {
+                return R.ok("添加成功");
+            }else{
+                return R.error(1,"添加失败");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return R.error("添加失败");
@@ -73,10 +78,15 @@ public class PurchaseController {
 
     @PutMapping("/purchase/edit")
     @ApiOperation("修改采购单")
-    public R updatePurchaseById(@RequestBody Purchase purchase){
+    public R updatePurchaseById(Purchase purchase){
 
         try{
-            return R.ok("修改成功");
+            int i = this.purchaseService.update(purchase);
+            if(i == 0) {
+                return R.ok("修改成功");
+            }else{
+                return R.error(1,"修改失败");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return R.error("修改失败");
