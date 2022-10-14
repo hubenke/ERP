@@ -2,7 +2,9 @@ package com.gxa.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 @ApiModel("供应商")
 public
 class Supplier {
