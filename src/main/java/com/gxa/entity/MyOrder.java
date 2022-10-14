@@ -1,5 +1,7 @@
 package com.gxa.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -12,6 +14,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@TableName("myorder")
 @ApiModel("销售订单")
 public class MyOrder {
     @ApiModelProperty("销售订单id")
@@ -25,6 +28,7 @@ public class MyOrder {
     @ApiModelProperty("订单状态")
     private Integer status;
     @ApiModelProperty("提交时间")
+    @TableField("submit_time")
     private Date submitTime;
     @ApiModelProperty("配送方式")
     private Integer type;

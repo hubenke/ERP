@@ -1,14 +1,20 @@
 package com.gxa.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxa.entity.MyOrder;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface MyOrderMapper {
-//    List<MyOrder> queryAll();
-//    void save(MyOrder myOrder);
+public interface MyOrderMapper extends BaseMapper<MyOrder> {
+
+
+    List<MyOrder> queryAll();
+
+    void add(MyOrder myOrder);
 //    MyOrder queryByOrder(Integer orderno);
 //
 //    void update(MyOrder myOrder);
