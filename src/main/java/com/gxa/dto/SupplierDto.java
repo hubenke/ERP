@@ -2,7 +2,10 @@ package com.gxa.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 @ApiModel("供应商条件模型")
+@Data
 public
 class SupplierDto {
     @ApiModelProperty(value = "供应商编号",name = "供应商编号")
