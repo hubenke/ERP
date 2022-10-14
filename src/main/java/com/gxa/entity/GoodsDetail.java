@@ -1,47 +1,50 @@
 package com.gxa.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author:
- * @ClassName:Details
- * @Package:com.gxa.entity.Details
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("商品详情")
+@TableName("goods_detail")
 public class GoodsDetail {
     @ApiModelProperty("id")
+    @TableField("did")
     private Integer did;
 
     @ApiModelProperty("商品一级类别  ，1对应鞋子 2对应化妆品，3对应手机"  )
+    @TableField("type_a")
     private Integer  typeA;
 
     @ApiModelProperty("商品二级类别")
+    @TableField("type_b")
     private String  typeB;
 
     @ApiModelProperty("颜色")
+    @TableField("color")
     private String  color;
 
     @ApiModelProperty("尺寸")
+    @TableField("size")
     private  Integer size;
 
     @ApiModelProperty("规格")
+    @TableField("spec")
     private String spec;
 
     @ApiModelProperty("单位")
+    @TableField("unit")
     private String unit;
 
-    @ApiModelProperty("商品id")
-    private Integer goodsId;
+    @ApiModelProperty("商品实体类")
+    private Goods goods;
 
 
 }
