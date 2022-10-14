@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version:
  **/
 @RestController
-@ApiModel("")
 public class DetailsController {
     //查询
     @GetMapping("/details/list")
