@@ -4,9 +4,11 @@ import com.gxa.common.uitls.R;
 import com.gxa.dto.GoodsDetailsDto;
 import com.gxa.dto.GoodsDto;
 import com.gxa.entity.Goods;
+import com.gxa.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +22,23 @@ import java.util.Map;
 @Api(tags = "商品列表")
 public class GoodsController {
     //查询
+    @Autowired
+    private GoodsService goodsService;
     @GetMapping("/goods/list")
     @ApiOperation("商品的列表")
 
     public R queryAll(){
-        Goods goods= new Goods(1,"神仙水","图片",1200.00,800.00,"sk-2",1);
-        List<Goods> list =new ArrayList<>();
-        list.add(goods);
-        Map<String,Object> map = new HashMap<>();
-        map.put("list",list);
-//        Result result =new Result(0,"查询操作",null,null);
-        return R.ok(map);
+
+        try {
+            List<Goods> goods = this.goodsService.queryGoods();
+            Map<String,Object> map = new HashMap<>();
+            map.put("goods",goods);
+            return R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
+
     }
 
     //  添加商品

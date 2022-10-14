@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-@ApiModel("采购单条件模型")
+@ApiModel("采购单条件")
 public class PurchaseDto {
 
     @ApiModelProperty("采购单状态")
@@ -19,5 +19,5 @@ public class PurchaseDto {
     private String sname;
 
     @ApiModelProperty("请购负责人")
-    private Integer requestMan ;
+    private Integer principal ;
 }
