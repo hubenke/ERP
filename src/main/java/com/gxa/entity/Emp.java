@@ -25,9 +25,6 @@ public class Emp {
     @ApiModelProperty("所在部门")
     private String department;
 
-    @ApiModelProperty("员工岗位")
-    private String post;
-
     @ApiModelProperty("手机号")
     private String tel;
 
@@ -39,6 +36,9 @@ public class Emp {
 
     @ApiModelProperty("直属上级")
     private String mgr;
+
+    @ApiModelProperty("职位引用")
+    private Company company;
 
 //    @ApiModelProperty("用户id")
 //    private User user;
