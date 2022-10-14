@@ -15,6 +15,10 @@ public interface MyOrderMapper extends BaseMapper<MyOrder> {
     List<MyOrder> queryAll();
 
     void add(MyOrder myOrder);
+    void updateStatusByClose(Integer id);
+    void updateStatusByOut(Integer id);
+    void updateStatusByFinish(Integer id);
+    void delete(Integer id);
 //    MyOrder queryByOrder(Integer orderno);
 //
 //    void update(MyOrder myOrder);

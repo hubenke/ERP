@@ -27,17 +27,24 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
-    public MyOrder queryByOrder(Integer orderno) {
-        return null;
+    public void updateStatusByOut(Integer id) {
+        this.myOrderMapper.updateStatusByOut(id);
     }
 
     @Override
-    public void update(MyOrder myOrder) {
-
+    public void updateStatusByClose(Integer id) {
+        this.myOrderMapper.updateStatusByClose(id);
     }
 
     @Override
-    public void deleteByOrdersno(Integer orderno) {
-
+    public void updateStatusByFinish(Integer id) {
+        this.myOrderMapper.updateStatusByFinish(id);
     }
+
+    @Override
+    public void delete(Integer id) {
+        this.myOrderMapper.delete(id);
+    }
+
+
 }

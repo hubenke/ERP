@@ -86,7 +86,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为关闭")
     public R updateCloseById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByClose(id);
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为发货")
     public R updateOutById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByOut(id);
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为确认收货已完成")
     public R updateFinishById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByFinish(id);
             return R.ok("收货成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,6 +135,7 @@ public class MyOrderController {
     public R deleteById(Integer id){
 
         try {
+            this.myOrderService.delete(id);
             return R.ok("删除成功");
         } catch (Exception e) {
             e.printStackTrace();

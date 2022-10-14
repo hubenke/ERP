@@ -42,6 +42,24 @@
         <result column="gstatus" property="goods.status"/>
 
     </resultMap>
+    <update id="updateStatusByClose">
+        UPDATE myorder
+        SET status=4
+        WHERE id=#{id}
+    </update>
+    <update id="updateStatusByOut">
+        UPDATE myorder
+        SET status=2
+        WHERE id=#{id}
+    </update>
+    <update id="updateStatusByFinish">
+        UPDATE myorder
+        SET status=3
+        WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM myorder WHERE id=#{id}
+    </delete>
 
     <select id="queryAll" resultMap="myOrderResultMap">
     SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
