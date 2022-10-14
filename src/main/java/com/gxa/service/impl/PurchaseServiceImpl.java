@@ -27,4 +27,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 //        this.purchaseMapper.selectList(queryWrapper);
         return purchases;
     }
+
+    @Override
+    public int add(Purchase purchase) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        int i = this.purchaseMapper.insert(purchase);
+        return i;
+    }
 }

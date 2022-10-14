@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PurchaseService {
     List<Purchase> queryAll(PurchaseDto purchaseDto);
+
+    int add(Purchase purchase);
 }
