@@ -41,8 +41,7 @@ public class Emp {
     private String mgr;
 
 //    @ApiModelProperty("用户id")
-//    @TableField("user_id")
-//    private User userId;
+//    private User user;
 }
 
 

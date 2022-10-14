@@ -32,12 +32,10 @@ public class Outbound {
     @ApiModelProperty("联系方式")
     private String tel;
 
-    @ApiModelProperty("仓库id")
-    @TableField("repository_id")
-    private Repository repositoryId;
+    @ApiModelProperty("仓库")
+    private Repository repository;
 
-//    @ApiModelProperty("区域id")
-//    @TableField("region_id")
+//    @ApiModelProperty("区域")
 //    private Region regionId;
 
 }

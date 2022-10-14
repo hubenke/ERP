@@ -16,17 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author:
- * @ClassName:DetailsController
- * @Package:com.gxa.controller.DetailsController
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
+
 @RestController
 @Api(tags = "销售详情接口")
-public class GoodsDetailsController {
+public class GoodsDetailController {
 
     //查询
     @GetMapping("/goodsdetail/query")
