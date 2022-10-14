@@ -1,5 +1,6 @@
 package com.gxa.service.impl;
 
+import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.MyOrder;
 import com.gxa.mapper.MyOrderMapper;
 import com.gxa.service.MyOrderService;
@@ -19,6 +20,12 @@ public class MyOrderServiceImpl  implements MyOrderService {
     {
         List<MyOrder> myOrders = this.myOrderMapper.queryAll();
         return myOrders;
+    }
+
+    @Override
+    public List<MyOrder> queryByCondition(MyOrderDto myOrderDto) {
+        List<MyOrder> queryByConditionMyOrders = this.myOrderMapper.queryByCondition(myOrderDto);
+        return queryByConditionMyOrders;
     }
 
     @Override

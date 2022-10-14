@@ -67,10 +67,11 @@ public class MyOrderController {
     @ApiOperation("根据条件查询销售订单")
     public R queryByCondition(@RequestBody MyOrderDto myOrderDto){
         try {
+            List<MyOrder> queryByConditionMyOrders = this.myOrderService.queryByCondition(myOrderDto);
             System.out.println("myOrderDto------------------" + myOrderDto.toString());
             Map<String,Object> map = new HashMap<>();
             List<MyOrder> orders = new ArrayList<>();
-            map.put("result", orders);
+            map.put("result", queryByConditionMyOrders);
 
             R r = R.ok(map);
 
