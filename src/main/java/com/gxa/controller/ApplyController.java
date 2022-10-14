@@ -24,7 +24,8 @@ public class ApplyController {
     R queryAll() {
 
         List list =new ArrayList();
-        list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -38,6 +39,8 @@ public class ApplyController {
     public R querybyCondition(@RequestBody ApplyDto applyDto){
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -46,34 +49,13 @@ public class ApplyController {
         return R.ok(map);
     }
 
-
-//    @ApiOperation(value = "点击添加，展示员工")
-//    @GetMapping("/apply/add/emp")
-//public R queryEmp() {
-//        List list = new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0, "suc", list);
-//        return r;
-//    }
-
-//    @ApiOperation(value = "点击添加后的添加商品，展示商品信息")
-//    @GetMapping("/apply/add/goods")
-//    public R queryGoods(){
-//        List list = new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0, "suc", list);
-//        return r;
-//    }
-
     @PostMapping("/apply/add/goodsAdd")
     @ApiOperation(value = "添加请购单的商品添加保存")
     public R applyGoodsAdd(@RequestBody ApplyDetail applyDetail){
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -87,6 +69,8 @@ public class ApplyController {
     public R applyAdd(@RequestBody Apply apply){
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
 
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
@@ -96,23 +80,15 @@ public class ApplyController {
         return R.ok(map);
     }
 
-//    @ApiOperation(value = "点击编辑，返回请购单编号，展示请购单信息")
-//    @GetMapping("/apply/update/info/{sid}")
-//    public R queryUpdateInfo(@PathVariable("sid") Integer sid){
-//        List list = new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0, "suc", list);
-//        return r;
-//
-//    }
+
 
     @ApiOperation("请购单编辑保存")
     @PutMapping("/apply/update")
     public R applyupdate(@RequestBody Apply apply) {
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -120,44 +96,6 @@ public class ApplyController {
 
         return R.ok(map);
     }
-
-
-
-//@ApiOperation("请购单商品")
-//@DeleteMapping("apply/goodsDelete")
-//public  R applyDelete(){
-//    List list = new ArrayList();
-//
-//    list.add("可以传");
-//
-//    R r = new R(0, "suc", list);
-//    return r;
-//};
-
-
-
-
-//    @ApiOperation("点击指派，员工数据显示")
-//    @GetMapping("apply/assignList/{current}/{limit}")
-//    public  R queryEmp(@ApiParam("current")int current, @ApiParam("limit") int limit){
-//        List list = new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0, "suc", list);
-//        return r;
-//    };
-//    @ApiOperation("按条件查询员工")
-//    @GetMapping("apply/assignListcondition/{current}/{limit}")
-//    public  R queryConditonEmp(@ApiParam("current")int current, @ApiParam("limit") int limit, EmpDto empDto){
-//        List list = new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0, "suc", list);
-//        return r;
-//    };
-
 
 
     @ApiOperation("指派员工保存，返回当前请购单编号和指派的员工姓名")
@@ -166,6 +104,8 @@ public class ApplyController {
 
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -179,6 +119,8 @@ public class ApplyController {
     public R DeleteEmp(@PathVariable("applyno") Integer applyno,@ApiParam("撤销的员工姓名") String ename) {
 
         List list =new ArrayList();
+        list.add("123");
+        list.add("456");
 
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
@@ -194,6 +136,8 @@ public class ApplyController {
     public R auditPass(@ApiParam("当前点击审核的用户") String aduitMan) {
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -207,6 +151,8 @@ public class ApplyController {
     public R auditFailed(@PathVariable("applyno") Integer applyno,@ApiParam("审核不通过的理由") String reason) {
         List list =new ArrayList();
         list.add("可以传");
+        list.add("123");
+        list.add("456");
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
