@@ -3,5 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.MyOrderMapper">
+    <resultMap type="myOrder" id="myOrderResultMap">
+<!--    左 数据库 右 实体类-->
+        <id column="id" property="id"/>
 
+        <result column="orderno" property="orderno"/>
+
+        <result column="submit_time" property="submitTime"/>
+
+        <result column="receiver" property="receiver"/>
+
+        <result column="money" property="money"/>
+
+        <result column="type" property="type"/>
+
+        <result column="source" property="source"/>
+
+        <result column="status" property="status"/>
+
+        <result column="tel" property="tel"/>
+
+        <result column="saleqty" property="saleqty"/>
+
+        <result column="payment" property="payment"/>
+
+        <result column="goods_id" property="goods.gid"/>
+
+        <result column="gname" property="goods.gname"/>
+
+        <result column="picture" property="goods.picture"/>
+
+        <result column="sale_price" property="goods.salePrice"/>
+
+        <result column="buy_price" property="goods.buyPrice"/>
+
+        <result column="brand" property="goods.brand"/>
+
+        <result column="gstatus" property="goods.status"/>
+
+    </resultMap>
+
+    <select id="queryAll" resultMap="myOrderResultMap">
+    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
+    FROM myorder o,goods g
+    WHERE o.goods_id = g.gid
+    </select>
+
+    <insert id="add">
+        INSERT INTO myorder(id,orderno,money,payment,status,submit_time,source,type,receiver,tel,saleqty,goods_id)VALUES(#{id},#{orderno},#{money},#{payment},#{status},#{submitTime},#{source},#{type},#{receiver},#{tel},#{saleqty},#{goods.gid})
+    </insert>
 </mapper>

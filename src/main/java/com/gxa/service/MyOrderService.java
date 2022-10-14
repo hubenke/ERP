@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface MyOrderService {
     List<MyOrder> queryAll();
-    void save(MyOrder myOrder);
+    void add(MyOrder myOrder);
+
     MyOrder queryByOrder(Integer orderno);
 
     void update(MyOrder myOrder);
 
-    void deleteByEmpno(Integer orderno);
+    void deleteByOrdersno(Integer orderno);
 }
