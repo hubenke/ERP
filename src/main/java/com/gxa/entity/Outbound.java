@@ -35,7 +35,7 @@ public class Outbound {
     @ApiModelProperty("仓库")
     private Repository repository;
 
-//    @ApiModelProperty("区域")
-//    private Region regionId;
+    @ApiModelProperty("区域")
+    private Region region;
 
 }
