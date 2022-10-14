@@ -25,7 +25,7 @@ public class MyOrder {
     private double money;
     @ApiModelProperty("支付方式")
     private Integer payment;
-    @ApiModelProperty("订单状态")
+    @ApiModelProperty("订单状态:0:待付款、1:代发货、2:已发货、3:已完成、4:已关闭")
     private Integer status;
     @ApiModelProperty("提交时间")
     @TableField("submit_time")
@@ -38,7 +38,7 @@ public class MyOrder {
     private String tel;
     @ApiModelProperty("订单数量")
     private Integer saleqty;
-    @ApiModelProperty("订单来源")
+    @ApiModelProperty("订单来源:0:app，1:微信端，2:pc端")
     private String source;
     @ApiModelProperty("商品类")
     private Goods goods;

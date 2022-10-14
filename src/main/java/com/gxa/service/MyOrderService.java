@@ -7,6 +7,7 @@ import java.util.List;
 public interface MyOrderService {
     List<MyOrder> queryAll();
     void add(MyOrder myOrder);
+
     MyOrder queryByOrder(Integer orderno);
 
     void update(MyOrder myOrder);
