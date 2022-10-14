@@ -52,11 +52,11 @@
 
     <!--    cors跨域支持-->
     <mvc:cors>
-        <mvc:mapping path="/**"
-                     allowed-origins="http://192.16.143.227:63344"
-                     allowed-methods="GET,POST,PUT,DELETE,OPTIONS"
-                     allowed-headers="Content-Type,token"
-                     allow-credentials="true"
-                     max-age="123" />
+        <mvc:mapping path="/**"/>
+<!--                     allowed-origins="http://192.16.143.227:63344"-->
+<!--                     allowed-methods="GET,POST,PUT,DELETE,OPTIONS"-->
+<!--                     allowed-headers="Content-Type,token"-->
+<!--                     allow-credentials="true"-->
+<!--                     max-age="123" />-->
     </mvc:cors>
 </beans>

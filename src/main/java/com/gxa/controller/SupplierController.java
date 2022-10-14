@@ -4,9 +4,11 @@ import com.gxa.dto.SupplierDto;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.SupplierDto;
 import com.gxa.entity.Supplier;
+import com.gxa.service.SupplierService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,18 +21,19 @@ import java.util.Map;
 @RestController
 public
 class SupplierController {
+
+    @Autowired
+    private SupplierService supplierService;
     @ApiOperation(value = "点击供应商，供应商页面数据展示")
-    @GetMapping("/suppiler/slist/")
+    @GetMapping("/suppiler/slist")
     public R queryAll() {
 
         List list =new ArrayList();
         list.add("可以传");
+//        List<Supplier> suppliers = this.supplierService.queryAll();
+
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
-
-
-
-
 
         return R.ok(map);
     }
@@ -47,44 +50,10 @@ class SupplierController {
 
 
 
+
+
         return R.ok(map);
     }
-
-
-
-//    @ApiOperation(value = "点击商品添加，数据显示")
-//    @GetMapping()
-//    public R suppilerAddList(){
-//        return null;
-//
-//    }
-
-//
-//    @PostMapping("/suppiler/BasicAdd")
-//    @ApiOperation(value = "供应商基本信息保存")
-//    public R suppilerAdd(Integer sid){
-//        List list =new ArrayList();
-//        list.add("供应商信息");
-//        R r = new R(0,"suc",list);
-//
-//       return r;
-//    }
-
-
-//    @ApiOperation(value = "点击绑定商品，商品下拉框信息")
-//    @GetMapping("/suppiler/goodsInfo")
-//    public
-//    R queryGoods() {
-//
-//        List list =new ArrayList();
-//
-//        list.add("可以传");
-//
-//        R r = new R(0,"suc",list);
-//
-//
-//        return r;
-//    }
 
 
 
@@ -97,6 +66,22 @@ class SupplierController {
         map.put("list",list);
 
 
+
+        return R.ok(map);
+    }
+
+
+    @GetMapping("/suppiler/site")
+    @ApiOperation("查询省市接口")
+    public R querySite(){
+
+        List list = new ArrayList();
+        list.add("四川");
+
+
+
+        Map map = new HashMap();
+        map.put("list",list);
 
         return R.ok(map);
     }
@@ -114,22 +99,6 @@ class SupplierController {
 
         }
 
-
-
-
-        //创建一个int类型的数组.
-//        int [] numberArr = new int[ids.length];
-//
-//        //把strArr中的数据进行类型转换并存入到int数组中
-//        for (int i = 0; i < ids.length; i++) {
-//            int number = Integer.parseInt(ids[i]);
-//            numberArr[i] = number;
-//        }
-
-
-
-
-
         Map<String,Object> map =new HashMap<>();
         map.put("list",list);
 
@@ -138,20 +107,6 @@ class SupplierController {
         return R.ok(map);
 
     }
-
-
-
-
-
-//    @ApiOperation("点击供应商编辑，根据供应商编号传输当前供应商信息")
-//    @GetMapping("/suppiler/supplierinfo/{sid}")
-//    public R querybyId(@PathVariable("sid") Integer sid) {
-//        List list =new ArrayList();
-//        list.add("供应商信息");
-//        R r = new R(0,"suc",list);
-//
-//        return r;
-//    }
 
 
     @ApiOperation("编辑绑定商品保存，传输的数据需要编辑后剩下的绑定商品的商品编号构成的数组和当前供应商编号")
@@ -179,7 +134,7 @@ class SupplierController {
 
         return R.ok(map);
     }
-//,@PathVariable("sid")Integer sid
+
 
 
 
