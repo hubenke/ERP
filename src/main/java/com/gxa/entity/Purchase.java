@@ -52,11 +52,11 @@ public class Purchase {
 //    @ApiModelProperty("请购单实体类")
 //    private Apply apply;
 
-//    @ApiModelProperty("供应商实体类")
-//    private Supplier supplier;
+    @ApiModelProperty("供应商实体类")
+    private Supplier supplier;
 
-//    @ApiModelProperty("用户实体类")
-//    private User user;
+    @ApiModelProperty("员工实体类")
+    private Emp emp;
 
 
 }

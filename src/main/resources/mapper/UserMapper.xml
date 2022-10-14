@@ -3,5 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.UserMapper">
-<!--   User123类处理 -->
+    <resultMap id="userResultMap" type="user">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uname"></result>
+        <result property="password" column="password"></result>
+        <result property="salt" column="salt"></result>
+        <result property="limit" column="limit"></result>
+
+    </resultMap>
+<select id="queryByUserNameAndPwd" resultMap="userResultMap">
+
+</select>
+
 </mapper>

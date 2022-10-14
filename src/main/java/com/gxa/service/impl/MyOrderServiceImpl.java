@@ -1,22 +1,29 @@
 package com.gxa.service.impl;
 
 import com.gxa.entity.MyOrder;
+import com.gxa.mapper.MyOrderMapper;
 import com.gxa.service.MyOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MyOrderServiceImpl  implements MyOrderService {
-    @Override
 
-    public List<MyOrder> queryAll() {
-        return null;
+    @Autowired
+    private MyOrderMapper myOrderMapper;
+
+    @Override
+    public List<MyOrder> queryAll()
+    {
+        List<MyOrder> myOrders = this.myOrderMapper.queryAll();
+        return myOrders;
     }
 
     @Override
-    public void save(MyOrder myOrder) {
-
+    public void add(MyOrder myOrder) {
+        this.myOrderMapper.add(myOrder);
     }
 
     @Override
@@ -30,7 +37,7 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
-    public void deleteByEmpno(Integer orderno) {
+    public void deleteByOrdersno(Integer orderno) {
 
     }
 }
