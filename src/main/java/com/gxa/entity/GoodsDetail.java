@@ -47,4 +47,5 @@ public class GoodsDetail {
     private Goods goods;
 
 
+
 }
