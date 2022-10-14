@@ -5,13 +5,17 @@ import com.gxa.entity.User;
 import com.gxa.service.UserService;
 import io.swagger.annotations.*;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +43,11 @@ public class UserController {
     public R login(User user){
 
 
+//        System.out.println();
+//        Subject subject =SecurityUtils.getSubject();
+//        UsernamePasswordToken token = new UsernamePasswordToken(user.getUname(),user.getPassword());
+
+
 
 
         //Subject subject = SecurityUtils.getSubject();
@@ -49,16 +58,20 @@ public class UserController {
         //OAuth2Token oAuth2Token = new OAuth2Token(jwtToken);
 
         try {
+//            subject.login(token);
+            //登录成功
+            return R.ok("redirect:/main.html");
+
             //subject.login(oAuth2Token);
 
-            Map<String,Object> map = new HashMap<>();
+//            Map<String,Object> map = new HashMap<>();
             //map.put("token",jwtToken);
 
-            return R.ok(map);
+//            return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
-
-            return R.error("登录失败");
+            //登录失败
+            return R.error("redirect:/index.html");
         }
  }
 
@@ -66,15 +79,14 @@ public class UserController {
     @GetMapping("/user/loginout")
     @ApiOperation("退出登陆")
     public R loginout(){
-
-        return R.ok("退出登录成功");
+        return  R.ok("redirect:/index.html");
 
     }
 
 
     @PutMapping("/user/update")
     @ApiOperation("修改用户信息")
-    public R updateById(User user){
+    public R updateById(){
 
         try {
            // userService.updateUser(user);
@@ -82,8 +94,18 @@ public class UserController {
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return R.error("修改失败");
+            return R.error("修改失败,请重新再试");
         }
+    }
+
+//盐值计算
+
+    public static void main(String[] args){
+        String hashAlgorithName ="MD5";
+        Object credentials="zhansan";
+        ByteSource salt=ByteSource.Util.bytes("123");
+        SimpleHash simpleHash=new SimpleHash(hashAlgorithName,credentials,salt,1024);
+        System.out.println(simpleHash);
     }
 
 
