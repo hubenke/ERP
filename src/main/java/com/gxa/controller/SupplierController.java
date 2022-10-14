@@ -85,7 +85,7 @@ class SupplierController {
     }
 
 
-    @PostMapping("/suppiler/goodsAdd")
+    @PostMapping("/suppiler/goodsAdd")  //不
     @ApiOperation(value = "添加供应商绑定商品信息保存,保存的数据需要当前供应商编号和绑定商品的商品编号构成的数组")
     public R suppiler(@ApiParam("商品编号构成的字符数组") String[] ids,@PathVariable("sid")Integer sid){
         List list =new ArrayList();

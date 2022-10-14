@@ -18,10 +18,9 @@ import java.util.Map;
 @RestController
 public class ApplyController {
 
-    @ApiOperation(value = "点击请购单，请购单页面数据展示")
+    @ApiOperation(value = "点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @GetMapping("/apply/applylist")
-    public
-    R queryAll() {
+    public R queryAll() {
 
         List list =new ArrayList();
         list.add("123");
@@ -34,23 +33,8 @@ public class ApplyController {
         return R.ok(map);
     }
 
-    @ApiOperation(value = "请购单页面按条件查询")
-    @GetMapping("/apply/alistcondition")
-    public R querybyCondition(@RequestBody ApplyDto applyDto){
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
-
-
-
-        return R.ok(map);
-    }
-
-    @PostMapping("/apply/add/goodsAdd")
-    @ApiOperation(value = "添加请购单的商品添加保存")
+    @PostMapping("/apply/applyAdd")
+    @ApiOperation("请购单的保存")
     public R applyGoodsAdd(@RequestBody ApplyDetail applyDetail){
         List list =new ArrayList();
         list.add("可以传");
@@ -64,8 +48,9 @@ public class ApplyController {
     }
 
 
-    @PostMapping("/apply/add/infoAdd")
-    @ApiOperation(value = "请购单添加保存")
+
+    @GetMapping("/apply/goods")
+    @ApiOperation("查询商品")
     public R applyAdd(@RequestBody Apply apply){
         List list =new ArrayList();
         list.add("可以传");
