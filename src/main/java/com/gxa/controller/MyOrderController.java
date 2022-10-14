@@ -30,13 +30,13 @@ public class MyOrderController {
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
 //        List<MyOrder> myOrders = myOrderService.queryAll();
-        Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
-        MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
+//        Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
+//        MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
 
         try {
 
             List<MyOrder> orders = new ArrayList<>();
-            orders.add(myOrder);
+//            orders.add(myOrder);
             System.out.println("orders:----------"+orders.toString());
             Map<String,Object> map = new HashMap<>();
             map.put("orders",orders);

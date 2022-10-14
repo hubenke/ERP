@@ -1,6 +1,7 @@
 package com.gxa.service;
 
 
+import com.gxa.dto.GoodsDto;
 import com.gxa.entity.Goods;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 
 public interface GoodsService {
     List<Goods> queryGoods(); //查询所有
+
+    List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
 
     void add(Goods goods );;//添加商品
 

@@ -4,6 +4,7 @@ import com.gxa.common.uitls.R;
 import com.gxa.dto.GoodsDetailsDto;
 import com.gxa.dto.GoodsDto;
 import com.gxa.entity.Goods;
+import com.gxa.entity.Stock;
 import com.gxa.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,15 +25,36 @@ public class GoodsController {
     //查询
     @Autowired
     private GoodsService goodsService;
+
     @GetMapping("/goods/list")
     @ApiOperation("商品的列表")
-
     public R queryAll(){
 
         try {
-            List<Goods> goods = this.goodsService.queryGoods();
+            List<Goods> goodsList = this.goodsService.queryGoods();
+//            for(Goods goods : goodsList){
+//                Integer size = goods.getGoodsDetail().getSize();
+//                String color = goods.getGoodsDetail().getColor();
+//                String attr = size + "/" + color;
+//            }
             Map<String,Object> map = new HashMap<>();
-            map.put("goods",goods);
+            map.put("goods",goodsList);
+            return R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("请求异常");
+        }
+
+    }
+
+
+    @GetMapping("/goodsByGoodsDto/list")
+    @ApiOperation("根据商品条件查询")
+    public R queryByCondition(@RequestBody GoodsDto goodsDto){
+        try {
+            List<Goods> goodsList = this.goodsService.queryAllByGoodsDto(goodsDto);
+            Map<String,Object> map = new HashMap<>();
+            map.put("goods",goodsList);
             return R.ok(map);
         }catch (Exception e){
             e.printStackTrace();
@@ -64,12 +86,7 @@ public class GoodsController {
         return R.ok();
 
     }
-    @GetMapping("/goods/bytest")
-    @ApiOperation("根据商品条件查询")
-    public R queryByCondition(GoodsDto goodsDto){
 
-        return R.ok();
-    }
 
 
 

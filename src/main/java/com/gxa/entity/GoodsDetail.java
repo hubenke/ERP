@@ -46,5 +46,9 @@ public class GoodsDetail {
     @ApiModelProperty("商品实体类")
     private Goods goods;
 
-
+//    public GoodsDetail(String color, Integer size, String spec) {
+//        this.color = color;
+//        this.size = size;
+//        this.spec = spec;
+//    }
 }
