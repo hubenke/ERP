@@ -8,5 +8,8 @@ package com.gxa.service;
  * @CreateDate:2022年10月12日
  * @Version:
  **/
-public interface DetailsService {
+public interface GoodsDetailService {
+    GoodsDetailService queryById(Integer did);//根据id查询
+
+    void  add(GoodsDetailService goodsDetail);//添加商品
 }
