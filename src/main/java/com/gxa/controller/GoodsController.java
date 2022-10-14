@@ -37,7 +37,7 @@ public class GoodsController {
         Map<String,Object> map = new HashMap<>();
         map.put("list",list);
 //        Result result =new Result(0,"查询操作",null,null);
-        return R.ok();
+        return R.ok(map);
     }
 
     //  添加商品
