@@ -1,5 +1,6 @@
 package com.gxa.service.impl;
 
+import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.MyOrder;
 import com.gxa.mapper.MyOrderMapper;
 import com.gxa.service.MyOrderService;
@@ -22,22 +23,35 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
+    public List<MyOrder> queryByCondition(MyOrderDto myOrderDto) {
+        List<MyOrder> queryByConditionMyOrders = this.myOrderMapper.queryByCondition(myOrderDto);
+        return queryByConditionMyOrders;
+    }
+
+    @Override
     public void add(MyOrder myOrder) {
         this.myOrderMapper.add(myOrder);
     }
 
     @Override
-    public MyOrder queryByOrder(Integer orderno) {
-        return null;
+    public void updateStatusByOut(Integer id) {
+        this.myOrderMapper.updateStatusByOut(id);
     }
 
     @Override
-    public void update(MyOrder myOrder) {
-
+    public void updateStatusByClose(Integer id) {
+        this.myOrderMapper.updateStatusByClose(id);
     }
 
     @Override
-    public void deleteByOrdersno(Integer orderno) {
-
+    public void updateStatusByFinish(Integer id) {
+        this.myOrderMapper.updateStatusByFinish(id);
     }
+
+    @Override
+    public void delete(Integer id) {
+        this.myOrderMapper.delete(id);
+    }
+
+
 }

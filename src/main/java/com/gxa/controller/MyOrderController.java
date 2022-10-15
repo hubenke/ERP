@@ -29,17 +29,11 @@ public class MyOrderController {
     @GetMapping("/orders")
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
-//        List<MyOrder> myOrders = myOrderService.queryAll();
-//        Goods goods = new Goods(8,"ppp","lll",20.0,10.0,"kkk",0);
-//        MyOrder myOrder = new MyOrder(1,"11",123,0,1,null,4,"jy","888",321,"56",goods);
-
         try {
-
-            List<MyOrder> orders = new ArrayList<>();
-//            orders.add(myOrder);
-            System.out.println("orders:----------"+orders.toString());
+            List<MyOrder> myOrders = this.myOrderService.queryAll();
+            System.out.println("myOrders:----------"+myOrders.toString());
             Map<String,Object> map = new HashMap<>();
-            map.put("orders",orders);
+            map.put("myOrders",myOrders);
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,6 +46,7 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
+            this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {
 
@@ -64,10 +59,10 @@ public class MyOrderController {
     @ApiOperation("根据条件查询销售订单")
     public R queryByCondition(@RequestBody MyOrderDto myOrderDto){
         try {
+            List<MyOrder> queryByConditionMyOrders = this.myOrderService.queryByCondition(myOrderDto);
             System.out.println("myOrderDto------------------" + myOrderDto.toString());
             Map<String,Object> map = new HashMap<>();
-            List<MyOrder> orders = new ArrayList<>();
-            map.put("result", orders);
+            map.put("result", queryByConditionMyOrders);
 
             R r = R.ok(map);
 
@@ -83,7 +78,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为关闭")
     public R updateCloseById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByClose(id);
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +90,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为发货")
     public R updateOutById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByOut(id);
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +114,7 @@ public class MyOrderController {
     @ApiOperation("根据id修改订单状态为确认收货已完成")
     public R updateFinishById(Integer id){
         try {
-
+            this.myOrderService.updateStatusByFinish(id);
             return R.ok("收货成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,6 +127,7 @@ public class MyOrderController {
     public R deleteById(Integer id){
 
         try {
+            this.myOrderService.delete(id);
             return R.ok("删除成功");
         } catch (Exception e) {
             e.printStackTrace();

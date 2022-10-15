@@ -1,6 +1,7 @@
 package com.gxa.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.MyOrder;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -13,8 +14,12 @@ public interface MyOrderMapper extends BaseMapper<MyOrder> {
 
 
     List<MyOrder> queryAll();
-
+    List<MyOrder> queryByCondition(MyOrderDto myOrderDto);
     void add(MyOrder myOrder);
+    void updateStatusByClose(Integer id);
+    void updateStatusByOut(Integer id);
+    void updateStatusByFinish(Integer id);
+    void delete(Integer id);
 //    MyOrder queryByOrder(Integer orderno);
 //
 //    void update(MyOrder myOrder);
