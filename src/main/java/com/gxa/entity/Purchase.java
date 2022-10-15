@@ -32,31 +32,29 @@ public class Purchase {
     @TableField("remark")
     private String remark;
 
+    @ApiModelProperty("请购负责人")
+    @TableField("principal")
+    private String principalName;
 
     @ApiModelProperty("采购负责人")
     @TableField("purchase_handler")
-    private Integer purchaseHandler;
+    private String purchaseHandlerName;
 
     @ApiModelProperty("采购审核人")
     @TableField("purchase_checker")
-    private Integer purchaseChecker;
+    private String purchaseCheckerName;
 
     @ApiModelProperty("财务审核人")
     @TableField("finance_checker")
-    private Integer financeChecker;
+    private String financeCheckerName;
 
-    @ApiModelProperty("采购单详情实体类")
-    private PurchaseDetail purchaseDetail;
-
+//    @ApiModelProperty("采购单详情实体类")
+//    private PurchaseDetail purchaseDetail;
 
 //    @ApiModelProperty("请购单实体类")
 //    private Apply apply;
 
     @ApiModelProperty("供应商实体类")
     private Supplier supplier;
-
-    @ApiModelProperty("员工实体类")
-    private Emp emp;
-
 
 }
