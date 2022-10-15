@@ -30,5 +30,22 @@ public class Repository {
     @ApiModelProperty("货架数量")
     @TableField("shelves_num")
     private Integer shelvesNum;
+
+    @ApiModelProperty("货位")
+    private Cargo cargo;
+
+
+    @ApiModelProperty("库存")
+    private Stock stock;
+
+    @ApiModelProperty("商品")
+    private Goods goods;
+
+    @ApiModelProperty("商品详情")
+    private GoodsDetail goodsDetail;
+
+
+
+
 }
 
