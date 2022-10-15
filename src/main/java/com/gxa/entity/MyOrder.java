@@ -19,8 +19,7 @@ import lombok.Data;
 public class MyOrder {
     @ApiModelProperty("销售订单id")
     private Integer id;
-
-    @ApiModelProperty("订单编号")
+    @ApiModelProperty(value = "订单编号",required = true)
     private String orderno;
 
     @ApiModelProperty("订单金额")

@@ -43,11 +43,53 @@
 
     </resultMap>
 
+
+    <update id="updateStatusByClose">
+        UPDATE myorder
+        SET status=4
+        WHERE id=#{id}
+    </update>
+    <update id="updateStatusByOut">
+        UPDATE myorder
+        SET status=2
+        WHERE id=#{id}
+    </update>
+    <update id="updateStatusByFinish">
+        UPDATE myorder
+        SET status=3
+        WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM myorder WHERE id=#{id}
+    </delete>
+
     <select id="queryAll" resultMap="myOrderResultMap">
     SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
-    FROM myorder o,goods g
-    WHERE o.goods_id = g.gid
+    FROM myorder o LEFT JOIN goods g
+    ON o.goods_id = g.gid
     </select>
+    <select id="queryByCondition" resultMap="myOrderResultMap">
+        SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
+        FROM myorder o,goods g
+        <where>
+            <if test="orderno != null">
+                orderno=#{orderno} AND o.goods_id=g.gid
+            </if>
+            <if test="status != null">
+                and status=#{status} AND o.goods_id=g.gid
+            </if>
+            <if test="submitTime != null">
+                and submit_time=#{submitTime} AND o.goods_id=g.gid
+            </if>
+            <if test="receiver != null">
+                and receiver=#{receiver} AND o.goods_id=g.gid
+            </if>
+            <if test="source != null">
+                and source=#{source} AND o.goods_id=g.gid
+            </if>
+        </where>
+    </select>
+
 
     <insert id="add">
         INSERT INTO myorder(id,orderno,money,payment,status,submit_time,source,type,receiver,tel,saleqty,goods_id)VALUES(#{id},#{orderno},#{money},#{payment},#{status},#{submitTime},#{source},#{type},#{receiver},#{tel},#{saleqty},#{goods.gid})
