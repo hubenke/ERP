@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.SupplierMapper">
+    <resultMap id="inBoundResultMap" type="inBound">
+
+    </resultMap>
+    <select id="queryAll" resultMap="inBoundResultMap">
+        SELECT s.sid,s.origin,s.sname,s.`range`,e .ename,s.wcreate_time
+        FROM `supplier`s,emp e
+    </select>
+    <select id="queryRegions" resultType="Region">
+        SELECT r.id,r.province,r.town,r.address
+        FROM region r
+    </select>
+
+</mapper>
