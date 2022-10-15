@@ -5,9 +5,9 @@ import java.awt.*;
 
 public interface CompanyService {
 
-    void add(Component component); //添加负责人
+    void add(Integer component); //根据模块名称添加负责人
 
-    void  update(Component component);//修改负责人
+    void  update(Integer component);//根据模板名称编辑
 
     CompanyService queryName(String name);//根据模板名字查询
 

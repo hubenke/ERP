@@ -6,13 +6,15 @@ import com.gxa.service.CompanyService;
 import java.awt.*;
 
 public class CompanyServiceImpl  implements CompanyService {
+
+
     @Override
-    public void add(Component component) {
+    public void add(Integer component) {
 
     }
 
     @Override
-    public void update(Component component) {
+    public void update(Integer component) {
 
     }
 
