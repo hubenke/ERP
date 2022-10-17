@@ -10,11 +10,11 @@
         <result property="job" column="job"></result>
     </resultMap>
 
-<insert id="add"  >
+<insert id="add" >
     insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
-    <update id="update" >
-        UPDATE company  SET  job =#{job}
+    <update id="updateById"  >
+        UPDATE company  SET  id =#{id}
         WHERE id =#{id}
     </update>
     <select id="queryAll" resultType="com.gxa.entity.Company" resultMap="companyResultMap">

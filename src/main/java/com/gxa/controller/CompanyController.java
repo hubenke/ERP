@@ -2,6 +2,7 @@ package com.gxa.controller;
 
 import com.gxa.common.uitls.R;
 import com.gxa.dto.CompanyDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@ApiModel("公司架构接口")
+@Api(tags = "公司架构接口")
 public class CompanyController {
 
     @GetMapping("/com/list")

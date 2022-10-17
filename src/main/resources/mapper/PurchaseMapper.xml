@@ -4,20 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.PurchaseMapper">
 
-    <resultMap id="purchaseResultMap" type="purchase">
-        <id property="id" column="id"></id>
-        <result property="purchaseNo" column="purchaseno"></result>
-        <result property="createTime" column="create_time"></result>
-        <result property="status" column="status"></result>
-        <result property="purchaseHandlerName" column="purchase_handler"></result>
-        <result property="purchaseCheckerName" column="purchase_checker"></result>
-        <result property="financeCheckerName" column="finance_checker"></result>
-        <result property="principalName" column="principal"></result>
-        <association property="supplier" javaType="supplier">
-            <id property="sid" column="sid"></id>
-            <result property="sname" column="sname"></result>
-        </association>
+    <resultMap id="purchaseResultMap" type="com.gxa.dto.PurchaseQueryDto">
+        <result property="purchase.id" column="id"></result>
+        <result property="purchase.purchaseNo"  column="purchaseno"></result>
+        <result property="purchase.createTime" column="create_time"></result>
+        <result property="purchase.status" column="status"></result>
+        <result property="purchase.remark" column="remark"></result>
+        <result property="purchase.purchaseHandlerName" column="purchase_handler"></result>
+        <result property="purchase.purchaseCheckerName" column="purchase_checker"></result>
+        <result property="purchase.financeCheckerName" column="finance_checker"></result>
+        <result property="sid" column="sid"></result>
+        <result property="sname" column="sname"></result>
+        <result property="principal" column="principal"></result>
     </resultMap>
+
+    <insert id="insert" parameterType="com.gxa.dto.PurchaseAddDto" useGeneratedKeys="true" keyProperty="id">
+        insert into purchase(purchaseno,status,create_time,purchase_handler,remark,apply_id,supplier_id)
+        values (#{purchaseNo},1,#{createTime},#{purchaseHandlerName},#{remark},#{applyId},#{sid});
+
+    </insert>
+
     <select id="queryAll" resultMap="purchaseResultMap">
         select p.id,p.create_time,p.purchaseno,p.status,s.sid,s.sname,e.ename principal,e1.ename purchase_handler,e2.ename purchase_checker,e3.ename finance_checker
         from purchase p
@@ -41,6 +47,10 @@
                     a.principal = #{principal}
                 </if>
         </where>
+    </select>
+
+    <select id="queryIdByNo" resultType="java.lang.Integer">
+        select id from purchase where purchaseno = #{purchaseNo}
     </select>
 
 </mapper>

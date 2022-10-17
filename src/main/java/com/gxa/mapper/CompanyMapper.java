@@ -17,9 +17,9 @@ public interface CompanyMapper  extends BaseMapper<Company> {
 
   void  add( );//添加操作
 
-  void  update(Integer id);
+  void  updateById(Integer id);//根据id去编辑
 
-  void  queryById(Integer id);
+  void  queryById(Integer id);//根据id去查询
 
 //  void  queryByCondit
 
