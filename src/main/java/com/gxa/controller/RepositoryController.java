@@ -1,11 +1,14 @@
 package com.gxa.controller;
 
 import com.gxa.common.uitls.R;
+import com.gxa.dto.RepositoryDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import com.gxa.service.RepositoryService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +31,20 @@ public class RepositoryController {
         map.put("repositories",repositories);
         return R.ok(map);
     }
+
+
+
+
+
+
     @PostMapping("/repository/regionAdd")
     @ApiOperation("添加仓库结构区域数据")
-    public R addRegion(@RequestBody Repository repository){
+    public R insertNew(@RequestBody Repository repository){
+
+        repositoryService.insertNew(repository);
+        Map<String,Object> map = new HashMap();
+        map.put("repositories",repository);
+
         try {
             return R.ok("添加成功");
         }catch (Exception e){
@@ -39,9 +53,50 @@ public class RepositoryController {
         }
     }
 
-    @PostMapping("/repository/cargoAdd")
-    @ApiOperation("添加仓库结构货架数据，返回当前仓库编号，货架名称，区域名称")
+
+
+
+    @PostMapping("/repository/areaAdd")
+    @ApiOperation("添加仓库结构区域数据")
+    public R insertArea(@RequestBody Cargo cargo){
+
+        repositoryService.insertArea(cargo);
+
+
+        try {
+            return R.ok("添加成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("添加失败");
+        }
+    }
+
+
+
+
+
+
+    @GetMapping
+    @ApiOperation("点击新增货架，根据当前仓库名称给所属仓库赋值，并且返回仓库名称，接收查询到的区域名称集合")
+    @PostMapping("/repository/queryArea")
+    public R queryArea(@ApiParam("仓库名称") String rname){
+        List<Cargo> cargos = repositoryService.queryLevelByRnameCargos(rname);
+
+        Map<String,Object> map = new HashMap();
+        map.put("cargos",cargos);
+
+        try {
+            return R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
+    }
+
+
+    @ApiOperation("添加仓库结构货架数据，返回当前仓库名称，货架名称，区域名称")
     public R addCargo(@RequestBody Cargo cargo){
+        repositoryService.insertCargo(cargo);
         try {
             return R.ok("添加成功");
         }catch (Exception e){
@@ -67,9 +122,11 @@ public class RepositoryController {
 
     @GetMapping("/repository/warehouse")
     @ApiOperation("点击仓储管理，呈现数据")
-    public R  queryWarehouse(){
+    public R  queryWarehouse(@RequestBody RepositoryDto repositoryDto){
 
-        List<Repository> repositories = this.repositoryService.queryAll();
+
+
+        List<Repository> repositories = this.repositoryService.queryAll(repositoryDto);
 
         Map<String,Object> map = new HashMap<>();
         map.put("repositories",repositories);
