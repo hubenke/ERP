@@ -22,15 +22,23 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Repository> queryAll(RepositoryDto repositoryDto);
 
 
+    List<Repository> queryStoreAndArea();
+
+
+//    void updateIncrease();
+//
+//    void updateDecrease();
+
 //    仓储结构页面
     List<Repository> queryStructure();
 
 
 
 //    新增仓库
-    void insertNew(Repository repository);
+    void addNew(Repository repository);
 
-    void insertArea(Cargo cargo);
+
+    void addArea(Cargo cargo);
 
 
     List<Cargo> queryAreaByRnameCargos(String rname);

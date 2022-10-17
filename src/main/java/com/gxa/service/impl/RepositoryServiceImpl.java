@@ -28,6 +28,17 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
+    List<Repository> queryStoreAndArea() {
+        List<Repository> repositories = this.repositoryMapper.queryStoreAndArea();
+        return repositories;
+    }
+
+
+
+
+
+    @Override
+    public
     List<Repository> queryStructure() {
         List<Repository> repositories = this.repositoryMapper.queryStructure();
         return repositories;
@@ -35,15 +46,15 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-   void insertNew(Repository repository) {
-         this.repositoryMapper.insertNew(repository);
+   void addNew(Repository repository) {
+         this.repositoryMapper.addNew(repository);
 
     }
 
     @Override
     public
-    void insertArea(Cargo cargo) {
-      this.repositoryMapper.insertArea(cargo);
+    void addArea(Cargo cargo) {
+      this.repositoryMapper.addArea(cargo);
 
     }
 
@@ -56,7 +67,7 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-    void insertCargo(Cargo cargo) {
-        this.repositoryMapper.insertCargo();
+    void addCargo(Cargo cargo) {
+        this.repositoryMapper.addCargo(cargo);
     }
 }

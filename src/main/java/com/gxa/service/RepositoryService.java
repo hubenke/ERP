@@ -12,18 +12,21 @@ public interface RepositoryService {
     List<Repository> queryAll(RepositoryDto repositoryDto);
 
 
+    List<Repository> queryStoreAndArea();
+
+
     List<Repository> queryStructure();
 
 
 //新增仓库
-    void insertNew(Repository repository);
+    void addNew(Repository repository);
 
 
 
-    void insertArea(Cargo cargo);
+    void addArea(Cargo cargo);
 
     List<Cargo> queryLevelByRnameCargos( String rname);
 
-    void insertCargo(Cargo cargo);
+    void addCargo(Cargo cargo);
 
 }

@@ -36,18 +36,21 @@ public class ReturnBill {
     @ApiModelProperty("退货联系人电话")
     private String phone;
 
+    @ApiModelProperty("退货发起人id")
+    private Integer initiatorId;
+
     @ApiModelProperty("退货单备注")
     private String remark;
 
-    @ApiModelProperty("退货单详情实体类")
-    private ReturnDetail returnDetail;
+//    @ApiModelProperty("退货单详情实体类")
+//    private ReturnGoods returnGoods;
 
 //    @ApiModelProperty("供应商实体类")
 //    private Supplier supplier;
 
-//    @ApiModelProperty("人员实体类")
-//    private Emp emp;
-
 //    @ApiModelProperty("仓库实体类")
 //    private Repository repository;
+
+//    @ApiModelProperty("订单实体类")
+//    private MyOrder myOrder;
 }

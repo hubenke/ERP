@@ -77,7 +77,7 @@ public class MyOrderController {
         }
     }
 
-    @GetMapping("/orders/queryByCondition")
+    @PostMapping("/orders/queryByCondition")
     @ApiOperation("根据条件查询销售订单")
     public R queryByCondition(@RequestBody MyOrderDto myOrderDto){
         try {
@@ -96,7 +96,7 @@ public class MyOrderController {
         }
     }
 
-    @GetMapping("/orders/queryReturnByCondition")
+    @PostMapping("/orders/queryReturnByCondition")
     @ApiOperation("根据条件查询退货订单")
     public R queryReturnByCondition(MyOrderDto myOrderDto){
         try {
