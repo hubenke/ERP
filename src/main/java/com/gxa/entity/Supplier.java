@@ -22,26 +22,20 @@ public class Supplier {
     @ApiModelProperty("供应商名称")
     private    String sname;
 
-
     @ApiModelProperty("经营范围")
     private    String range ;
-
 
     @ApiModelProperty("联系人")
     private    String contact;
 
-
     @ApiModelProperty("岗位")
     private    String position;
-
 
     @ApiModelProperty("电话")
     private    String tel;
 
-
     @ApiModelProperty("邮件")
     private    String email;
-
 
     @ApiModelProperty("qq")
     private    String qq;

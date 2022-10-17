@@ -29,6 +29,18 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
+    public List<MyOrder> queryAllReturn() {
+        List<MyOrder> myOrdersReturn = this.myOrderMapper.queryAllReturn();
+        return myOrdersReturn;
+    }
+
+    @Override
+    public List<MyOrder> queryReturnByCondition(MyOrderDto myOrderDto) {
+        List<MyOrder> queryReturnByConditionMyOrders = this.myOrderMapper.queryReturnByCondition(myOrderDto);
+        return queryReturnByConditionMyOrders;
+    }
+
+    @Override
     public void add(MyOrder myOrder) {
         this.myOrderMapper.add(myOrder);
     }
@@ -36,6 +48,11 @@ public class MyOrderServiceImpl  implements MyOrderService {
     @Override
     public void updateStatusByOut(Integer id) {
         this.myOrderMapper.updateStatusByOut(id);
+    }
+
+    @Override
+    public void updateOuts(Integer[] ids) {
+        this.myOrderMapper.updateOuts(ids);
     }
 
     @Override
@@ -49,8 +66,18 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
+    public void updateFinishes(Integer[] ids) {
+        this.myOrderMapper.updateFinishes(ids);
+    }
+
+    @Override
     public void delete(Integer id) {
         this.myOrderMapper.delete(id);
+    }
+
+    @Override
+    public void deleteMyOrders(Integer[] ids) {
+        this.myOrderMapper.deleteMyOrders(ids);
     }
 
 
