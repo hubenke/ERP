@@ -23,11 +23,12 @@ public class ApplyController {
 
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @GetMapping("/apply/applylist")
-    public R queryAll() {
+    public R queryAll(ApplyDto applyDto) {
 
+        List<Apply> applies = this.applyService.queryAll(applyDto);
 
         Map<String,Object> map =new HashMap<>();
-
+        map.put("applies",applies);
 
         return R.ok(map);
     }

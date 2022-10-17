@@ -3,7 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.ApplyMapper">
+    <resultMap id="applyResultMap" type="apply">
+        <id property="id" column="id"></id>
+        <result property="applyno" column="applyon"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="applyChecker" column="apply_launch"></result>
+        <result property="applyLaunch" column="apply_checker"></result>
+        <result property="remark" column="remark"></result>
+        <association property="emp" column="eid" javaType="emp">
+            <result property="eid" column="eid"></result>
+            <result property="ename" column="ename"></result>
+        </association>
+    </resultMap>
 
-
-
+    <select id="queryAll" resultMap="applyResultMap">
+        SELECT a.create_time,a.applyno,p.`status`,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
+        FROM apply a
+        LEFT JOIN emp e ON e.eid = a.apply_launch
+        LEFT JOIN emp ON emp.eid = a.apply_checker
+        LEFT JOIN purchase p ON p.apply_id = a.id
+        <where>
+            <if test="createTime != null">
+                a.create_time = #{createTime}
+            </if>
+            <if test="applyLaunch != null AND applyLaunch != ''">
+                a.apply_launch like "%"#{applyLaunch}"%"
+            </if>
+            <if test="applyChecker != null AND applyChecker != ''">
+                a.apply_checker like "%"#{applyChecker}"%"
+            </if>
+        </where>
+    </select>
 </mapper>
