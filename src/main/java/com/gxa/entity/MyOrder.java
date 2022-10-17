@@ -50,6 +50,9 @@ public class MyOrder {
     @ApiModelProperty("订单来源:0:app，1:微信端，2:pc端")
     private String source;
 
+    @ApiModelProperty("退货类:退货单状态：0：待处理 1：处理中 2：已完成 3：已拒绝")
+    private ReturnBill returnBill;
+
     @ApiModelProperty("商品类")
     private Goods goods;
 

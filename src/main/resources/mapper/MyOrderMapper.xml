@@ -41,6 +41,16 @@
 
         <result column="gstatus" property="goods.status"/>
 
+        <result column="rid" property="returnBill.id"/>
+
+        <result column="returnno" property="returnBill.returnNo"/>
+
+        <result column="rstatus" property="returnBill.status"/>
+
+        <result column="create_time" property="returnBill.createTime"/>
+
+        <result column="return_time" property="returnBill.returnTime"/>
+
     </resultMap>
 
 
@@ -49,18 +59,46 @@
         SET status=4
         WHERE id=#{id}
     </update>
+
     <update id="updateStatusByOut">
         UPDATE myorder
         SET status=2
         WHERE id=#{id}
     </update>
+
     <update id="updateStatusByFinish">
         UPDATE myorder
         SET status=3
         WHERE id=#{id}
     </update>
+
+    <update id="updateOuts" parameterType="Integer">
+        UPDATE myorder
+        SET status=2
+        WHERE id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateFinishes" parameterType="Integer">
+        UPDATE myorder
+        SET status=3
+        WHERE id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
     <delete id="delete">
         DELETE FROM myorder WHERE id=#{id}
+    </delete>
+
+    <delete id="deleteMyOrders" parameterType="Integer">
+            delete from myorder where id in
+            <foreach item="id" collection="array" open="(" separator="," close=")">
+                #{id}
+            </foreach>
     </delete>
 
     <select id="queryAll" resultMap="myOrderResultMap">
@@ -68,6 +106,7 @@
     FROM myorder o LEFT JOIN goods g
     ON o.goods_id = g.gid
     </select>
+
     <select id="queryByCondition" resultMap="myOrderResultMap">
         SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
         FROM myorder o,goods g
@@ -90,6 +129,33 @@
         </where>
     </select>
 
+    <select id="queryAllReturn" resultMap="myOrderResultMap">
+        SELECT o.id,r.returnno,r.create_time,o.receiver,o.money,r.contact,r.status AS rstatus,r.return_time
+        FROM myorder o RIGHT JOIN returnbill r
+        ON o.id = r.myorder_id
+    </select>
+
+    <select id="queryReturnByCondition" resultMap="myOrderResultMap">
+        SELECT o.id,r.returnno,r.create_time,o.receiver,o.money,r.contact,r.status AS rstatus,r.return_time
+        FROM myorder o,returnbill r
+        <where>
+            <if test="orderno != null">
+                r.returnno=#{orderno} AND o.id = r.myorder_id
+            </if>
+            <if test="status != null">
+                and o.status=#{status} AND o.id = r.myorder_id
+            </if>
+            <if test="submitTime != null">
+                and create_time=#{submitTime} AND o.id = r.myorder_id
+            </if>
+            <if test="receiver != null">
+                and receiver=#{receiver} AND o.id = r.myorder_id
+            </if>
+            <if test="source != null">
+                and source=#{source} AND o.id = r.myorder_id
+            </if>
+        </where>
+    </select>
 
     <insert id="add">
         INSERT INTO myorder(id,orderno,money,payment,status,submit_time,source,type,receiver,tel,saleqty,goods_id)VALUES(#{id},#{orderno},#{money},#{payment},#{status},#{submitTime},#{source},#{type},#{receiver},#{tel},#{saleqty},#{goods.gid})
