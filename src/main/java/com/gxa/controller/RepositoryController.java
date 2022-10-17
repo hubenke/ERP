@@ -37,11 +37,11 @@ public class RepositoryController {
 
 
 
-    @PostMapping("/repository/regionAdd")
-    @ApiOperation("添加仓库结构区域数据")
-    public R insertNew(@RequestBody Repository repository){
+    @PostMapping("/repository/repositoryAdd")
+    @ApiOperation("添加仓库确定")
+    public R addNew(@RequestBody Repository repository){
 
-        repositoryService.insertNew(repository);
+        repositoryService.addNew(repository);
         Map<String,Object> map = new HashMap();
         map.put("repositories",repository);
 
@@ -58,9 +58,9 @@ public class RepositoryController {
 
     @PostMapping("/repository/areaAdd")
     @ApiOperation("添加仓库结构区域数据")
-    public R insertArea(@RequestBody Cargo cargo){
+    public R addArea(@RequestBody Cargo cargo){
 
-        repositoryService.insertArea(cargo);
+        repositoryService.addArea(cargo);
 
 
         try {
@@ -93,10 +93,10 @@ public class RepositoryController {
         }
     }
 
-
-    @ApiOperation("添加仓库结构货架数据，返回当前仓库名称，货架名称，区域名称")
+    @PostMapping("/repository/cargoAdd")
+    @ApiOperation("点击添加仓库结构货架数据，返回当前仓库名称，货架名称，区域名称")
     public R addCargo(@RequestBody Cargo cargo){
-        repositoryService.insertCargo(cargo);
+        repositoryService.addCargo(cargo);
         try {
             return R.ok("添加成功");
         }catch (Exception e){
@@ -147,17 +147,17 @@ public class RepositoryController {
 
 
 
-    @GetMapping("/repository/sift")
-    @ApiOperation("仓促管理数据筛选")
-    public R  queryDto(){
-        List repositories = new ArrayList();
-        repositories.add("s");
-        repositories.add("2");
-        repositories.add("p");
-        Map map = new HashMap();
-        map.put("repositories",repositories);
-        return R.ok(map);
-    }
+//    @GetMapping("/repository/sift")
+//    @ApiOperation("仓促管理数据筛选")
+//    public R  queryDto(){
+//        List repositories = new ArrayList();
+//        repositories.add("s");
+//        repositories.add("2");
+//        repositories.add("p");
+//        Map map = new HashMap();
+//        map.put("repositories",repositories);
+//        return R.ok(map);
+//    }
 
 
 
@@ -200,16 +200,16 @@ public class RepositoryController {
 //        return R.ok(map);
 //    }
 
-    public R  queryFormDto(){
-        List repositories = new ArrayList();
-        repositories.add("s");
-        repositories.add("2");
-        repositories.add("p");
-        Map map = new HashMap();
-        map.put("repositories",repositories);
-        return R.ok(map);
-    }
-
+//    public R  queryFormDto(){
+//        List repositories = new ArrayList();
+//        repositories.add("s");
+//        repositories.add("2");
+//        repositories.add("p");
+//        Map map = new HashMap();
+//        map.put("repositories",repositories);
+//        return R.ok(map);
+//    }
+//
 
 
 

@@ -8,20 +8,34 @@
 
 
 
-    <insert id="insertCargo" parameterType="cargo">
-        insert into cargo(repository_id,location)
-        VALUES((SELECT rid FROM repository WHERE rname=#{rname} and area=#{area}) ,#{location})
-    </insert>
+<!--    <insert id="addCargo" parameterType="com.gxa.entity.Cargo">-->
+<!--        insert into cargo(repository_id,location)  values ((selcet rid from repository where ranme=#{repository.rname} and address-->
+<!--           )-->
+<!--           -->
+<!--    </insert>-->
+<!--    SELECT rid FROM repository WHERE rname=#{} and area=#{area}) ,#{}-->
+
+
+
+
+
+
+
+
 
 <!--    新增仓库-->
-    <insert id="insertNew" parameterType="com.gxa.entity.Repository"  >
+    <insert id="addNew" parameterType="com.gxa.entity.Repository"  >
         INSERT into repository(rname,address,storemanager) VALUES(#{rname},#{address},#{storeManager})
     </insert>
 
 <!--    新增区域-->
 
-    <insert id="insertArea" parameterType="com.gxa.entity.Cargo">
-        INSERT INTO cargo(repository_id,area)  VALUES(#{repositoryId},#{area})
+    <insert id="addArea" parameterType="com.gxa.entity.Cargo">
+        INSERT INTO cargo(repository_id,area)  VALUES(#{repository.rid},#{area})
+    </insert>
+    <insert id="addCargo" parameterType="com.gxa.entity.Cargo">
+        insert into cargo(location,area,repository_id)
+        values (#{location},#{area},(select rid from repository where rname=#{repository.rname}))
     </insert>
 
 

@@ -28,14 +28,16 @@ interface RepositoryMapper extends BaseMapper<Repository> {
 
 
 //    新增仓库
-    void insertNew(Repository repository);
-    void insertArea(Cargo cargo);
+    void addNew(Repository repository);
+
+
+    void addArea(Cargo cargo);
 
 
     List<Cargo> queryAreaByRnameCargos(String rname);
 
 
-    List<Cargo> insertCargo();
+    void addCargo(Cargo cargo);
 
 
 
