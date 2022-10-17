@@ -1,12 +1,11 @@
 package com.gxa.controller;
 
+import com.gxa.common.uitls.R;
 import com.gxa.dto.GoodsDetailsDto;
 import com.gxa.entity.Goods;
 import com.gxa.entity.GoodsDetail;
-import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

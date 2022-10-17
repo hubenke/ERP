@@ -7,6 +7,7 @@ import com.gxa.service.MyOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,6 +43,16 @@ public class MyOrderServiceImpl  implements MyOrderService {
 
     @Override
     public void add(MyOrder myOrder) {
+        Date dt=new Date();
+        String year=String.format("%tY", dt);
+        String mon=String .format("%tm", dt);
+        String day=String .format("%td", dt);
+        String h=String .format("%tH", dt);
+        String m=String .format("%tM", dt);
+        String s=String .format("%tS", dt);
+        String orderno ="XSDD"+year+mon+day+h+m+s;
+        System.out.println("newOrderno-----------"+orderno);
+        myOrder.setOrderno(orderno);
         this.myOrderMapper.add(myOrder);
     }
 
