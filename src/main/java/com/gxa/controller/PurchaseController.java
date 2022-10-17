@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
@@ -48,15 +49,17 @@ public class PurchaseController {
 
     @GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition(PurchaseDto purchaseDto) {
+    public R queryByCondition(PurchaseDto purchaseDto,Integer page,Integer limit) {
 
         try {
-        List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            PageHelper.startPage(page,limit);//进行分页
+            List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            int count = purchaseService.count(purchaseDto);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("purchases", purchases);
+            Map<String, Object> map = new HashMap<>();
+            map.put("purchases", purchases);
 
-        return R.ok(map);
+            return R.ok(map,count);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("查询失败");
