@@ -7,7 +7,7 @@ import lombok.Data;
 @ApiModel("请购单商品详情")
 @Data
 public
-class ApplyDetail {
+class ApplyGoods {
 
     @ApiModelProperty("请购表id")
     private Integer did ;

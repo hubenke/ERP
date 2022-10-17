@@ -14,7 +14,7 @@ class Apply {
     private Integer id;
 
     @ApiModelProperty("请购单编号")
-    private Integer applyno;
+    private String applyno;
 
     @ApiModelProperty("创建时间")
     private Date createTime;
@@ -41,7 +41,7 @@ class Apply {
     private Goods goods;
 
     @ApiModelProperty("请购商品详情对象列表")
-    private List< ApplyDetail> applyDetail;
+    private List<ApplyGoods> applyGoods;
 
     @ApiModelProperty("采购单状态")
     private Integer status;

@@ -3,11 +3,12 @@ package com.gxa.controller;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
 import com.gxa.entity.Apply;
-import com.gxa.entity.ApplyDetail;
+import com.gxa.entity.ApplyGoods;
 import com.gxa.service.ApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,13 +20,18 @@ import java.util.Map;
 @RestController
 public class ApplyController {
 
+    @Autowired
     private ApplyService applyService;
 
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
-    @GetMapping("/apply/applylist")
+    @PostMapping("/apply/applylist")
     public R queryAll(ApplyDto applyDto) {
 
+        System.out.println("前端数据是"+applyDto);
+
         List<Apply> applies = this.applyService.queryAll(applyDto);
+
+        System.out.println("查询的数据是"+applies);
 
         Map<String,Object> map =new HashMap<>();
         map.put("applies",applies);
@@ -35,7 +41,7 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("请购单的保存")
-    public R applyGoodsAdd(@RequestBody ApplyDetail applyDetail){
+    public R applyGoodsAdd(@RequestBody ApplyGoods applyGoods){
         List list =new ArrayList();
         list.add("可以传");
         list.add("123");
