@@ -32,11 +32,6 @@ public class GoodsController {
 
         try {
             List<Goods> goodsList = this.goodsService.queryGoods();
-//            for(Goods goods : goodsList){
-//                Integer size = goods.getGoodsDetail().getSize();
-//                String color = goods.getGoodsDetail().getColor();
-//                String attr = size + "/" + color;
-//            }
             Map<String,Object> map = new HashMap<>();
             map.put("goods",goodsList);
             return R.ok(map);
@@ -78,11 +73,11 @@ public class GoodsController {
         return R.ok();
     }
 
-    //根据id删除
-    @DeleteMapping("/goods/del")
-    @ApiOperation("根据id删除数据")
-    public R delete(Integer gid){
-//        Result result =new Result(0,"删除操作",null,null);
+    //根据id下架商品
+    @PutMapping("/goods/Shelves/{gid}")
+    @ApiOperation("根据id下架商品")
+    public R downShelves(@PathVariable("gid") Integer gid){
+        this.goodsService.updateShelves(gid);
         return R.ok();
 
     }

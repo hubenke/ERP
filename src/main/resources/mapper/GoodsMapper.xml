@@ -24,6 +24,7 @@
         LEFT JOIN stock s ON  s.goods_id = g.gid
 
     </select>
+
     <select id="queryAllByGoodsDto" resultMap="GoodsResultMap">
         SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty
         FROM goods g
@@ -44,4 +45,11 @@
             </if>
         </where>
     </select>
+
+
+  <update id="updateShelves">
+      UPDATE goods SET status=0 WHERE gid=#{gid}
+  </update>
+
+
 </mapper>
