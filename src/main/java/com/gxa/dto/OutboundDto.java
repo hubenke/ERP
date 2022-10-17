@@ -14,7 +14,7 @@ public class OutboundDto {
     @ApiModelProperty("出库时间")
     private Date outTime;
 
-    @ApiModelProperty("chu出货仓库")
+    @ApiModelProperty("出货仓库")
     private String repositoryId;
 
     @ApiModelProperty("订单编号")

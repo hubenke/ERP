@@ -1,16 +1,33 @@
 package com.gxa.service;
 
+import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.MyOrder;
 
 import java.util.List;
 
 public interface MyOrderService {
     List<MyOrder> queryAll();
+
+    List<MyOrder> queryByCondition(MyOrderDto myOrderDto);
+
+    List<MyOrder> queryAllReturn();
+
+    List<MyOrder> queryReturnByCondition(MyOrderDto myOrderDto);
+
     void add(MyOrder myOrder);
 
-    MyOrder queryByOrder(Integer orderno);
+    void updateStatusByOut(Integer id);
 
-    void update(MyOrder myOrder);
+    void updateOuts(Integer[] ids);
 
-    void deleteByOrdersno(Integer orderno);
+    void updateStatusByClose(Integer id);
+
+    void updateStatusByFinish(Integer id);
+
+    void updateFinishes(Integer[] ids);
+
+    void delete(Integer id);
+
+    void deleteMyOrders(Integer[] ids);
+
 }

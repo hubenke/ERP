@@ -1,14 +1,15 @@
 package com.gxa.service;
 
+import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
-import com.gxa.entity.Purchase;
+import com.gxa.dto.PurchaseQueryDto;
 
 import java.util.List;
 
 public interface PurchaseService {
-    List<Purchase> queryAll(PurchaseDto purchaseDto);
+    List<PurchaseQueryDto> queryAll(PurchaseDto purchaseDto);
 
-    int add(Purchase purchase);
+    int add(PurchaseAddDto purchaseAddDto);
 
-    int update(Purchase purchase);
+    int update(PurchaseAddDto purchaseAddDto);
 }

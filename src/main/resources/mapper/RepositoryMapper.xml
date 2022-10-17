@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.RepositoryMapper">
+
+    <insert id="insertCargo" parameterType="cargo">
+        insert into cargo(repository_id,location)
+        VALUES((SELECT rid FROM repository WHERE rname=#{rname} and area=#{area}) ,#{location})
+    </insert>
+
+<!--    新增仓库-->
+    <insert id="insertNew" parameterType="com.gxa.entity.Repository"  >
+        INSERT into repository(rname,address,storemanager) VALUES(#{rname},#{address},#{storeManager})
+    </insert>
+
+<!--    新增区域-->
+
+    <insert id="insertArea" parameterType="com.gxa.entity.Cargo">
+        INSERT INTO cargo(repository_id,area)  VALUES(#{repositoryId},#{area})
+    </insert>
+
+
+    <resultMap id="qaMap" type="repository">
+
+        <result property="rname" column="rname"></result>
+        <result property="cargo.area" column="area"></result>
+        <result property="cargo.cid" column="cid"></result>
+        <result property="goodsDetail.typeA" column="type_a"></result>
+        <result property="goods.gname" column="ganme"></result>
+        <result property="goodsDetail.unit" column="unit"></result>
+        <result property="stock.qty" column="qty"></result>
+
+    </resultMap>
+
+
+    <select id="queryAll" resultType="com.gxa.entity.Repository" resultMap="qaMap">
+        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,s.qty
+        FROM repository r
+        LEFT JOIN cargo c ON r.rid=c.repository_id
+        LEFT JOIN goods g on c.goods_id=g.gid
+        LEFT JOIN goods_detail gd on g.gid =gd.goods_id
+        LEFT JOIN stock s on gd.goods_id=s.cargo_id
+        <where>
+            <if test="repositoryId">
+            r.rid=#{repositoryId}
+            </if>
+            <if test="regionId">
+            r.regionId=#{regionId}
+            </if>
+            <if test="type">
+            gd.type_a=#{type}
+            </if>
+            <if test="goodsName">
+            g.goodsName=#{goodsName}
+            </if>
+            <if test="brand">
+            g.brand=#{brand}
+            </if>
+        </where>
+
+
+    </select>
+
+
+
+
+    <resultMap id="qsMap" type="repository">
+        <id property="rid" column="rid"></id>
+        <result property="rname" column="rname"></result>
+        <result property="address" column="address"></result>
+        <result property="storeManager" column="storemanager"></result>
+        <result property="areaNum" column="area_num"></result>
+        <result property="stock.minQty" column="minqty"></result>
+
+    </resultMap>
+    <select id="queryStructure" resultType="com.gxa.entity.Repository"  resultMap="qsMap">
+
+        SELECT r.rid,r.rname,r.address,r.storemanager,r.area_num,r.shelves_num,s.minqty
+        FROM repository r
+                 LEFT JOIN cargo c
+                           on r.rid=c.repository_id
+                 LEFT JOIN stock s
+                           on c.cid=s.cargo_id
+
+    </select>
+
+
+
+    <select id="queryAreaByRnameCargos" resultType="com.gxa.entity.Cargo">
+        SELECT  c.area
+        FROM cargo c
+                 LEFT JOIN repository r
+                           on c.repository_id=r.rid
+        WHERE rid=(select rid from repository where rname=#{rname})
+
+    </select>
+
+
+</mapper>
