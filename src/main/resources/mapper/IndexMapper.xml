@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.IndexMapper">
+
+
+    <select id="queryDepositSum" resultType="java.lang.Integer">
+        SELECT COUNT(i.status)
+        FROM inbound i
+        WHERE i.status = 0
+    </select>
+
+    <select id="queryOutBoundSum" resultType="java.lang.Integer">
+        SELECT COUNT(o.status)
+        FROM outbound o
+        WHERE o.status=0
+    </select>
+
+</mapper>
