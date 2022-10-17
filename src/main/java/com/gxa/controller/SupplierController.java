@@ -29,8 +29,10 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
     @ApiOperation("点击供应商管理，供应商页面数据展示")
-    @GetMapping("/suppiler/slist")
+    @PostMapping("/suppiler/slist")
     public R queryAll(@RequestBody SupplierDto supplierDto) {
+
+        System.out.println("前端数据是"+supplierDto);
 
         List<Supplier> suppliers = this.supplierService.queryAll(supplierDto);//调用service
 
