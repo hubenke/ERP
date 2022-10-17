@@ -14,10 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @Api(tags = "采购单接口")
@@ -68,6 +66,10 @@ public class PurchaseController {
     @PostMapping("/purchase/add")
     @ApiOperation("添加采购单")
     public R addPurchase(PurchaseAddDto purchaseAddDto) {
+        //构建采购单编号
+        String purchaseNo = this.createPurchaseNo();
+        purchaseAddDto.getPurchase().setPurchaseNo(purchaseNo);
+
         int i = this.purchaseGoodsService.add(purchaseAddDto);
         if (i == 1) {
             return R.ok("添加成功");
@@ -128,6 +130,25 @@ public class PurchaseController {
             e.printStackTrace();
             return R.error("终止失败");
         }
+    }
+
+    //构建采购单编号
+    private String createPurchaseNo(){
+        StringBuilder sb = new StringBuilder();
+
+        //获取当前日期
+        Date date = new Date(System.currentTimeMillis());
+        int year = date.getYear();
+        int month = date.getMonth();
+        int day = date.getDay();
+        sb.append("CG" + year + month + day);
+
+        Random random = new Random();
+        int ends = random.nextInt(99);
+        String format = String.format("%02d", ends);//如果不足两位，前面补0
+        sb.append(format);
+
+        return sb.toString();
     }
 
 }

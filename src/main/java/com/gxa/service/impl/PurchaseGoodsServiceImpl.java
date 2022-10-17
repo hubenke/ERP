@@ -25,7 +25,7 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
         //i:插入语句影响的行数
         if (i != 0) {
             //通过采购单编号查询插入第一条语句的自增id
-            int purchaseid = purchaseMapper.queryIdByNo(purchaseAddDto.getPurchaseNo());
+            int purchaseid = purchaseMapper.queryIdByNo(purchaseAddDto.getPurchase().getPurchaseNo());
 
             //第一条语句插入成功，第二条语句没有插入成功的话就要回滚
             int j = purchaseGoodsMapper.insert(purchaseAddDto,purchaseid);

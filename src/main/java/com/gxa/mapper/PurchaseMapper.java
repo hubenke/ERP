@@ -12,7 +12,8 @@ public interface PurchaseMapper extends BaseMapper<Purchase> {
 
     List<PurchaseQueryDto> queryAll(PurchaseDto purchaseDto);
 
-    int queryIdByNo(int purchaseNo);
+    int queryIdByNo(String purchaseNo);
 
     int insert(PurchaseAddDto purchaseAddDto);
+
 }

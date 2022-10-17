@@ -5,14 +5,14 @@
 <mapper namespace="com.gxa.mapper.PurchaseMapper">
 
     <resultMap id="purchaseResultMap" type="com.gxa.dto.PurchaseQueryDto">
-        <result property="purchase.id" column="id"></result>
-        <result property="purchase.purchaseNo"  column="purchaseno"></result>
-        <result property="purchase.createTime" column="create_time"></result>
-        <result property="purchase.status" column="status"></result>
-        <result property="purchase.remark" column="remark"></result>
-        <result property="purchase.purchaseHandlerName" column="purchase_handler"></result>
-        <result property="purchase.purchaseCheckerName" column="purchase_checker"></result>
-        <result property="purchase.financeCheckerName" column="finance_checker"></result>
+        <result property="id" column="id"></result>
+        <result property="purchaseNo"  column="purchaseno"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="status" column="status"></result>
+        <result property="remark" column="remark"></result>
+        <result property="purchaseHandlerName" column="purchase_handler"></result>
+        <result property="purchaseCheckerName" column="purchase_checker"></result>
+        <result property="financeCheckerName" column="finance_checker"></result>
         <result property="sid" column="sid"></result>
         <result property="sname" column="sname"></result>
         <result property="principal" column="principal"></result>
@@ -20,7 +20,7 @@
 
     <insert id="insert" parameterType="com.gxa.dto.PurchaseAddDto" useGeneratedKeys="true" keyProperty="id">
         insert into purchase(purchaseno,status,create_time,purchase_handler,remark,apply_id,supplier_id)
-        values (#{purchaseNo},1,#{createTime},#{purchaseHandlerName},#{remark},#{applyId},#{sid});
+        values (#{purchaseNo},1,#{createTime},#{purchaseHandlerId},#{remark},#{applyId},#{sid});
 
     </insert>
 
