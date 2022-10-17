@@ -39,6 +39,14 @@
     </insert>
 
 
+<!--    <update id="updateIncrease">-->
+<!--        update stock set qty=#{}-->
+<!--    </update>-->
+
+
+<!--    <update id="updateDecrease"></update>-->
+
+
     <resultMap id="qaMap" type="com.gxa.entity.Repository">
 
         <result property="rname" column="rname"></result>
@@ -66,7 +74,7 @@
         LEFT JOIN goods_detail gd
         on g.gid =gd.goods_id
         LEFT JOIN stock s
-        on gd.goods_id=s.cargo_id
+        on gd.did=s.goodsdetail_id
 
 <where>
     <if test="rname !=null and rname !='' ">
