@@ -1,6 +1,7 @@
 package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.MyOrderDto;
 import com.gxa.entity.Goods;
@@ -30,6 +31,7 @@ public class MyOrderController {
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
+            PageHelper.startPage(page, limit);
             List<MyOrder> myOrders = this.myOrderService.queryAll();
             System.out.println("myOrders:----------"+myOrders.toString());
             Map<String,Object> map = new HashMap<>();
@@ -46,6 +48,7 @@ public class MyOrderController {
     @ApiOperation("查询所有退换货订单")
     public R listReturn(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
+            PageHelper.startPage(page, limit);
             List<MyOrder> myOrdersReturn = this.myOrderService.queryAllReturn();
             System.out.println("myOrdersReturn:----------"+myOrdersReturn.toString());
             Map<String,Object> map = new HashMap<>();
@@ -62,6 +65,9 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
+            List<MyOrder> myOrders = this.myOrderService.queryAll();
+            int size = myOrders.size();
+            myOrder.setId(size+1);
             this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {

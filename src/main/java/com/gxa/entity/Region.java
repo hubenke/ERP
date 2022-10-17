@@ -22,9 +22,6 @@ public class Region {
     @ApiModelProperty("所在省")
     private String province;
 
-    @ApiModelProperty("所在区域")
-    private String address;
-
     @ApiModelProperty("所在市")
     private String town;
 

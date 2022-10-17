@@ -17,4 +17,6 @@ public interface GoodsMapper {
     List<Goods> queryGoods();
 
     List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
+
+    void updateShelves(Integer gid);
 }

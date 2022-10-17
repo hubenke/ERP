@@ -3,16 +3,134 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.SupplierMapper">
-    <resultMap id="inBoundResultMap" type="inBound">
+    <resultMap id="supplierResultMap" type="supplier">
+        <id property="sid" column="sid"></id>
+        <result property="introducer" column="introducer"></result>
+        <result property="origin" column="origin"></result>
+        <result property="sname" column="sname"></result>
+        <result property="scope" column="scope"></result>
+        <result property="contact" column="contact"></result>
+        <result property="position" column="position"></result>
+        <result property="tel" column="tel"></result>
+        <result property="email" column="email"></result>
+        <result property="qq" column="qq"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="address" column="address"></result>
+        <association property="region" column="id" javaType="region">
+            <result property="id" column="id"></result>
+            <result property="province" column="province"></result>
+            <result property="town" column="town"></result>
+        </association>
+    </resultMap>
+    <resultMap id="goodsDetailResultMap" type="goodsDetail">
+        <id property="did" column="did"></id>
+        <result property="typeA" column=""></result>
+        <result property="typeB" column=""></result>
+        <result property="color" column=""></result>
+        <result property="size" column=""></result>
+        <result property="spec" column=""></result>
+        <result property="unit" column=""></result>
+        <association property="goods" column="gid" javaType="goods">
+            <id property="gid" column="gid" ></id>
+            <result property="gname" column="gname"></result>
+            <result property="picture" column="picture"></result>
+            <result property="salePrice" column="sale_price"></result>
+            <result property="salePrice" column="sale_price"></result>
+            <result property="buyPrice" column="buy_price"></result>
+            <result property="status" column="status"></result>
+        </association>
 
     </resultMap>
-    <select id="queryAll" resultMap="inBoundResultMap">
-        SELECT s.sid,s.origin,s.sname,s.`range`,e .ename,s.wcreate_time
-        FROM `supplier`s,emp e
+<!--添加供应商-->
+    <insert id="addSupplier" parameterType="supplier">
+        INSERT INTO supplier(sid,origin,sname,scope,contact,tel,email,qq,introducer,region_id,address,position)
+        VALUES(#{sid},#{origin},#{sname},#{scope},#{contact},#{tel},#{email},#{qq},#{introducer},#{region.id},#{address},#{position})
+    </insert>
+
+    <!--    添加供应商关联商品-->
+    <update id="addGoods">
+        UPDATE supplier
+        SET goods = #{ids}
+        WHERE sid = #{sid}
+    </update>
+
+<!--    修改供应商信息-->
+    <update id="updateSupplier" parameterType="supplier">
+        UPDATE supplier
+        SET origin=#{origin},sname=#{sname},scope=#{scope},contact=#{contact},tel=#{tel},email=#{email},qq=#{qq},introducer=#{introducer},region_id=#{region.id},address=#{address},position=#{position}
+        WHERE sid = #{sid}
+    </update>
+
+<!--    修改供应商关联商品-->
+    <update id="updateGoods">
+        UPDATE supplier
+        SET goods = #{ids}
+        WHERE sid = #{sid}
+    </update>
+
+<!--查询管理页面查询-->
+    <select id="queryAll" resultMap="supplierResultMap">
+        SELECT s.sid,s.origin,s.sname,s.scope,e.ename,s.create_time,s.region_id
+        FROM supplier s
+        LEFT JOIN emp e on e.eid = s.introducer
+        <where>
+            <if test="introducer != null">
+                s.introducer = #{introducer}
+            </if>
+            <if test="sid != null">
+                s.sid = #{sid}
+            </if>
+            <if test="origin != null">
+                s.origin = #{origin}
+            </if>
+            <if test="sname != null">
+                s.sname = #{sname}
+            </if>
+            <if test="range != null">
+                s.scope = #{scope}
+            </if>
+            <if test="contact != null">
+                s.contact = #{contact}
+            </if>
+            <if test="createTime != null">
+                s.create_time = #{createTime}
+            </if>
+        </where>
     </select>
+<!--    查询省市-->
     <select id="queryRegions" resultType="Region">
-        SELECT r.id,r.province,r.town,r.address
+        SELECT r.id,r.province,r.town
         FROM region r
+        <where>
+            <if test="id != null">
+                r.id = #{id}
+            </if>
+            <if test="province != null">
+                r.province = #{province}
+            </if>
+            <if test="town != null">
+                r.town = #{town}
+            </if>
+            <if test="address !=null">
+                r.address = ${address}
+            </if>
+        </where>
+    </select>
+<!--查询商品-->
+    <select id="queryGoods" resultMap="goodsDetailResultMap">
+        SELECT g.gid,g.gname,gd.spec,gd.unit
+        FROM goods g
+        LEFT JOIN goods_detail gd ON gd.goods_id = g.gid
+    </select>
+
+<!--    编辑页面查询-->
+    <select id="queryByID" resultMap="supplierResultMap">
+        SELECT s.sid,s.origin,s.scope,s.sname,s.contact,s.tel,s.email,s.qq,s.introducer,s.address,s.position
+        FROM supplier s
+        WHERE s.sid = #{sid}
+    </select>
+    <select id="queryIntroducer" resultType="com.gxa.entity.Emp">
+        SELECT e.eid,e.ename FROM emp e
     </select>
 
 </mapper>
