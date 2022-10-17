@@ -62,6 +62,9 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
+            List<MyOrder> myOrders = this.myOrderService.queryAll();
+            int size = myOrders.size();
+            myOrder.setId(size+1);
             this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {
