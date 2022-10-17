@@ -24,6 +24,11 @@ interface RepositoryMapper extends BaseMapper<Repository> {
 
     List<Repository> queryStoreAndArea();
 
+
+//    void updateIncrease();
+//
+//    void updateDecrease();
+
 //    仓储结构页面
     List<Repository> queryStructure();
 

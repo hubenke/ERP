@@ -10,15 +10,12 @@ import java.util.Date;
 public
 class ApplyDto {
 
-    @ApiModelProperty("请购单状态")
-    private Integer status;
-
     @ApiModelProperty("请购单创建日期")
     private Date createTime;
 
     @ApiModelProperty("请购审核人")
-    private String checkMan;
+    private String applyChecker;
 
     @ApiModelProperty("请购发起人")
-    private Integer requestMan ;
+    private String applyLaunch ;
 }
