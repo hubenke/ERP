@@ -40,4 +40,7 @@
             </if>
         </where>
     </select>
+    <select id="queryDept" resultType="com.gxa.entity.Emp">
+
+    </select>
 </mapper>
