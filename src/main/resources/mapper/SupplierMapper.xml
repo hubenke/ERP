@@ -5,7 +5,8 @@
 <mapper namespace="com.gxa.mapper.SupplierMapper">
     <resultMap id="supplierResultMap" type="supplier">
         <id property="sid" column="sid"></id>
-        <result property="introducer" column="introducer"></result>
+        <result property="introducerId" column="introducer"></result>
+        <result property="introducer" column="ename"></result>
         <result property="origin" column="origin"></result>
         <result property="sname" column="sname"></result>
         <result property="scope" column="scope"></result>
@@ -75,7 +76,7 @@
         LEFT JOIN emp e on e.eid = s.introducer
         <where>
             <if test="introducer != null">
-                s.introducer = #{introducer}
+                e.ename = #{introducer}
             </if>
             <if test="sid != null">
               AND  s.sid = #{sid}

@@ -14,8 +14,11 @@ public class Supplier {
     @ApiModelProperty("供应商编号")
     private Integer sid ;
 
-    @ApiModelProperty("供应商引进人")
-    private Integer introducer;
+    @ApiModelProperty("供应商引进人id")
+    private Integer introducerId;
+
+    @ApiModelProperty("供应商引进人姓名")
+    private String introducer;
 
     @ApiModelProperty("供应商来源")
     private String origin;

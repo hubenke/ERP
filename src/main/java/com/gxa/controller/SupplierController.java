@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.dto.RegionDto;
 import com.gxa.dto.SupplierDto;
 import com.gxa.common.uitls.R;
@@ -30,9 +31,9 @@ public class SupplierController {
     private SupplierService supplierService;
     @ApiOperation("点击供应商管理，供应商页面数据展示")
     @PostMapping("/suppiler/slist")
-    public R queryAll(@RequestBody SupplierDto supplierDto) {
+    public R queryAll(@RequestBody SupplierDto supplierDto,@ApiParam("页数") Integer page,@ApiParam("条数") Integer limit) {
 
-        System.out.println("前端数据是"+supplierDto);
+        PageHelper.startPage(page, limit);  //使用此方法进行分页
 
         List<Supplier> suppliers = this.supplierService.queryAll(supplierDto);//调用service
 

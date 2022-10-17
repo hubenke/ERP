@@ -53,6 +53,7 @@ public class ApplyController {
     @GetMapping("/apply/dept")
     public R queryDepts(){
 
+        this.applyService.queryDeot();
         return R.ok();
     }
 
