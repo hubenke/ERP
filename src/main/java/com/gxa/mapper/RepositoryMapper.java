@@ -29,6 +29,7 @@ interface RepositoryMapper extends BaseMapper<Repository> {
 
 //    新增仓库
     void insertNew(Repository repository);
+
     void insertArea(Cargo cargo);
 
 

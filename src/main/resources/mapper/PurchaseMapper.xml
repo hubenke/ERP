@@ -37,12 +37,15 @@
                 <if test="status != null ">
                     p.status = #{status}
                 </if>
+
                 <if test="createTime != null">
                     p.create_time = #{createTime}
                 </if>
+
                 <if test="sname != null and sname != ''">
                     s.sname = #{sname}
                 </if>
+
                 <if test="principal != null">
                     a.principal = #{principal}
                 </if>

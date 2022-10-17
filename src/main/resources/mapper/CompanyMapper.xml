@@ -45,9 +45,7 @@
     </select>
 
     <select id="queryById">
---         SELECT c.id,c.compno,c.`name`,c.job
---         FROM company c
---         WHERE id =#{id}
+
     </select>
 
 

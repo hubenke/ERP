@@ -15,7 +15,7 @@ public interface CompanyMapper  extends BaseMapper<Company> {
 
   List<Company> queryAll();
 
-  void  add( );//添加操作
+  void  add(Company company);//添加操作
 
   void  updateById(Integer id);//根据id去编辑
 
@@ -25,7 +25,8 @@ public interface CompanyMapper  extends BaseMapper<Company> {
 
 
 
-//  void
+
+
 
 
 

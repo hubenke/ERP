@@ -23,9 +23,9 @@ public class CompanyController {
     public R queryAll(){
 
         List list = new ArrayList();
-//        list.add("NO 7528");
-//        list.add("供应商审核模板");
-//        list.add("销售代表-销售经理-总经理-财务");
+        list.add("NO 7528");
+        list.add("供应商审核模板");
+        list.add("销售代表-销售经理-总经理-财务");
 
         Map map = new HashMap();
         map.put("Company",list);

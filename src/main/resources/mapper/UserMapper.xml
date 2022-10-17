@@ -11,12 +11,13 @@
         <result property="limit" column="limit"></result>
 
     </resultMap>
-    <insert id="add">
+    <insert id="add" >
         INSERT INTO USER(uid,uname,password,salt,LIMIT) value (#{uid},#{uname},#{password},#{salt},#{limit})
     </insert>
 
-    <update id="update">
-        UPDATE `user` SET `limit` = #{limt}
+    <update id="updateById" >
+        UPDATE user
+        SET limit = #{limt}
         WHERE uid = #{uid}
     </update>
 
@@ -24,11 +25,32 @@
         SELECT uid,password FROM USER
     </select>
 
-    <select id="queryByUid">
-        SELECT *
+    <select id="queryByUid" >
+        SELECT u.uid,u.uname,u.limit
         FROM user u
         WHERE u.uid = #{uid}
     </select>
+
+
+<!--    <select id="queruAll" resultType="com.gxa.entity.User">-->
+<!--        -->
+<!--    </select>-->
+    <select id="queryAll" resultMap="userResultMap">
+        SELECT u.uid,u.uname,u.`limit`
+        FROM `user` u
+        <where>
+            <if test="uid !=null">
+             u.uid =#{uid}
+            </if>>
+        </where>>
+
+    </select>
+
+<!--    <select id="queryById" resultType="com.gxa.entity.User">-->
+<!--        SELECT u.uid,u.`limit`,u.uname-->
+<!--        FROM user u-->
+<!--        WHERE uid =#{uid}-->
+<!--    </select>-->
 
 
 </mapper>
