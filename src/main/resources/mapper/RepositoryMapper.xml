@@ -51,7 +51,7 @@
 
         <result property="rname" column="rname"></result>
         <result property="cargo.area" column="area"></result>
-        <result property="cargo.cid" column="cid"></result>
+        <result property="cargo.location" column="location"></result>
         <result property="goodsDetail.typeA" column="type_a"></result>
         <result property="goods.gname" column="gname"></result>
         <result property="goods.brand" column="brand"></result>
@@ -66,7 +66,7 @@
 
 
     <select id="queryAll" resultMap="qaMap">
-        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,g.brand,gd.unit,gd.spec,s.qty,s.realqty
+        SELECT r.rname,c.area,c.location,gd.type_a,g.gname,g.brand,gd.unit,gd.spec,s.qty,s.realqty
         FROM repository r
         LEFT JOIN cargo c
         ON r.rid=c.repository_id
