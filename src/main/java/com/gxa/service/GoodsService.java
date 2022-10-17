@@ -12,6 +12,8 @@ public interface GoodsService {
 
     List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
 
+    void updateShelves(Integer gid);
+
     void add(Goods goods );;//添加商品
 
 //    void  queryGoods();//查询商品表
