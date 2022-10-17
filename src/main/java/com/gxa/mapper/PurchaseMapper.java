@@ -16,4 +16,6 @@ public interface PurchaseMapper extends BaseMapper<Purchase> {
 
     int insert(PurchaseAddDto purchaseAddDto);
 
+    int updateById(PurchaseAddDto purchaseAddDto);
+
 }

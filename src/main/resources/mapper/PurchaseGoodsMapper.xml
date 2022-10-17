@@ -5,6 +5,8 @@
 <mapper namespace="com.gxa.mapper.PurchaseGoodsMapper">
 
 
+
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into purchase_goods(buyqty,goods_id,purchase_id)
         <foreach collection="purchaseGoodsList" item="pg" index="index" separator="union all">
@@ -15,5 +17,21 @@
             from purchase_goods
         </foreach>
     </insert>
+
+    <update id="updateByPurchaseId">
+        <foreach collection="purchaseGoodsList" item="pg" index="index" separator="union all">
+            update purchase_goods
+            set buyqty=#{pg.buyqty}
+            where purchase_id=#{pg.purchaseId} and goods_id=#{pg.goodsId}
+        </foreach>
+    </update>
+
+    <delete id="deleteById">
+        delete form purchase_goods where goods_id in(#{ids})
+    </delete>
+
+    <select id="queryGoodsId" parameterType="java.lang.Integer">
+        select goods_id from purchase_goods where purchase_id = #{purchaseId}
+    </select>
 
 </mapper>

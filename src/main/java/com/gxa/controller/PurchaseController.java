@@ -80,10 +80,10 @@ public class PurchaseController {
 
     @PutMapping("/purchase/edit")
     @ApiOperation("修改采购单")
-    public R updatePurchaseById(PurchaseAddDto purchase) {
+    public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseService.update(purchase);
+            int i = this.purchaseGoodsService.updateByPurchaseId(purchaseAddDto);
             if (i == 0) {
                 return R.ok("修改成功");
             } else {

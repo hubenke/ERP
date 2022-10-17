@@ -27,6 +27,10 @@ public class Purchase {
     @TableField("create_time")
     private Date createTime;
 
+    @ApiModelProperty("采购单到货地址")
+    @TableField("address")
+    private String address;
+
     @ApiModelProperty("备注")
     @TableField("remark")
     private String remark;

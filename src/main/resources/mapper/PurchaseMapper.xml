@@ -19,10 +19,16 @@
     </resultMap>
 
     <insert id="insert" parameterType="com.gxa.dto.PurchaseAddDto" useGeneratedKeys="true" keyProperty="id">
-        insert into purchase(purchaseno,status,create_time,purchase_handler,remark,apply_id,supplier_id)
-        values (#{purchaseNo},1,#{createTime},#{purchaseHandlerId},#{remark},#{applyId},#{sid});
+        insert into purchase(purchaseno,status,create_time,purchase_handler,remark,address,apply_id,supplier_id)
+        values (#{purchaseNo},1,#{createTime},#{purchaseHandlerId},#{remark},#{address},#{applyId},#{sid});
 
     </insert>
+
+    <update id="updateById">
+        update from purchase
+        set status=#{status},purchase_handler=#{purchaseHandlerId},remark=#{remark},address=#{address},apply_id=#{apply_id}
+        where id=#{id}
+    </update>
 
     <select id="queryAll" resultMap="purchaseResultMap">
         select p.id,p.create_time,p.purchaseno,p.status,s.sid,s.sname,e.ename principal,e1.ename purchase_handler,e2.ename purchase_checker,e3.ename finance_checker
