@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 @ApiModel("请输入权限名称")
 public class UserDto {
-    @ApiModelProperty("根据id查询")
-    private Integer uid;
+//    @ApiModelProperty("根据id查询")
+//    private Integer uid;
 }

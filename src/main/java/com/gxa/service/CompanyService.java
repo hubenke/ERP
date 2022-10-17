@@ -12,7 +12,7 @@ public interface CompanyService {
 
 //    List<Company> queryAllCompanyDto (CompanyDto companyDto);
 
-    void add(); //添加操作
+    void add(Company company); //添加操作
 
     void  update();// 进行修改
 

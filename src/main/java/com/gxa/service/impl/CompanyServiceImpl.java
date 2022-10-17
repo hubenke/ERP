@@ -5,10 +5,12 @@ import com.gxa.entity.Company;
 import com.gxa.mapper.CompanyMapper;
 import com.gxa.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.List;
 
+@Service
 public class CompanyServiceImpl  implements CompanyService {
 
     @Autowired
@@ -22,8 +24,8 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public void add() {
-
+    public void add(Company company) {
+        this.companyMapper.add(company);
     }
 
     @Override

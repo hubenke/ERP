@@ -20,7 +20,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     void updateById(Integer uid);//根据id修改
 
-
      List<User> queryAll(UserDto userDto);
 
 //     List<User> queryById();//根据

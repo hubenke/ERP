@@ -13,16 +13,20 @@
 <insert id="add" >
     insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
-    <update id="updateById"  >
+
+    <update id="update"  >
         UPDATE company  SET  id =#{id}
         WHERE id =#{id}
     </update>
+
     <select id="queryAll" resultType="com.gxa.entity.Company" resultMap="companyResultMap">
-        SELECT id,compno,name,job FROM company
+        SELECT id,compno,name,job
+        FROM company
     </select>
 
     <select id="queryByCondition" resultMap="companyResultMap">
-      SELECT id,compno,name,job FROM company
+      SELECT c.id,c.compno,c.name,c.job
+      FROM company c
         <where>
              <if test="id !=null">
                      c.id =#{id}
@@ -45,7 +49,9 @@
     </select>
 
     <select id="queryById">
-
+    SELECT c.id,c.compno,c.name,c.job
+    FROM company c
+    WHERE id =#{id}
     </select>
 
 

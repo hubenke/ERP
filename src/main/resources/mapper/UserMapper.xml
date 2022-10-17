@@ -22,7 +22,9 @@
     </update>
 
     <select id="queryByUserNameAndPwd" resultMap="userResultMap">
-        SELECT uid,password FROM USER
+        SELECT u.uid,u.uname,u.password,u.salt,u.limit
+        FROM `user` u
+        WHERE uname=#{uname} AND password=#{password}
     </select>
 
     <select id="queryByUid" >
