@@ -1,6 +1,7 @@
 package com.gxa.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.annotations.ApiModel;
@@ -14,6 +15,7 @@ import lombok.Data;
 @ApiModel("员工表实体类")
 public class Emp {
     @ApiModelProperty("员工编号")
+    @TableId(value = "eid")
     private Integer eid;
 
     @ApiModelProperty("员工姓名")
