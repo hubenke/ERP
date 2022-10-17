@@ -39,7 +39,7 @@
     </insert>
 
 
-    <resultMap id="qaMap" type="repository">
+    <resultMap id="qaMap" type="com.gxa.entity.Repository">
 
         <result property="rname" column="rname"></result>
         <result property="cargo.area" column="area"></result>
@@ -47,13 +47,17 @@
         <result property="goodsDetail.typeA" column="type_a"></result>
         <result property="goods.gname" column="ganme"></result>
         <result property="goodsDetail.unit" column="unit"></result>
+        <result property="goodsDetail.spec" column="spec"></result>
         <result property="stock.qty" column="qty"></result>
+        <result property="stock.realQty" column="realqty"></result>
+
+
 
     </resultMap>
 
 
-    <select id="queryAll" resultType="com.gxa.entity.Repository" resultMap="qaMap">
-        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,s.qty
+    <select id="queryAll" resultMap="qaMap">
+        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,gd.spec,s.qty,s.realqty
         FROM repository r
         LEFT JOIN cargo c
         ON r.rid=c.repository_id
@@ -65,19 +69,20 @@
         on gd.goods_id=s.cargo_id
 
 <where>
-    <if test="repositoryId">
-    r.rid=#{repositoryId}
+    <if test="rname !=null and rname !='' ">
+    r.rname=#{rname}
     </if>
-    <if test="regionId">
-    r.regionId=#{regionId}
+    <if test="area !=null and area!='' ">
+    c.area=#{area}
     </if>
-    <if test="type">
-    gd.type_a=#{type}
+    <if test="type_A !=null">
+    gd.type_a=#{type_A}
     </if>
-    <if test="goodsName">
+    <if test="goodsName !=null and goodsName !='' ">
     g.goodsName=#{goodsName}
     </if>
-    <if test="brand">
+    <if test="brand!=null and brand!='' ">
+
     g.brand=#{brand}
     </if>
 </where>
@@ -117,6 +122,19 @@
                            on c.repository_id=r.rid
         WHERE rid=(select rid from repository where rname=#{rname})
 
+    </select>
+    
+    
+    
+    <resultMap id="qsaMap" type="repository">
+        <result property="rname" column="rname"></result>
+        <result property="cargo.area" column="area"></result>
+    </resultMap>
+
+    <select id="queryStoreAndArea" resultMap="qsaMap">
+        SELECT  r.rname,c.area
+        FROM  repository  r
+                  left JOIN cargo c on r.rid =c.repository_id
     </select>
 
 

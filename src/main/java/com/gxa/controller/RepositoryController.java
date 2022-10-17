@@ -121,8 +121,8 @@ public class RepositoryController {
 
 
     @GetMapping("/repository/warehouse")
-    @ApiOperation("点击仓储管理，呈现数据")
-    public R  queryWarehouse(@RequestBody RepositoryDto repositoryDto){
+    @ApiOperation("点击仓储管理，呈现数据,且按条件查询")
+    public R  queryWarehouse( RepositoryDto repositoryDto){
 
 
 
@@ -132,6 +132,30 @@ public class RepositoryController {
         map.put("repositories",repositories);
         return R.ok(map);
     }
+
+
+
+    @GetMapping("/repository/queryHouseAndArea")
+    @ApiOperation("点击筛选，查询已有仓库和区域")
+    public R queryStorehouse(){
+        List<Repository> houseAndArea = this.repositoryService.queryStoreAndArea();
+
+
+        Map<String,Object> map = new HashMap();
+        map.put("houseAndArea",houseAndArea);
+
+        try {
+            return R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
+    }
+
+
+
+
+
 //
 //    @GetMapping("/repository/")
 //    @ApiOperation("按商品显示，呈现数据")

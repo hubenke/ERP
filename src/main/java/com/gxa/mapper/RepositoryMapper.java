@@ -22,6 +22,8 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Repository> queryAll(RepositoryDto repositoryDto);
 
 
+    List<Repository> queryStoreAndArea();
+
 //    仓储结构页面
     List<Repository> queryStructure();
 

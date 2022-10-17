@@ -12,6 +12,9 @@ public interface RepositoryService {
     List<Repository> queryAll(RepositoryDto repositoryDto);
 
 
+    List<Repository> queryStoreAndArea();
+
+
     List<Repository> queryStructure();
 
 

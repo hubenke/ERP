@@ -28,6 +28,14 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
+    List<Repository> queryStoreAndArea() {
+        List<Repository> repositories = this.repositoryMapper.queryStoreAndArea();
+        return repositories;
+    }
+
+
+    @Override
+    public
     List<Repository> queryStructure() {
         List<Repository> repositories = this.repositoryMapper.queryStructure();
         return repositories;
