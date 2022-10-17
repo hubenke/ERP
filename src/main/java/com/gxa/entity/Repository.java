@@ -28,7 +28,8 @@ public class Repository {
     private Integer areaNum;
     
     @ApiModelProperty("仓库管理员")
-    private Emp storeManager;
+    @TableField("storemanager")
+    private Integer storeManager;
 
     @ApiModelProperty("货架数量")
     @TableField("shelves_num")
