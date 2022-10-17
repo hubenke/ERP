@@ -27,21 +27,25 @@ public class Purchase {
     @TableField("create_time")
     private Date createTime;
 
+    @ApiModelProperty("采购单到货地址")
+    @TableField("address")
+    private String address;
+
     @ApiModelProperty("备注")
     @TableField("remark")
     private String remark;
 
     @ApiModelProperty("采购负责人")
     @TableField("purchase_handler")
-    private String purchaseHandlerName;
+    private Integer purchaseHandlerId;
 
     @ApiModelProperty("采购审核人")
     @TableField("purchase_checker")
-    private String purchaseCheckerName;
+    private Integer purchaseCheckerId;
 
     @ApiModelProperty("财务审核人")
     @TableField("finance_checker")
-    private String financeCheckerName;
+    private Integer financeCheckerId;
 
     @ApiModelProperty("请购单id")
     private Integer applyId;
@@ -49,7 +53,7 @@ public class Purchase {
     @ApiModelProperty("供应商id")
     private Integer supplierId;
 
-    @ApiModelProperty("用户id")
-    private Integer userId;
+//    @ApiModelProperty("用户id")
+//    private Integer userId;
 
 }
