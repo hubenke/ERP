@@ -39,13 +39,22 @@
     </insert>
 
 
+<!--    <update id="updateIncrease">-->
+<!--        update stock set qty=#{}-->
+<!--    </update>-->
+
+
+<!--    <update id="updateDecrease"></update>-->
+
+
     <resultMap id="qaMap" type="com.gxa.entity.Repository">
 
         <result property="rname" column="rname"></result>
         <result property="cargo.area" column="area"></result>
-        <result property="cargo.cid" column="cid"></result>
+        <result property="cargo.location" column="location"></result>
         <result property="goodsDetail.typeA" column="type_a"></result>
-        <result property="goods.gname" column="ganme"></result>
+        <result property="goods.gname" column="gname"></result>
+        <result property="goods.brand" column="brand"></result>
         <result property="goodsDetail.unit" column="unit"></result>
         <result property="goodsDetail.spec" column="spec"></result>
         <result property="stock.qty" column="qty"></result>
@@ -57,7 +66,7 @@
 
 
     <select id="queryAll" resultMap="qaMap">
-        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,gd.spec,s.qty,s.realqty
+        SELECT r.rname,c.area,c.location,gd.type_a,g.gname,g.brand,gd.unit,gd.spec,s.qty,s.realqty
         FROM repository r
         LEFT JOIN cargo c
         ON r.rid=c.repository_id
@@ -66,7 +75,7 @@
         LEFT JOIN goods_detail gd
         on g.gid =gd.goods_id
         LEFT JOIN stock s
-        on gd.goods_id=s.cargo_id
+        on gd.did=s.goodsdetail_id
 
 <where>
     <if test="rname !=null and rname !='' ">

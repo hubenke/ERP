@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @ApiModel("退货单详情模型")
-public class ReturnDetail {
+public class ReturnGoods {
 
     @ApiModelProperty("退货单详情id")
     private Integer id;

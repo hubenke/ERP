@@ -31,6 +31,12 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    public int count(PurchaseDto purchaseDto) {
+        int count = purchaseMapper.count(purchaseDto);
+        return count;
+    }
+
+    @Override
     public int add(PurchaseAddDto purchaseAddDto) {
         int i = purchaseMapper.insert(purchaseAddDto);
         return i;

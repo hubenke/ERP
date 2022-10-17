@@ -1,12 +1,16 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ReturnBillDto;
+import com.gxa.dto.ReturnQueryDto;
 import com.gxa.entity.ReturnBill;
+import com.gxa.service.ReturnService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,7 +21,11 @@ import java.util.Map;
 @RestController
 @Api(tags = "退货单接口")
 public class ReturnController {
-    @GetMapping("/return/list")
+
+    @Autowired
+    private ReturnService returnService;
+
+    /*@GetMapping("/return/list")
     @ApiOperation("查询所有退货单")
     public R queryAll(){
         ReturnBill returnBill = new ReturnBill();
@@ -32,30 +40,25 @@ public class ReturnController {
             e.printStackTrace();
             return R.error("请求异常");
         }
-    }
+    }*/
 
-
-    @GetMapping("/queryReturnByCondition/list")
+    @GetMapping("/queryByCondition/list")
     @ApiOperation("根据条件查询所有满足条件的退货单")
-    public R queryReturnByCondition(ReturnBillDto returnBillDto){
+    public R queryReturnByCondition(ReturnBillDto returnBillDto,Integer page,Integer limit){
+        try {
+            PageHelper.startPage(page,limit);//进行分页
 
-
-        ReturnBill returnBill = new ReturnBill();
-
-        try{
-            List<ReturnBill> returnBillList = new ArrayList<>();
-            returnBillList.add(returnBill);
-            Map<String,Object> map = new HashMap<>();
-            map.put("returnBillList",returnBillList);
+            List<ReturnQueryDto> returnList = returnService.queryAllReturnBill(returnBillDto);
+            Map<String, Object> map = new HashMap<>();
+            map.put("returnList", returnList);
             return R.ok(map);
         }catch (Exception e){
-            e.printStackTrace();
             return R.error("查询失败");
         }
     }
 
 
-    @PostMapping("/Return/add")
+    @PostMapping("/return/add")
     @ApiOperation("添加退货单")
     public R addReturn(@RequestBody ReturnBill returnBill){
 
@@ -68,7 +71,7 @@ public class ReturnController {
 
     }
 
-    @PutMapping("/Return/check/{id}")
+    @PutMapping("/return/check/{id}")
     @ApiOperation("根据Id审核退货单")
     public R checkReturn(@PathVariable("id") Integer id){
         try{

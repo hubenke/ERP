@@ -35,11 +35,19 @@ public class Repository {
     private Cargo cargo;
 
 
+
+    @ApiModelProperty("商品")
+     private Goods goods;
+
+
     @ApiModelProperty("库存")
     private Stock stock;
 
-    @ApiModelProperty("商品")
-    private Goods goods;
+//    @ApiModelProperty("商品名称")
+//    private String goodsName;
+
+//    @ApiModelProperty("商品品牌")
+//    private String brand;
 
     @ApiModelProperty("商品详情")
     private GoodsDetail goodsDetail;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.ReturnMapper">
+
+    <resultMap id="returnResultMap" type="com.gxa.dto.ReturnQueryDto" >
+        <id property="id" column="id"></id>
+        <result property="createTime" column="create_time"></result>
+        <result property="returnNo" column="returnno"></result>
+        <result property="status" column="status"></result>
+        <result property="type" column="type"></result>
+        <result property="returnTime" column="return_time"></result>
+        <result property="contact" column="contact"></result>
+        <result property="rname" column="rname"></result>
+        <result property="sname" column="sname"></result>
+        <result property="initiatorName" column="ename"></result>
+    </resultMap>
+
+    <select id="queryAllReturnBill" resultType="java.util.List" resultMap="returnResultMap">
+        select r.id,r.returnno,r.status,r.type,r.create_time,r.return_time,r.contact,rs.rname,s.sname,e.ename
+        from returnbill r
+        left join repository rs on r.repository_id = rs.rid
+        left join supplier s on r.supplier_id = s.sid
+        left join emp e on e.eid = r.initiator
+        <where>
+            <if test="status != null">
+                r.status = #{status}
+            </if>
+            <if test="createTime != null">
+                and r.create_time = #{createTime}
+            </if>
+            <if test="sname != null and sname != ''">
+                and s.sname = #{sname}
+            </if>
+            <if test="rname != null and rname != ''">
+                and rs.rname = #{rname}
+            </if>
+        </where>
+    </select>
+</mapper>

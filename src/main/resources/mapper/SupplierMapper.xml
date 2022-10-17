@@ -5,7 +5,8 @@
 <mapper namespace="com.gxa.mapper.SupplierMapper">
     <resultMap id="supplierResultMap" type="supplier">
         <id property="sid" column="sid"></id>
-        <result property="introducer" column="introducer"></result>
+        <result property="introducerId" column="introducer"></result>
+        <result property="introducer" column="ename"></result>
         <result property="origin" column="origin"></result>
         <result property="sname" column="sname"></result>
         <result property="scope" column="scope"></result>
@@ -75,25 +76,25 @@
         LEFT JOIN emp e on e.eid = s.introducer
         <where>
             <if test="introducer != null">
-                s.introducer = #{introducer}
+                e.ename = #{introducer}
             </if>
             <if test="sid != null">
-                s.sid = #{sid}
+              AND  s.sid = #{sid}
             </if>
             <if test="origin != null">
-                s.origin = #{origin}
+              AND  s.origin = #{origin}
             </if>
             <if test="sname != null">
-                s.sname = #{sname}
+               AND s.sname = #{sname}
             </if>
             <if test="range != null">
-                s.scope = #{scope}
+              AND  s.scope = #{scope}
             </if>
             <if test="contact != null">
-                s.contact = #{contact}
+              AND  s.contact = #{contact}
             </if>
             <if test="createTime != null">
-                s.create_time = #{createTime}
+              AND  s.create_time = #{createTime}
             </if>
         </where>
     </select>
@@ -106,13 +107,13 @@
                 r.id = #{id}
             </if>
             <if test="province != null">
-                r.province = #{province}
+              AND  r.province = #{province}
             </if>
             <if test="town != null">
-                r.town = #{town}
+              AND  r.town = #{town}
             </if>
             <if test="address !=null">
-                r.address = ${address}
+              AND  r.address = ${address}
             </if>
         </where>
     </select>

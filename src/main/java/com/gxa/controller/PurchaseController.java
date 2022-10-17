@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
@@ -14,10 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @Api(tags = "采购单接口")
@@ -50,15 +49,17 @@ public class PurchaseController {
 
     @GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition(PurchaseDto purchaseDto) {
+    public R queryByCondition(PurchaseDto purchaseDto,Integer page,Integer limit) {
 
         try {
-        List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            PageHelper.startPage(page,limit);//进行分页
+            List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            int count = purchaseService.count(purchaseDto);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("purchases", purchases);
+            Map<String, Object> map = new HashMap<>();
+            map.put("purchases", purchases);
 
-        return R.ok(map);
+            return R.ok(map,count);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("查询失败");
@@ -68,6 +69,10 @@ public class PurchaseController {
     @PostMapping("/purchase/add")
     @ApiOperation("添加采购单")
     public R addPurchase(PurchaseAddDto purchaseAddDto) {
+        //构建采购单编号
+        String purchaseNo = this.createPurchaseNo();
+        purchaseAddDto.getPurchase().setPurchaseNo(purchaseNo);
+
         int i = this.purchaseGoodsService.add(purchaseAddDto);
         if (i == 1) {
             return R.ok("添加成功");
@@ -78,10 +83,10 @@ public class PurchaseController {
 
     @PutMapping("/purchase/edit")
     @ApiOperation("修改采购单")
-    public R updatePurchaseById(PurchaseAddDto purchase) {
+    public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseService.update(purchase);
+            int i = this.purchaseGoodsService.updateByPurchaseId(purchaseAddDto);
             if (i == 0) {
                 return R.ok("修改成功");
             } else {
@@ -128,6 +133,25 @@ public class PurchaseController {
             e.printStackTrace();
             return R.error("终止失败");
         }
+    }
+
+    //构建采购单编号
+    private String createPurchaseNo(){
+        StringBuilder sb = new StringBuilder();
+
+        //获取当前日期
+        Date date = new Date(System.currentTimeMillis());
+        int year = date.getYear();
+        int month = date.getMonth();
+        int day = date.getDay();
+        sb.append("CG" + year + month + day);
+
+        Random random = new Random();
+        int ends = random.nextInt(99);
+        String format = String.format("%02d", ends);//如果不足两位，前面补0
+        sb.append(format);
+
+        return sb.toString();
     }
 
 }
