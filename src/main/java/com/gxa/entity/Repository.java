@@ -1,7 +1,9 @@
 package com.gxa.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,6 +14,7 @@ import lombok.Data;
 @TableName("repository")
 public class Repository {
     @ApiModelProperty("仓库id")
+    @TableId(value = "rid" ,type = IdType.AUTO)
     private Integer rid;
 
     @ApiModelProperty("仓库名称")
@@ -25,13 +28,13 @@ public class Repository {
     private Integer areaNum;
     
     @ApiModelProperty("仓库管理员")
-    private Integer storemanager;
+    private Emp storeManager;
 
     @ApiModelProperty("货架数量")
     @TableField("shelves_num")
     private Integer shelvesNum;
 
-    @ApiModelProperty("货位")
+    @ApiModelProperty("区域货位")
     private Cargo cargo;
 
 

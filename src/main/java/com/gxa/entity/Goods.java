@@ -53,11 +53,11 @@ public class Goods {
     @TableField("status")
     private  Integer status;
 
-    @ApiModelProperty("商品详情实体类")
-    private GoodsDetail goodsDetail;
+    /*@ApiModelProperty("商品详情实体类")
+    private GoodsDetail goodsDetail;*/
 
-    @ApiModelProperty("库存实体类")
-    private Stock stock;
+    /*@ApiModelProperty("库存实体类")
+    private Stock stock;*/
 
 
 
