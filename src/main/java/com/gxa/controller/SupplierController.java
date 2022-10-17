@@ -98,8 +98,6 @@ public class SupplierController {
 
         List<Supplier> suppliers = this.supplierService.queryById(sid); //编辑页面查询
 
-        System.out.println("查询的是"+suppliers);
-
         List<Region> regionList = this.supplierService.querySite(regionDto); //查询省市
 
         Map<String,Object> map =new HashMap<>();

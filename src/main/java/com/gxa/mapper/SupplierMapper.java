@@ -7,6 +7,7 @@ import com.gxa.entity.Emp;
 import com.gxa.entity.GoodsDetail;
 import com.gxa.entity.Region;
 import com.gxa.entity.Supplier;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -24,11 +25,11 @@ public interface SupplierMapper extends BaseMapper<Supplier> {
 
      List<Supplier> queryByID(Integer sid); //编辑页面查询
 
-     void addGoods(String ids, Integer sid); //添加供应商关联商品
+     void addGoods(@Param("ids") String ids, @Param("sid") Integer sid); //添加供应商关联商品
 
      void updateSupplier(Supplier supplier); //修改供应商信息
 
-     void updateGoods(String str, Integer sid); //修改供应商关联商品
+     void updateGoods(@Param("ids") String ids, @Param("sid") Integer sid); //修改供应商关联商品
 
      List<Emp> queryIntroducer();
 

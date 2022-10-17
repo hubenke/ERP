@@ -47,10 +47,12 @@
         VALUES(#{sid},#{origin},#{sname},#{scope},#{contact},#{tel},#{email},#{qq},#{introducer},#{region.id},#{address},#{position})
     </insert>
 
-<!--    添加供应商关联商品-->
-    <insert id="addGoods">
-        INSERT INTO supplier(goods) VALUES(#{ids}) WHERE sid = #{sid}
-    </insert>
+    <!--    添加供应商关联商品-->
+    <update id="addGoods">
+        UPDATE supplier
+        SET goods = #{ids}
+        WHERE sid = #{sid}
+    </update>
 
 <!--    修改供应商信息-->
     <update id="updateSupplier" parameterType="supplier">
@@ -62,7 +64,7 @@
 <!--    修改供应商关联商品-->
     <update id="updateGoods">
         UPDATE supplier
-        SET goods = #{str}
+        SET goods = #{ids}
         WHERE sid = #{sid}
     </update>
 

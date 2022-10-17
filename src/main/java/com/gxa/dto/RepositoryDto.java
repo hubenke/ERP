@@ -1,5 +1,6 @@
 package com.gxa.dto;
 
+import com.gxa.entity.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -10,20 +11,36 @@ import java.util.Date;
 public
 class RepositoryDto {
 
-    @ApiModelProperty("所属仓库，id")
-    private Integer repositoryId;
+    @ApiModelProperty("仓库名称")
+    private String rname;
 
-    @ApiModelProperty("所属区域，id")
-    private Date regionId;
 
-    @ApiModelProperty("商品品类，对应商品表一级类")
-    private String type;
+    @ApiModelProperty("所属区域")
+    private String area;
 
-    @ApiModelProperty("商品名称 ")
+
+
+    @ApiModelProperty("商品品类，对应商品一级类")
+    private Integer type_A;
+
+
+    @ApiModelProperty("商品名称")
     private String goodsName;
 
     @ApiModelProperty("商品品牌")
     private String brand;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

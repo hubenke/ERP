@@ -22,7 +22,7 @@ public interface SupplierService {
 
     List<Supplier> queryById(Integer sid); //编辑页面查询
 
-    void updateGoods(String str, Integer sid);  //修改供应商关联商品
+    void updateGoods(String ids, Integer sid);  //修改供应商关联商品
 
     void addGoods(String ids, Integer sid);  //添加供应商关联商品
 

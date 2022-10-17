@@ -4,6 +4,7 @@ import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
 import com.gxa.entity.Apply;
 import com.gxa.entity.ApplyDetail;
+import com.gxa.service.ApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,16 +19,14 @@ import java.util.Map;
 @RestController
 public class ApplyController {
 
-    @ApiOperation(value = "点击请购单，请购单页面数据展示,与搜索使用一个接口")
+    private ApplyService applyService;
+
+    @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @GetMapping("/apply/applylist")
     public R queryAll() {
 
-        List list =new ArrayList();
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
 
+        Map<String,Object> map =new HashMap<>();
 
 
         return R.ok(map);

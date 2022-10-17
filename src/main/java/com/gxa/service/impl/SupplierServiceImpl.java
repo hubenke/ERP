@@ -57,8 +57,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void updateGoods(String str, Integer sid) {  //修改供应商关联商品
-        this.supplierMapper.updateGoods(str,sid);
+    public void updateGoods(String ids, Integer sid) {  //修改供应商关联商品
+        this.supplierMapper.updateGoods(ids,sid);
     }
 
     @Override
