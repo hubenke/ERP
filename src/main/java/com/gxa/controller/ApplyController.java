@@ -27,11 +27,7 @@ public class ApplyController {
     @PostMapping("/apply/applylist")
     public R queryAll(ApplyDto applyDto) {
 
-        System.out.println("前端数据是"+applyDto);
-
         List<Apply> applies = this.applyService.queryAll(applyDto);
-
-        System.out.println("查询的数据是"+applies);
 
         Map<String,Object> map =new HashMap<>();
         map.put("applies",applies);
@@ -40,7 +36,7 @@ public class ApplyController {
     }
 
     @PostMapping("/apply/applyAdd")
-    @ApiOperation("请购单的保存")
+    @ApiOperation("新增请购单的保存")
     public R applyGoodsAdd(@RequestBody ApplyGoods applyGoods){
         List list =new ArrayList();
         list.add("可以传");
@@ -51,6 +47,13 @@ public class ApplyController {
 
 
         return R.ok(map);
+    }
+
+    @ApiOperation("查询部门")
+    @GetMapping("/apply/dept")
+    public R queryDepts(){
+
+        return R.ok();
     }
 
 
