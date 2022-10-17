@@ -4,24 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.RepositoryMapper">
 
-    <insert id="insertCargo" parameterType="cargo">
-        insert into cargo(repository_id,location)
-        VALUES((SELECT rid FROM repository WHERE rname=#{rname} and area=#{area}) ,#{location})
-    </insert>
+
+
+
+
+<!--    <insert id="addCargo" parameterType="com.gxa.entity.Cargo">-->
+<!--        insert into cargo(repository_id,location)  values ((selcet rid from repository where ranme=#{repository.rname} and address-->
+<!--           )-->
+<!--           -->
+<!--    </insert>-->
+<!--    SELECT rid FROM repository WHERE rname=#{} and area=#{area}) ,#{}-->
+
+
+
+
+
+
+
+
 
 <!--    新增仓库-->
-    <insert id="insertNew" parameterType="com.gxa.entity.Repository"  >
+    <insert id="addNew" parameterType="com.gxa.entity.Repository"  >
         INSERT into repository(rname,address,storemanager) VALUES(#{rname},#{address},#{storeManager})
     </insert>
 
 <!--    新增区域-->
 
-    <insert id="insertArea" parameterType="com.gxa.entity.Cargo">
-        INSERT INTO cargo(repository_id,area)  VALUES(#{repositoryId},#{area})
+    <insert id="addArea" parameterType="com.gxa.entity.Cargo">
+        INSERT INTO cargo(repository_id,area)  VALUES(#{repository.rid},#{area})
+    </insert>
+    <insert id="addCargo" parameterType="com.gxa.entity.Cargo">
+        insert into cargo(location,area,repository_id)
+        values (#{location},#{area},(select rid from repository where rname=#{repository.rname}))
     </insert>
 
 
-    <resultMap id="qaMap" type="repository">
+    <resultMap id="qaMap" type="com.gxa.entity.Repository">
 
         <result property="rname" column="rname"></result>
         <result property="cargo.area" column="area"></result>
@@ -29,35 +47,45 @@
         <result property="goodsDetail.typeA" column="type_a"></result>
         <result property="goods.gname" column="ganme"></result>
         <result property="goodsDetail.unit" column="unit"></result>
+        <result property="goodsDetail.spec" column="spec"></result>
         <result property="stock.qty" column="qty"></result>
+        <result property="stock.realQty" column="realqty"></result>
+
+
 
     </resultMap>
 
 
-    <select id="queryAll" resultType="com.gxa.entity.Repository" resultMap="qaMap">
-        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,s.qty
+    <select id="queryAll" resultMap="qaMap">
+        SELECT r.rname,c.area,c.cid,gd.type_a,g.gname,gd.unit,gd.spec,s.qty,s.realqty
         FROM repository r
-        LEFT JOIN cargo c ON r.rid=c.repository_id
-        LEFT JOIN goods g on c.goods_id=g.gid
-        LEFT JOIN goods_detail gd on g.gid =gd.goods_id
-        LEFT JOIN stock s on gd.goods_id=s.cargo_id
-        <where>
-            <if test="repositoryId">
-            r.rid=#{repositoryId}
-            </if>
-            <if test="regionId">
-            r.regionId=#{regionId}
-            </if>
-            <if test="type">
-            gd.type_a=#{type}
-            </if>
-            <if test="goodsName">
-            g.goodsName=#{goodsName}
-            </if>
-            <if test="brand">
-            g.brand=#{brand}
-            </if>
-        </where>
+        LEFT JOIN cargo c
+        ON r.rid=c.repository_id
+        LEFT JOIN goods g
+        on c.goods_id=g.gid
+        LEFT JOIN goods_detail gd
+        on g.gid =gd.goods_id
+        LEFT JOIN stock s
+        on gd.goods_id=s.cargo_id
+
+<where>
+    <if test="rname !=null and rname !='' ">
+    r.rname=#{rname}
+    </if>
+    <if test="area !=null and area!='' ">
+    c.area=#{area}
+    </if>
+    <if test="type_A !=null">
+    gd.type_a=#{type_A}
+    </if>
+    <if test="goodsName !=null and goodsName !='' ">
+    g.goodsName=#{goodsName}
+    </if>
+    <if test="brand!=null and brand!='' ">
+
+    g.brand=#{brand}
+    </if>
+</where>
 
 
     </select>
@@ -94,6 +122,19 @@
                            on c.repository_id=r.rid
         WHERE rid=(select rid from repository where rname=#{rname})
 
+    </select>
+    
+    
+    
+    <resultMap id="qsaMap" type="repository">
+        <result property="rname" column="rname"></result>
+        <result property="cargo.area" column="area"></result>
+    </resultMap>
+
+    <select id="queryStoreAndArea" resultMap="qsaMap">
+        SELECT  r.rname,c.area
+        FROM  repository  r
+                  left JOIN cargo c on r.rid =c.repository_id
     </select>
 
 
