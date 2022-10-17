@@ -39,7 +39,7 @@ public class Repository {
     private Stock stock;
 
     @ApiModelProperty("商品")
-    private Goods goods;
+    private String goodsName;
 
     @ApiModelProperty("商品详情")
     private GoodsDetail goodsDetail;
