@@ -1,11 +1,15 @@
 package com.gxa.controller;
 
+import com.gxa.dto.RegionDto;
 import com.gxa.dto.SupplierDto;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.SupplierDto;
+import com.gxa.entity.Emp;
+import com.gxa.entity.GoodsDetail;
 import com.gxa.entity.Region;
 import com.gxa.entity.Supplier;
 import com.gxa.service.SupplierService;
+import com.gxa.service.impl.SupplierServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,46 +24,40 @@ import java.util.Map;
 
 @Api(tags = "供应商接口")
 @RestController
-public
-class SupplierController {
+public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
     @ApiOperation("点击供应商管理，供应商页面数据展示")
     @GetMapping("/suppiler/slist")
-    public R queryAll() {
+    public R queryAll(@RequestBody SupplierDto supplierDto) {
 
-        List list =new ArrayList();
-        list.add("成功");
-//        List<Supplier> suppliers = this.supplierService.queryAll();
+        List<Supplier> suppliers = this.supplierService.queryAll(supplierDto);//调用service
 
         Map map =new HashMap();
-        map.put("list",list);
+        map.put("suppliers",suppliers);//将数据放入map
 
-        return R.ok(map);
+        return R.ok(map);//返回数据
     }
 
     @PostMapping("/suppiler/BasicAdd")
-    @ApiOperation(value = "添加供应商基本信息保存")
-    public R suppilerBasicAdd(@RequestBody Supplier supplier){
-        List list =new ArrayList();
-        list.add("可以传");
+    @ApiOperation("添加供应商-基本信息-保存")
+    public R suppilerBasicAdd(Supplier supplier){
 
-        Map map =new HashMap();
-        map.put("list",list);
+        System.out.println(supplier);
 
+        this.supplierService.addSuppiler(supplier);
 
-
-        return R.ok(map);
+        return R.ok("保存成功");
     }
 
 
     @GetMapping("/supplier/site")
     @ApiOperation("查询省市接口")
-    public R querySite(){
+    public R querySite(RegionDto regionDto){
 
 
-        List<Region> regionList = this.supplierService.querySite();
+        List<Region> regionList = this.supplierService.querySite(regionDto);
         System.out.println("区域是"+regionList);
 
         Map map = new HashMap();
@@ -67,72 +65,88 @@ class SupplierController {
 
         return R.ok(map);
     }
-
-//    @ApiOperation("编辑绑定商品保存，传输的数据需要编辑后剩下的绑定商品的商品编号构成的数组和当前供应商编号")@ApiParam("商品编号构成的字符数组") String[] ids
-    @ApiOperation("供应管理编辑，需要带供应商编号")
-    @PutMapping("/suppiler/updateGoods/{sid}")
-    public R updateGoods(@PathVariable("sid")Integer sid) {
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add(1);
-        list.add(2);
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
-
-
-
-        return R.ok(map);
-    }
-
-
-    @PostMapping("/suppiler/goodsAdd")  //不
-    @ApiOperation(value = "添加供应商绑定商品信息保存,保存的数据需要当前供应商编号和绑定商品的商品编号构成的数组")
-    public R suppiler(@ApiParam("商品编号构成的字符数组") String[] ids,@PathVariable("sid")Integer sid){
-        List list =new ArrayList();
-        list.add("供应商信息");
-        //ids = {1170,1123};
-
-        String str = "";
-        for(int i = 0;i < ids.length;i++){
-            str += Integer.parseInt(ids[i]);
-
-        }
-
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
-
-
-
-        return R.ok(map);
-
-    }
-
-
     @ApiOperation("绑定商品查询")
-    @PutMapping("/suppiler/googs")
+    @GetMapping("/suppiler/googs")
     public R queryGoods() {
 
-        List list =new ArrayList();
-        list.add(1111);
-        list.add(2222);
+        List<GoodsDetail> goodsDetails = this.supplierService.queryGoogs();
+
         Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
 
-
+        map.put("goodsDetails",goodsDetails);
 
         return R.ok(map);
     }
 
+    @PostMapping("/suppiler/goodsAdd")
+    @ApiOperation("需要供应商的id，商品编号，多个商品编号使用字符串传输过来 String类型")
+    public R suppiler(@ApiParam("商品编号构成的字符数组") String ids,@ApiParam("供应商id") Integer sid){
+
+        System.out.println("ids是----"+ids+"sid是+----"+sid);
+
+        this.supplierService.addGoods(ids,sid);
+
+        return R.ok("保存成功");
+
+    }
+
+    @ApiOperation("供应商管理编辑，需要带供应商编号")
+    @GetMapping("/suppiler/selSuppile")
+    public R selSuppile(Supplier supplier,RegionDto regionDto ) {
+
+        Integer sid = supplier.getSid();
+
+        List<Supplier> suppliers = this.supplierService.queryById(sid); //编辑页面查询
+
+        System.out.println("查询的是"+suppliers);
+
+        List<Region> regionList = this.supplierService.querySite(regionDto); //查询省市
+
+        Map<String,Object> map =new HashMap<>();
+        map.put("suppliers",suppliers);
+        map.put("regionList",regionList);
+
+        return R.ok(map);
+    }
+
+    @ApiOperation("编辑供应商信息保存")
+    @PutMapping("/suppiler/update")
+    public R updateSupplier(Supplier supplier){
+
+        try {
+            this.supplierService.updateSupplier(supplier);
+            return R.ok();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            return R.error();
+        }
 
 
+    }
 
+    @ApiOperation("编辑供应商关联商品接口")
+    @PutMapping("/sippiler/editgoods")
+    public R editGoods(@ApiParam("商品编号构成的字符串，逗号隔开") String ids,Integer sid){
 
+        this.supplierService.updateGoods(ids,sid);
 
+        return R.ok();
 
+    }
 
+    @GetMapping("/sippiler/introducer")
+    @ApiOperation("引进负责人查询")
+    public R queryIntroducer(){
 
+        List<Emp> emps = this.supplierService.queryIntroducer();
 
+        Map<String,Object> map =new HashMap<>();
+        map.put("emps",emps);
 
+        return R.ok(map);
+    }
 
 
 }

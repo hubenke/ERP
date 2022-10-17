@@ -9,14 +9,13 @@ import java.util.Date;
 
 @ApiModel("供应商条件模型")
 @Data
-public
-class SupplierDto {
-
-    @ApiModelProperty("引进负责人")
-    private String introducer;
+public class SupplierDto {
 
     @ApiModelProperty("供应商编号")
     private Integer sid ;
+
+    @ApiModelProperty("引进负责人")
+    private String introducer;
 
     @ApiModelProperty("供应商来源")
     private String origin;
