@@ -6,14 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author:
- * @ClassName:GoodsDto
- * @Package:com.gxa.dto.GoodsDto
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
