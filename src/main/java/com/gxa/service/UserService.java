@@ -9,4 +9,8 @@ public interface UserService {
 
     User login(String uname,String password);
 
+    void  add();
+
+    void queryByUid(Integer uid);
+
 }

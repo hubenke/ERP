@@ -23,4 +23,14 @@ public class UserServiceImpl implements UserService {
         return user;
 //        return null;
     }
+
+    @Override
+    public void add() {
+
+    }
+
+    @Override
+    public void queryByUid(Integer uid) {
+
+    }
 }

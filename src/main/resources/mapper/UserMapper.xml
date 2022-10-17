@@ -11,8 +11,24 @@
         <result property="limit" column="limit"></result>
 
     </resultMap>
-<select id="queryByUserNameAndPwd" resultMap="userResultMap">
+    <insert id="add">
+        INSERT INTO USER(uid,uname,password,salt,LIMIT) value (#{uid},#{uname},#{password},#{salt},#{limit})
+    </insert>
 
-</select>
+    <update id="update">
+        UPDATE `user` SET `limit` = #{limt}
+        WHERE uid = #{uid}
+    </update>
+
+    <select id="queryByUserNameAndPwd" resultMap="userResultMap">
+        SELECT uid,password FROM USER
+    </select>
+
+    <select id="queryByUid">
+        SELECT *
+        FROM user u
+        WHERE u.uid = #{uid}
+    </select>
+
 
 </mapper>

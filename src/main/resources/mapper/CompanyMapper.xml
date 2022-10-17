@@ -9,35 +9,45 @@
         <result property="name" column="name"></result>
         <result property="job" column="job"></result>
     </resultMap>
-    <select id="select" >
 
-    </select>
-<insert id="add" >
-insert into company(id,compno,name,job)value (#{id},#{compno},#{name},{job})
+<insert id="add"  >
+    insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
-    <select id="queryAll" resultMap="companyResultMap">
-SELECT id,compno,name,job FROM company
+    <update id="update" >
+        UPDATE company  SET  job =#{job}
+        WHERE id =#{id}
+    </update>
+    <select id="queryAll" resultType="com.gxa.entity.Company" resultMap="companyResultMap">
+        SELECT id,compno,name,job FROM company
+    </select>
+
+    <select id="queryByCondition" resultMap="companyResultMap">
+      SELECT id,compno,name,job FROM company
         <where>
              <if test="id !=null">
-                     p.id =#{id}
+                     c.id =#{id}
              </if>
 
               <if test="compno !=null">
-                     p.compno=#{compno}
+                     c.compno=#{compno}
              </if>
 
              <if test="name !=null">
-                     p.name=#{name}
+                     c.name=#{name}
              </if>
 
              <if test="job !=null">
-               p.job=#{job}
+                     c.job=#{job}
              </if>>
-
 
 
         </where>
     </select>
+
+    <select id="queryById">
+
+    </select>
+
 
 
 </mapper>

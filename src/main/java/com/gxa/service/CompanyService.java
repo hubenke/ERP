@@ -1,15 +1,22 @@
 package com.gxa.service;
 
 
+import com.gxa.dto.CompanyDto;
+import com.gxa.entity.Company;
+
 import java.awt.*;
+import java.util.List;
 
 public interface CompanyService {
+    List<Company> queryAll(); //查询所有
 
-    void add(Integer component); //根据模块名称添加负责人
+//    List<Company> queryAllCompanyDto (CompanyDto companyDto);
 
-    void  update(Integer component);//根据模板名称编辑
+    void add(); //添加操作
 
-    CompanyService queryName(String name);//根据模板名字查询
+    void  update();// 进行修改
+
+    void querById(Integer id);//根据id查询
 
 
 }

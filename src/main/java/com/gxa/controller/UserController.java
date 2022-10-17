@@ -102,7 +102,7 @@ public class UserController {
 
     public static void main(String[] args){
         String hashAlgorithName ="MD5";
-        Object credentials="zhansan";
+        Object credentials="zhangsan";
         ByteSource salt=ByteSource.Util.bytes("123");
         SimpleHash simpleHash=new SimpleHash(hashAlgorithName,credentials,salt,1024);
         System.out.println(simpleHash);
