@@ -25,7 +25,7 @@ public class MyOrder {
     @ApiModelProperty("订单金额")
     private double money;
 
-    @ApiModelProperty("支付方式")
+    @ApiModelProperty("支付方式：0:信用卡 1：网银")
     private Integer payment;
 
     @ApiModelProperty("订单状态:0:待付款、1:代发货、2:已发货、3:已完成、4:已关闭")
