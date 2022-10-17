@@ -14,4 +14,6 @@ public interface PurchaseService {
     int add(PurchaseAddDto purchaseAddDto);
 
     int update(PurchaseAddDto purchaseAddDto);
+
+    int updateStatus(Integer id, Integer btnNum);
 }
