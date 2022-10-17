@@ -1,7 +1,9 @@
 package com.gxa.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
+import com.gxa.dto.PurchaseQueryDto;
 import com.gxa.entity.Purchase;
 import com.gxa.mapper.PurchaseMapper;
 import com.gxa.service.PurchaseService;
@@ -18,8 +20,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     private PurchaseMapper purchaseMapper;
 
     @Override
-    public List<Purchase> queryAll(PurchaseDto purchaseDto) {
-        List<Purchase> purchases = this.purchaseMapper.queryAll(purchaseDto);
+    public List<PurchaseQueryDto> queryAll(PurchaseDto purchaseDto) {
+        List<PurchaseQueryDto> purchases = this.purchaseMapper.queryAll(purchaseDto);
 
 //        QueryWrapper queryWrapper = new QueryWrapper();
 //        queryWrapper.ge("id",10);
@@ -29,16 +31,14 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int add(Purchase purchase) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        int i = this.purchaseMapper.insert(purchase);
+    public int add(PurchaseAddDto purchaseAddDto) {
+        int i = purchaseMapper.insert(purchaseAddDto);
         return i;
     }
 
     @Override
-    public int update(Purchase purchase) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        int i = this.purchaseMapper.updateById(purchase);
-        return i;
+    public int update(PurchaseAddDto purchaseAddDto) {
+        //int i = this.purchaseMapper.updateById(purchase);
+        return 0;
     }
 }

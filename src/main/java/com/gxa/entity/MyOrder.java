@@ -19,14 +19,13 @@ import lombok.Data;
 public class MyOrder {
     @ApiModelProperty("销售订单id")
     private Integer id;
-
-    @ApiModelProperty("订单编号")
+    @ApiModelProperty(value = "订单编号",required = true)
     private String orderno;
 
     @ApiModelProperty("订单金额")
     private double money;
 
-    @ApiModelProperty("支付方式")
+    @ApiModelProperty("支付方式：0:信用卡 1：网银")
     private Integer payment;
 
     @ApiModelProperty("订单状态:0:待付款、1:代发货、2:已发货、3:已完成、4:已关闭")
@@ -50,6 +49,9 @@ public class MyOrder {
 
     @ApiModelProperty("订单来源:0:app，1:微信端，2:pc端")
     private String source;
+
+    @ApiModelProperty("退货类:退货单状态：0：待处理 1：处理中 2：已完成 3：已拒绝")
+    private ReturnBill returnBill;
 
     @ApiModelProperty("商品类")
     private Goods goods;

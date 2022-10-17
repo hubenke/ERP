@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel("采购单详情模型")
-public class PurchaseDetail {
+@ApiModel("采购单商品详情模型")
+public class PurchaseGoods {
     @ApiModelProperty("采购单详情id")
     private Integer id;
 
