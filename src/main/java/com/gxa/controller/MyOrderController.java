@@ -42,6 +42,22 @@ public class MyOrderController {
         }
     }
 
+    @GetMapping("/orders/return")
+    @ApiOperation("查询所有退换货订单")
+    public R listReturn(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
+        try {
+            List<MyOrder> myOrdersReturn = this.myOrderService.queryAllReturn();
+            System.out.println("myOrdersReturn:----------"+myOrdersReturn.toString());
+            Map<String,Object> map = new HashMap<>();
+            map.put("myOrdersReturn",myOrdersReturn);
+            return R.ok(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return R.error("请求异常");
+        }
+    }
+
     @PostMapping("/orders/add")
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
@@ -63,6 +79,25 @@ public class MyOrderController {
             System.out.println("myOrderDto------------------" + myOrderDto.toString());
             Map<String,Object> map = new HashMap<>();
             map.put("result", queryByConditionMyOrders);
+
+            R r = R.ok(map);
+
+            return r;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return R.error("查询失败");
+        }
+    }
+
+    @GetMapping("/orders/queryReturnByCondition")
+    @ApiOperation("根据条件查询退货订单")
+    public R queryReturnByCondition(MyOrderDto myOrderDto){
+        try {
+            List<MyOrder> queryReturnByConditionMyOrders = this.myOrderService.queryReturnByCondition(myOrderDto);
+            System.out.println("queryReturnByConditionMyOrders------------------" + queryReturnByConditionMyOrders.toString());
+            Map<String,Object> map = new HashMap<>();
+            map.put("result", queryReturnByConditionMyOrders);
 
             R r = R.ok(map);
 
@@ -101,8 +136,9 @@ public class MyOrderController {
     @PutMapping("/orders/out")
     @ApiOperation("批量修改订单发货")
     public R updateOuts(Integer[] ids){
-        System.out.println(ids);
+        System.out.println("updateOuts:----------"+ids);
         try {
+            this.myOrderService.updateOuts(ids);
             return R.ok("批量发货成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,12 +146,24 @@ public class MyOrderController {
         }
     }
 
-    @PutMapping("/orders/finish")
+    @PutMapping("/orders/finishById")
     @ApiOperation("根据id修改订单状态为确认收货已完成")
     public R updateFinishById(Integer id){
         try {
             this.myOrderService.updateStatusByFinish(id);
             return R.ok("收货成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error("收货失败");
+        }
+    }
+
+    @PutMapping("/orders/finishes")
+    @ApiOperation("根据id修改订单状态为确认收货已完成")
+    public R updateFinishes(Integer[] ids){
+        try {
+            this.myOrderService.updateFinishes(ids);
+            return R.ok("批量收货成功");
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("收货失败");
@@ -138,8 +186,9 @@ public class MyOrderController {
     @DeleteMapping("/orders/delete")
     @ApiOperation("批量删除订单")
     public R deleteOrders(Integer[] ids){
-        System.out.println(ids);
+        System.out.println("deleteOrders:----------"+ids);
         try {
+            this.myOrderService.deleteMyOrders(ids);
             return R.ok("删除成功");
         } catch (Exception e) {
             e.printStackTrace();

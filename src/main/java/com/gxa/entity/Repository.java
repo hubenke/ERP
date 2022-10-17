@@ -28,13 +28,13 @@ public class Repository {
     private Integer areaNum;
     
     @ApiModelProperty("仓库管理员")
-    private Integer storemanager;
+    private Emp storeManager;
 
     @ApiModelProperty("货架数量")
     @TableField("shelves_num")
     private Integer shelvesNum;
 
-    @ApiModelProperty("货位")
+    @ApiModelProperty("区域货位")
     private Cargo cargo;
 
 
