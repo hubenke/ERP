@@ -33,4 +33,9 @@ public class ApplyServiceImpl implements ApplyService {
     public void updateCheck(Apply apply) {
         this.applyMapper.updateCheck(apply);
     }
+
+    @Override
+    public void addApply() {
+
+    }
 }

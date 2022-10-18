@@ -26,7 +26,7 @@ public class ApplyController {
 
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @PostMapping("/apply/applylist")
-    public R queryAll(ApplyDto applyDto) {
+    public R queryAll(@RequestBody ApplyDto applyDto) {
 
         List<Apply> applies = this.applyService.queryAll(applyDto);
 
@@ -38,16 +38,11 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody ApplyGoods applyGoods){
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    public R applyGoodsAdd(@RequestBody Apply apply){
 
+        this.applyService.addApply();
 
-        return R.ok(map);
+        return R.ok();
     }
 
     @ApiOperation("查询部门")
@@ -65,7 +60,7 @@ public class ApplyController {
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd(@RequestBody Apply apply){
+    public R applyAdd( Apply apply){
 
         Map<String,Object> map =new HashMap<>();
 
@@ -131,7 +126,7 @@ public class ApplyController {
     public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
         this.applyService.updateCheck(apply);
-        
+
         return R.ok();
     }
 

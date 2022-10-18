@@ -12,4 +12,6 @@ public interface ApplyService {
     List<Emp> queryDeot();
 
     void updateCheck(Apply apply);
+
+    void addApply();
 }
