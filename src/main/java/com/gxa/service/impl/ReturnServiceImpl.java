@@ -20,4 +20,10 @@ public class ReturnServiceImpl implements ReturnService {
         List<ReturnQueryDto> returnList = returnMapper.queryAllReturnBill(returnBillDto);
         return returnList;
     }
+
+    @Override
+    public int count(ReturnBillDto returnBillDto) {
+        int count = returnMapper.count(returnBillDto);
+        return count;
+    }
 }

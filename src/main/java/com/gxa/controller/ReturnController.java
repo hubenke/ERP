@@ -42,16 +42,19 @@ public class ReturnController {
         }
     }*/
 
-    @GetMapping("/queryByCondition/list")
+    //@GetMapping("/return/queryByCondition")
+    @PostMapping("/return/queryByCondition")
     @ApiOperation("根据条件查询所有满足条件的退货单")
-    public R queryReturnByCondition(ReturnBillDto returnBillDto,Integer page,Integer limit){
+    public R queryReturnByCondition(@RequestBody ReturnBillDto returnBillDto){
         try {
-            PageHelper.startPage(page,limit);//进行分页
+            PageHelper.startPage(returnBillDto.getPage(),returnBillDto.getLimit());//进行分页
 
             List<ReturnQueryDto> returnList = returnService.queryAllReturnBill(returnBillDto);
+            int count = returnService.count(returnBillDto);
+
             Map<String, Object> map = new HashMap<>();
             map.put("returnList", returnList);
-            return R.ok(map);
+            return R.ok(map,count);
         }catch (Exception e){
             return R.error("查询失败");
         }

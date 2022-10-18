@@ -39,26 +39,30 @@
     </insert>
 
 
-<!--    <update id="updateIncrease">-->
-<!--        update stock set qty=#{}-->
-<!--    </update>-->
+    <update id="updateIncrease" parameterType="com.gxa.dto.StockUpdateDto">
+        update stock s set qty=qty+#{num},realqty=realqty+#{num}
+        WHERE s.cargo_id=(SELECT cid FROM cargo WHERE location=#{upLocation})
+    </update>
 
 
-<!--    <update id="updateDecrease"></update>-->
+    <update id="updateDecrease" parameterType="com.gxa.dto.StockUpdateDto">
+        update stock s set qty=qty-#{num},realqty=realqty-#{num}
+        WHERE s.cargo_id=(SELECT cid FROM cargo WHERE location=#{downLocation})
+    </update>
 
 
     <resultMap id="qaMap" type="com.gxa.entity.Repository">
 
         <result property="rname" column="rname"></result>
-        <result property="cargo.area" column="area"></result>
-        <result property="cargo.location" column="location"></result>
-        <result property="goodsDetail.typeA" column="type_a"></result>
-        <result property="goods.gname" column="gname"></result>
-        <result property="goods.brand" column="brand"></result>
-        <result property="goodsDetail.unit" column="unit"></result>
-        <result property="goodsDetail.spec" column="spec"></result>
-        <result property="stock.qty" column="qty"></result>
-        <result property="stock.realQty" column="realqty"></result>
+        <result property="area" column="area"></result>
+        <result property="location" column="location"></result>
+        <result property="typeA" column="type_a"></result>
+        <result property="goodsName" column="gname"></result>
+        <result property="brand" column="brand"></result>
+        <result property="unit" column="unit"></result>
+        <result property="spec" column="spec"></result>
+        <result property="qty" column="qty"></result>
+        <result property="realQty" column="realqty"></result>
 
 
 
@@ -79,20 +83,20 @@
 
 <where>
     <if test="rname !=null and rname !='' ">
-    r.rname=#{rname}
+     r.rname=#{rname}
     </if>
     <if test="area !=null and area!='' ">
-    c.area=#{area}
+      and c.area=#{area}
     </if>
-    <if test="type_A !=null">
-    gd.type_a=#{type_A}
+    <if test="typeA !=null">
+        and gd.type_a=#{typeA}
     </if>
     <if test="goodsName !=null and goodsName !='' ">
-    g.goodsName=#{goodsName}
+        and  g.gname=#{goodsName}
     </if>
     <if test="brand!=null and brand!='' ">
 
-    g.brand=#{brand}
+        and g.brand=#{brand}
     </if>
 </where>
 

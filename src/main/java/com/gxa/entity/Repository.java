@@ -31,8 +31,79 @@ public class Repository {
     @TableField("shelves_num")
     private Integer shelvesNum;
 
+    @ApiModelProperty("区域")
+    private String area;
+
+
+
+    @ApiModelProperty("货架号")
+    private String location;
+
+
+    @ApiModelProperty("存放品类")
+    private Integer typeA;
+
+
+
+
+    @ApiModelProperty("商品名称")
+    private String goodsName;
+
+
+    @ApiModelProperty("商品品牌")
+    private String brand;
+
+
+
+    @ApiModelProperty("单位")
+    private String unit;
+
+
+
+    @ApiModelProperty("库存量")
+    private Integer qty;
+
+
+
+    @ApiModelProperty("规格")
+    private String spec;
+
+
+    @ApiModelProperty("可用量")
+    private Integer realQty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @ApiModelProperty("区域货位")
     private Cargo cargo;
+
+
 
 
 
