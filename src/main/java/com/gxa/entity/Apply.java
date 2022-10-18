@@ -16,6 +16,9 @@ class Apply {
     @ApiModelProperty("请购单编号")
     private String applyno;
 
+    @ApiModelProperty("采购单状态，0：待审核；1：审核通过")
+    private Integer state;
+
     @ApiModelProperty("创建时间")
     private Date createTime;
 
@@ -43,8 +46,6 @@ class Apply {
     @ApiModelProperty("请购商品详情对象列表")
     private List<ApplyGoods> applyGoods;
 
-    @ApiModelProperty("采购单状态")
-    private Integer status;
 
 
 }

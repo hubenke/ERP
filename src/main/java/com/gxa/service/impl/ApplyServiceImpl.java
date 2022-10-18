@@ -25,7 +25,12 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     public List<Emp> queryDeot() {
-        this.applyMapper.queryDept();
-        return null;
+        List<Emp> emps = this.applyMapper.queryDept();
+        return emps;
+    }
+
+    @Override
+    public void updateCheck(Apply apply) {
+        this.applyMapper.updateCheck(apply);
     }
 }

@@ -18,7 +18,7 @@ public class PurchaseQueryDto {
     @TableField("purchaseno")
     private String purchaseNo;
 
-    @ApiModelProperty("采购单状态")
+    @ApiModelProperty("采购单状态 1：待分配 2：审核通过 3：已终止")
     @TableField("status")
     private Integer status;
 
