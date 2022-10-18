@@ -1,6 +1,7 @@
 package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.MyOrderDto;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -31,28 +33,32 @@ public class MyOrderController {
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
-            PageHelper.startPage(page, limit);
+            //PageHelper.startPage(page, limit);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(page, limit);
             List<MyOrder> myOrders = this.myOrderService.queryAll();
-            System.out.println("myOrders:----------"+myOrders.toString());
+            System.out.println("myOrders:----------" + myOrders.toString());
+            System.out.println("count:----------" + pageHelperList.getTotal());
             Map<String,Object> map = new HashMap<>();
             map.put("myOrders",myOrders);
+           map.put("count",pageHelperList.getTotal());
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
-
             return R.error("请求异常");
         }
     }
+
 
     @GetMapping("/orders/return")
     @ApiOperation("查询所有退换货订单")
     public R listReturn(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
-            PageHelper.startPage(page, limit);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(page, limit);
             List<MyOrder> myOrdersReturn = this.myOrderService.queryAllReturn();
             System.out.println("myOrdersReturn:----------"+myOrdersReturn.toString());
             Map<String,Object> map = new HashMap<>();
             map.put("myOrdersReturn",myOrdersReturn);
+            map.put("count",pageHelperList.getTotal());
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
