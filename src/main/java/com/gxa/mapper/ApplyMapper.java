@@ -13,4 +13,6 @@ public interface ApplyMapper  {
     List<Apply> queryAll(ApplyDto applyDto);
 
     List<Emp> queryDept();
+
+    void updateCheck(Apply apply);
 }

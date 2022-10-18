@@ -18,4 +18,5 @@ class ApplyDto {
 
     @ApiModelProperty("请购发起人")
     private String applyLaunch ;
+
 }
