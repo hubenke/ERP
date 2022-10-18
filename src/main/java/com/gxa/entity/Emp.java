@@ -14,8 +14,8 @@ import lombok.Data;
 @TableName("emp")
 @ApiModel("员工表实体类")
 public class Emp {
+
     @ApiModelProperty("员工编号")
-    @TableId(value = "eid")
     private Integer eid;
 
     @ApiModelProperty("员工姓名")

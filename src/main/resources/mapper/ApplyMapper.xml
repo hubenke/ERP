@@ -23,6 +23,16 @@
           SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
           WHERE applyno = #{applyno}
     </update>
+    <update id="assign">
+        UPDATE apply
+        SET principal = #{eid}
+        WHERE applyno = #{applyno}
+    </update>
+    <update id="backout">
+        UPDATE apply
+        SET principal = null
+        WHERE applyno = #{applyno}
+    </update>
 
     <select id="queryAll" resultMap="applyResultMap">
         SELECT a.create_time,a.applyno,a.state,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
@@ -47,5 +57,26 @@
     <select id="queryDept" resultType="com.gxa.entity.Emp">
         SELECT e.eid,e.department
         FROM emp e
+    </select>
+    <resultMap id="empResultMap" type="emp">
+        <id property="eid" column="eid"></id>
+        <result property="ename" column="ename"></result>
+        <result property="department" column="department"></result>
+    </resultMap>
+
+    <select id="queryEmp" resultMap="empResultMap">
+        SELECT e.eid,e.ename,e.department
+        FROM emp e
+        <where>
+            <if test="eid != null">
+                e.eid = #{eid}
+            </if>
+            <if test="ename != null and ename != ''">
+                AND e.ename = #{ename}
+            </if>
+            <if test="department != null and department != ''">
+                AND e.department = #{department}
+            </if>
+        </where>
     </select>
 </mapper>
