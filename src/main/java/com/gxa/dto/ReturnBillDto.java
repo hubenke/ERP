@@ -3,6 +3,7 @@ package com.gxa.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -12,6 +13,7 @@ public class ReturnBillDto {
     @ApiModelProperty("退货单状态")
     private Integer status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty("退货单创建日期")
     private Date createTime;
 
@@ -20,4 +22,10 @@ public class ReturnBillDto {
 
     @ApiModelProperty("退货仓库")
     private String rname;
+
+    @ApiModelProperty("页数")
+    private Integer page;
+
+    @ApiModelProperty("每页条数")
+    private Integer limit;
 }

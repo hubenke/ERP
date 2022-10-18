@@ -47,10 +47,10 @@ public class PurchaseController {
     @PostMapping("/purchase/queryByCondition")
     //@GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition( PurchaseDto purchaseDto,Integer page,Integer limit) {
+    public R queryByCondition(@RequestBody PurchaseDto purchaseDto) {
 
         try {
-            PageHelper.startPage(page,limit);//进行分页
+            PageHelper.startPage(purchaseDto.getPage(),purchaseDto.getLimit());//进行分页
             List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
             int count = purchaseService.count(purchaseDto);
 

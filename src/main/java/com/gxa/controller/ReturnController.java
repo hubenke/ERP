@@ -45,9 +45,9 @@ public class ReturnController {
     //@GetMapping("/return/queryByCondition")
     @PostMapping("/return/queryByCondition")
     @ApiOperation("根据条件查询所有满足条件的退货单")
-    public R queryReturnByCondition(ReturnBillDto returnBillDto, Integer page,Integer limit){
+    public R queryReturnByCondition(@RequestBody ReturnBillDto returnBillDto){
         try {
-            PageHelper.startPage(page,limit);//进行分页
+            PageHelper.startPage(returnBillDto.getPage(),returnBillDto.getLimit());//进行分页
 
             List<ReturnQueryDto> returnList = returnService.queryAllReturnBill(returnBillDto);
             Map<String, Object> map = new HashMap<>();
