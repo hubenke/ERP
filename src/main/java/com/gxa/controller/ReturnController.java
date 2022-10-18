@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ReturnBillDto;
@@ -47,14 +48,14 @@ public class ReturnController {
     @ApiOperation("根据条件查询所有满足条件的退货单")
     public R queryReturnByCondition(@RequestBody ReturnBillDto returnBillDto){
         try {
-            PageHelper.startPage(returnBillDto.getPage(),returnBillDto.getLimit());//进行分页
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(returnBillDto.getPage(), returnBillDto.getLimit());//进行分页
 
             List<ReturnQueryDto> returnList = returnService.queryAllReturnBill(returnBillDto);
-            int count = returnService.count(returnBillDto);
 
             Map<String, Object> map = new HashMap<>();
             map.put("returnList", returnList);
-            return R.ok(map,count);
+            map.put("count",pageHelperList.getTotal());
+            return R.ok(map);
         }catch (Exception e){
             return R.error("查询失败");
         }

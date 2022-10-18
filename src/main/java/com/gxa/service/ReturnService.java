@@ -9,5 +9,4 @@ public interface ReturnService {
 
     List<ReturnQueryDto> queryAllReturnBill(ReturnBillDto returnBillDto);
 
-    int count(ReturnBillDto returnBillDto);
 }

@@ -21,7 +21,7 @@ public class PurchaseDto {
     private String sname;
 
     @ApiModelProperty("请购负责人")
-    private Integer principal ;
+    private String principal ;
 
     private Integer page;
 

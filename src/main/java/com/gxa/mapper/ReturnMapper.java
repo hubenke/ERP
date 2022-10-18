@@ -8,5 +8,4 @@ import java.util.List;
 public interface ReturnMapper {
     List<ReturnQueryDto> queryAllReturnBill(ReturnBillDto returnBillDto);
 
-    int count(ReturnBillDto returnBillDto);
 }

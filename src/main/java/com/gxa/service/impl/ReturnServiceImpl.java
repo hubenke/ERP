@@ -21,9 +21,4 @@ public class ReturnServiceImpl implements ReturnService {
         return returnList;
     }
 
-    @Override
-    public int count(ReturnBillDto returnBillDto) {
-        int count = returnMapper.count(returnBillDto);
-        return count;
-    }
 }
