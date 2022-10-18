@@ -45,7 +45,7 @@
     </update>
 
 
-    <update id="updateDecrease">
+    <update id="updateDecrease" parameterType="com.gxa.dto.StockUpdateDto">
         update stock s set qty=qty-#{num},realqty=realqty-#{num}
         WHERE s.cargo_id=(SELECT cid FROM cargo WHERE location=#{downLocation})
     </update>
@@ -58,7 +58,7 @@
         <result property="location" column="location"></result>
         <result property="typeA" column="type_a"></result>
         <result property="goodsName" column="gname"></result>
-<!--        <result property="" column="brand"></result>-->
+        <result property="brand" column="brand"></result>
         <result property="unit" column="unit"></result>
         <result property="spec" column="spec"></result>
         <result property="qty" column="qty"></result>
@@ -83,20 +83,20 @@
 
 <where>
     <if test="rname !=null and rname !='' ">
-    r.rname=#{rname}
+     r.rname=#{rname}
     </if>
     <if test="area !=null and area!='' ">
-    c.area=#{area}
+      and c.area=#{area}
     </if>
-    <if test="type_A !=null">
-    gd.type_a=#{type_A}
+    <if test="typeA !=null">
+        and gd.type_a=#{typeA}
     </if>
     <if test="goodsName !=null and goodsName !='' ">
-    g.goodsName=#{goodsName}
+        and  g.gname=#{goodsName}
     </if>
     <if test="brand!=null and brand!='' ">
 
-    g.brand=#{brand}
+        and g.brand=#{brand}
     </if>
 </where>
 

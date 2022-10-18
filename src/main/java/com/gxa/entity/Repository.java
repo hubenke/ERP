@@ -50,12 +50,17 @@ public class Repository {
     private String goodsName;
 
 
+    @ApiModelProperty("商品品牌")
+    private String brand;
+
+
+
     @ApiModelProperty("单位")
     private String unit;
 
 
 
-    @ApiModelProperty("单位")
+    @ApiModelProperty("库存量")
     private Integer qty;
 
 
@@ -64,7 +69,7 @@ public class Repository {
     private String spec;
 
 
-    @ApiModelProperty("单位")
+    @ApiModelProperty("可用量")
     private Integer realQty;
 
 
