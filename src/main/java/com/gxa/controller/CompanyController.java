@@ -42,10 +42,11 @@ public class CompanyController {
 
     }
 
-    @PutMapping("/com/add")
+    @PostMapping("/com/add")
     @ApiOperation("添加公司接口")
 
-    public R addCompany(@RequestBody Company company) {
+    public R addCompany( @RequestBody Company company) {
+
 
         try {
             this.companyService.add(company);
@@ -103,7 +104,7 @@ public class CompanyController {
 //    }
 
     @PostMapping("/com/updateid")
-    @ApiOperation("根据id编辑")
+    @ApiOperation("根据id编辑操作")
     public R updateById( Integer id) {
         try {
             this.companyService.updateById(id);
@@ -115,7 +116,7 @@ public class CompanyController {
 
     }
     @GetMapping("/cm/byido")//失败
-    @ApiOperation("通过id查询")
+    @ApiOperation("通过id查询操作")
     public R querById( Integer id){
         try {
             this.companyService.querById(id);

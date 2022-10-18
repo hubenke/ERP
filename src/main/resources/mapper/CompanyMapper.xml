@@ -10,7 +10,7 @@
         <result property="job" column="job"></result>
     </resultMap>
 
-<insert id="add" >
+<insert id="addCompany" >
     insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
 

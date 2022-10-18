@@ -12,9 +12,9 @@ public interface CompanyService {
 
 //    List<Company> queryAllCompanyDto (CompanyDto companyDto);
 
-    Integer add(Company company); //添加操作
+    void add(Company company); //添加操作
 
-    Integer updateById(Integer id);// 进行修改
+    int updateById(Integer id);// 进行修改
 
     List<Company> querById(Integer id);//根据id查询
 

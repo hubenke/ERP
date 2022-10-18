@@ -58,6 +58,7 @@ public class MyOrderServiceImpl  implements MyOrderService {
 
     @Override
     public void updateStatusByOut(Integer id) {
+
         this.myOrderMapper.updateStatusByOut(id);
     }
 

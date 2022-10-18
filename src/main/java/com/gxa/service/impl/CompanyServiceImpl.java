@@ -30,17 +30,15 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Integer add(Company company) {
+    public void add(Company company) {
 
-        int add = companyMapper.add(company);
-        return add;
-
+         this.companyMapper.addCompany(company);
 
     }
 
     @Override
-    public Integer updateById(Integer id) {
-        int updateById = companyMapper.updateById(id);
+    public int updateById(Integer id) {
+        int updateById =companyMapper.updateById(id);
         return updateById;
 
 
