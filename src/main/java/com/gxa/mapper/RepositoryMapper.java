@@ -3,6 +3,7 @@ package com.gxa.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.RepositoryDto;
+import com.gxa.dto.StockUpdateDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -25,9 +26,9 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Repository> queryStoreAndArea();
 
 
-//    void updateIncrease();
-//
-//    void updateDecrease();
+    void updateIncrease(StockUpdateDto stockUpdateDto);
+
+    void updateDecrease(StockUpdateDto stockUpdateDto);
 
 //    仓储结构页面
     List<Repository> queryStructure();

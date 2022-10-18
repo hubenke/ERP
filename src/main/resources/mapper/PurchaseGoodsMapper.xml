@@ -18,7 +18,7 @@
         </foreach>
     </insert>
 
-    <update id="updateByPurchaseId">
+    <update id="batchUpdate">
         <foreach collection="purchaseGoodsList" item="pg" index="index" separator="union all">
             update purchase_goods
             set buyqty=#{pg.buyqty}

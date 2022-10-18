@@ -2,6 +2,7 @@ package com.gxa.controller;
 
 import com.gxa.common.uitls.R;
 import com.gxa.dto.RepositoryDto;
+import com.gxa.dto.StockUpdateDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import com.gxa.service.RepositoryService;
@@ -120,18 +121,25 @@ public class RepositoryController {
 
 
 
-    @GetMapping("/repository/warehouse")
+    @PostMapping("/repository/warehouse")
     @ApiOperation("点击仓储管理，呈现数据,且按条件查询")
-    public R  queryWarehouse( RepositoryDto repositoryDto){
+    public R  queryWarehouse(RepositoryDto repositoryDto){
 
 
 
-        List<Repository> repositories = this.repositoryService.queryAll(repositoryDto);
+      try {List<Repository> repositories = this.repositoryService.queryAll(repositoryDto);
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("repositories",repositories);
-        return R.ok(map);
+          Map<String,Object> map = new HashMap<>();
+          map.put("repositories",repositories);
+          return R.ok(map);}
+      catch (Exception e) {
+          e.printStackTrace();
+          return R.error("查询失败");
+      }
+
     }
+
+
 
 
 
@@ -185,31 +193,29 @@ public class RepositoryController {
 
 
 
-    @PutMapping("/repository/past")
-    @ApiOperation("移库")
-    public R updateNum (){
-        List repositories = new ArrayList();
-        repositories.add("s");
-        repositories.add("2");
-        repositories.add("p");
-        Map map = new HashMap();
-        map.put("repositories",repositories);
-        return R.ok(map);
-    }
+//    @PutMapping("/repository/past")
+//    @ApiOperation("移库")
+//    public R updateNum (){
+//        List repositories = new ArrayList();
+//        repositories.add("s");
+//        repositories.add("2");
+//        repositories.add("p");
+//        Map map = new HashMap();
+//        map.put("repositories",repositories);
+//        return R.ok(map);
+//    }
 
 
     @PutMapping("/repository/Allocate")
     @ApiOperation("调拨确定")
-    public R updateAllocate (){
-        List repositories = new ArrayList();
-        repositories.add("s");
-        repositories.add("2");
-        repositories.add("p");
-        Map map = new HashMap();
-        map.put("repositories",repositories);
-        return R.ok(map);
-    }
+    public R updateAllocate (@ RequestBody  StockUpdateDto stockUpdateDto) {
+        repositoryService.updateStock(stockUpdateDto);
+        try {
+            return R.ok("调拨完成");
 
+        } catch (Exception e) {
+            return R.error("调拨失败");
+        }
 
 
 //    @GetMapping("/repository/warehouse")
@@ -236,16 +242,6 @@ public class RepositoryController {
 //
 
 
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }

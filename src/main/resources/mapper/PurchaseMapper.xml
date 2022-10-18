@@ -67,6 +67,7 @@
                     and a.principal = #{principal}
                 </if>
         </where>
+        limit #{page},#{limit}
     </select>
 
     <select id="queryIdByNo" resultType="java.lang.Integer">

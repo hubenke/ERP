@@ -83,7 +83,7 @@ public class MyOrderServiceImpl  implements MyOrderService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         this.myOrderMapper.delete(id);
     }
 

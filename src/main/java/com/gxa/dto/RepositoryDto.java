@@ -21,7 +21,7 @@ class RepositoryDto {
 
 
     @ApiModelProperty("商品品类，对应商品一级类")
-    private Integer type_A;
+    private Integer typeA;
 
 
     @ApiModelProperty("商品名称")
