@@ -50,7 +50,7 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
     }
 
     @Override
-    public int updateByPurchaseId(PurchaseAddDto purchaseAddDto) {
+    public int batchUpdate(PurchaseAddDto purchaseAddDto) {
         //首先查询数据库的采购单中有哪些商品
         int[] ids = purchaseGoodsMapper.queryGoodsId(purchaseAddDto.getPurchase().getId());
 
@@ -64,7 +64,7 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
         }
 
         //先更新数据,数量一样的话说明没有删除过商品，数量少了的话就删除有差异的商品id
-        int k = purchaseGoodsMapper.updateByPurchaseId(purchaseAddDto);
+        int k = purchaseGoodsMapper.batchUpdate(purchaseAddDto);
         if(k != 0) {
             if (ids.length != goodses.length) {
                 //比较id数组的差异
