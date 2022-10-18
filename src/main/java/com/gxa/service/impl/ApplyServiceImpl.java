@@ -33,13 +33,24 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public void updateCheck(Apply apply) {
-        this.applyMapper.updateCheck(apply);
+    public int updateCheck(Apply apply) {
+        int i = this.applyMapper.updateCheck(apply);
+        return i;
     }
 
     @Override
-    public void addApply() {
+    public int addApply(ApplyDto applyDto) {
 
+        int i = this.applyMapper.addapply(applyDto);
+
+        if (i != 0){
+
+            Integer applyId = this.applyMapper.queryApplyId(applyDto);
+            this.applyMapper.addGoods(applyDto,applyId);
+
+        }
+
+        return i;
     }
 
     @Override
@@ -49,14 +60,36 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public void assign(Integer applyno,Integer eid) {
-        this.applyMapper.assign(applyno,eid);
+    public int assign(Integer applyno,Integer eid) {
+        int i = this.applyMapper.assign(applyno, eid);
+
+        return i;
     }
 
     @Override
-    public void backout(Integer applyno) {
+    public int backout(Integer applyno) {
 
-        this.applyMapper.backout(applyno);
+        int i = this.applyMapper.backout(applyno);
+
+        return i;
+    }
+
+    @Override
+    public List<ApplyDto> queryGoods() {
+        List<ApplyDto> googs = this.applyMapper.queryGoogs();
+        return googs;
+    }
+
+    @Override
+    public int addGoods(ApplyDto applyDto) {
+
+
+
+
+
+
+
+        return 0;
     }
 
 }

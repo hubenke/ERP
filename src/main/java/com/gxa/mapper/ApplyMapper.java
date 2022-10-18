@@ -16,11 +16,20 @@ public interface ApplyMapper  {
 
     List<Emp> queryDept();
 
-    void updateCheck(Apply apply);
+    int updateCheck(Apply apply);
 
     List<Emp> queryEmp(EmpDto empDto);
 
-    void assign(@Param("applyno") Integer applyno, @Param("eid") Integer eid);
+    int assign(@Param("applyno") Integer applyno, @Param("eid") Integer eid);
 
-    void backout(Integer applyno);
+    int backout(Integer applyno);
+
+    List<ApplyDto> queryGoogs(); //查询商品
+
+    Integer  queryApplyId(ApplyDto applyDto); //查询请购单id
+
+    int addapply(ApplyDto applyDto); //添加请购单基础数据
+
+
+    int addGoods(ApplyDto applyDto,Integer applyId);  //添加请购单商品
 }

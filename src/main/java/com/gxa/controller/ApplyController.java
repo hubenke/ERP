@@ -31,6 +31,8 @@ public class ApplyController {
     @PostMapping("/apply/applylist")
     public R queryAll(@RequestBody ApplyDto applyDto) {
 
+        PageHelper.startPage(applyDto.getPage(),applyDto.getLimit());  //使用此方法进行分页
+
         List<Apply> applies = this.applyService.queryAll(applyDto);
 
         Map<String,Object> map =new HashMap<>();
@@ -41,11 +43,12 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody Apply apply){
+    public R applyGoodsAdd(@RequestBody ApplyDto applyDto){
 
-        this.applyService.addApply();
+        System.out.println("接收到的数据是-------"+applyDto);
+        this.applyService.addApply(applyDto);
 
-        return R.ok();
+            return R.ok();
     }
 
     @ApiOperation("查询部门")
@@ -79,10 +82,12 @@ public class ApplyController {
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd(Apply apply){
+    public R applyAdd(){
+
+        List<ApplyDto> goods = this.applyService.queryGoods();
 
         Map<String,Object> map =new HashMap<>();
-
+        map.put("goods",goods);
 
         return R.ok(map);
     }
@@ -91,17 +96,15 @@ public class ApplyController {
 
     @ApiOperation("请购单编辑保存")
     @PutMapping("/apply/update")
-    public R applyupdate(@RequestBody Apply apply) {
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    public R applyupdate(ApplyDto applyDto) {
 
+        int i = this.applyService.addGoods(applyDto);
 
-
-        return R.ok(map);
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
     }
 
 
@@ -109,18 +112,28 @@ public class ApplyController {
     @PutMapping("/apply/edit")
     public R updateEmp(@ApiParam("请购单编号") Integer applyno, @ApiParam("指派的员工id") Integer eid) {
 
+        int i = this.applyService.assign(applyno, eid);
 
-        this.applyService.assign(applyno,eid);
-        return R.ok();
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
     }
 
     @ApiOperation("撤销接口，需要给到请购单编号")
     @PutMapping("/apply/delete")
     public R DeleteEmp(@ApiParam("请购单编号") Integer applyno) {
 
-        this.applyService.backout(applyno);
+        int i = this.applyService.backout(applyno);
 
-        return R.ok();
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
     }
 
 
@@ -128,9 +141,14 @@ public class ApplyController {
     @PutMapping("/apply/check")
     public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
-        this.applyService.updateCheck(apply);
+        int i = this.applyService.updateCheck(apply);
 
-        return R.ok();
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
     }
 
 
