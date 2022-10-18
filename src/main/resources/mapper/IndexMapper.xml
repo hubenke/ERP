@@ -17,4 +17,10 @@
         WHERE o.status=0
     </select>
 
+    <select id="queryOrdersSum" resultType="java.lang.Integer" parameterType="Date">
+        SELECT COUNT(o.id)
+        FROM myorder o
+        WHERE o.submit_time >= #{date} AND o.submit_time &lt;= #{date}
+    </select>
+
 </mapper>
