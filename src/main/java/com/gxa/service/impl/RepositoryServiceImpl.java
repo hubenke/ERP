@@ -1,6 +1,7 @@
 package com.gxa.service.impl;
 
 import com.gxa.dto.RepositoryDto;
+import com.gxa.dto.StockUpdateDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import com.gxa.mapper.RepositoryMapper;
@@ -69,5 +70,12 @@ public class   RepositoryServiceImpl implements RepositoryService {
     public
     void addCargo(Cargo cargo) {
         this.repositoryMapper.addCargo(cargo);
+    }
+
+    @Override
+    public
+    void updateStock(StockUpdateDto stockUpdateDto) {
+        this.repositoryMapper.updateDecrease(stockUpdateDto);
+        this.repositoryMapper.updateIncrease(stockUpdateDto);
     }
 }
