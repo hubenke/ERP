@@ -102,29 +102,28 @@
     </delete>
 
     <select id="queryAll" resultMap="myOrderResultMap">
-    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
-    FROM myorder o LEFT JOIN goods g
-    ON o.goods_id = g.gid
+    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id
+    FROM myorder o
     </select>
 
     <select id="queryByCondition" resultMap="myOrderResultMap">
-        SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
-        FROM myorder o,goods g
+        SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id
+        FROM myorder o
         <where>
             <if test="orderno != null">
-                orderno like concat ("%",#{orderno},"%") AND o.goods_id=g.gid
+                orderno like concat ("%",#{orderno},"%")
             </if>
             <if test="status != null">
-                and o.status=#{status} AND o.goods_id=g.gid
+                and o.status=#{status}
             </if>
             <if test="submitTime != null">
-                and submit_time=#{submitTime} AND o.goods_id=g.gid
+                and submit_time=#{submitTime}
             </if>
             <if test="receiver != null">
-                and receiver like concat ("%",#{receiver},"%") AND o.goods_id=g.gid
+                and receiver like concat ("%",#{receiver},"%")
             </if>
             <if test="source != null">
-                and source=#{source} AND o.goods_id=g.gid
+                and source=#{source}
             </if>
         </where>
     </select>

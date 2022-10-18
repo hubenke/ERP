@@ -38,6 +38,13 @@ public class R extends HashMap<String, Object> {
 		return r;
 	}
 	
+	public static R ok(Map<String, Object> map,Integer count) {
+		R r = new R();
+		r.putAll(map);
+		r.put("count",count);
+		return r;
+	}
+
 	public static R ok(Map<String, Object> map) {
 		R r = new R();
 		r.putAll(map);

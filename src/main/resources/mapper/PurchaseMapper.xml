@@ -30,6 +30,17 @@
         where id=#{id}
     </update>
 
+    <update id="updateStatus">
+        update from purchase
+        <if test="btnNum == 1">
+            set status = 2
+        </if>
+        <if test="btnNum == 2">
+            set status = 3
+        </if>
+        where id = #{id}
+    </update>
+
     <select id="queryAll" resultMap="purchaseResultMap">
         select p.id,p.create_time,p.purchaseno,p.status,s.sid,s.sname,e.ename principal,e1.ename purchase_handler,e2.ename purchase_checker,e3.ename finance_checker
         from purchase p
@@ -57,6 +68,31 @@
 
     <select id="queryIdByNo" resultType="java.lang.Integer">
         select id from purchase where purchaseno = #{purchaseNo}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(p.id)
+        from purchase p
+        left join emp e1 on e1.eid = p.purchase_handler
+        left join emp e2 on e2.eid = p.purchase_checker
+        left join emp e3 on e3.eid = p.finance_checker
+        left join supplier s on p.supplier_id = s.sid
+        left join apply a on p.apply_id = a.id
+        left join emp e on a.principal = e.eid
+        <where>
+            <if test="status != null ">
+                p.status = #{status}
+            </if>
+            <if test="createTime != null">
+                and p.create_time = #{createTime}
+            </if>
+            <if test="sname != null and sname != ''">
+                and s.sname = #{sname}
+            </if>
+            <if test="principal != null">
+                and a.principal = #{principal}
+            </if>
+        </where>
     </select>
 
 </mapper>

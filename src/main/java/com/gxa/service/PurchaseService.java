@@ -9,7 +9,11 @@ import java.util.List;
 public interface PurchaseService {
     List<PurchaseQueryDto> queryAll(PurchaseDto purchaseDto);
 
+    int count(PurchaseDto purchaseDto);
+
     int add(PurchaseAddDto purchaseAddDto);
 
     int update(PurchaseAddDto purchaseAddDto);
+
+    int updateStatus(Integer id, Integer btnNum);
 }
