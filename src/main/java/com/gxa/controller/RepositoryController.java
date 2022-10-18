@@ -77,7 +77,7 @@ public class RepositoryController {
 
 
 
-    @GetMapping
+    //@GetMapping
     @ApiOperation("点击新增货架，根据当前仓库名称给所属仓库赋值，并且返回仓库名称，接收查询到的区域名称集合")
     @PostMapping("/repository/queryArea")
     public R queryArea(@ApiParam("仓库名称") String rname){

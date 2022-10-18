@@ -1,6 +1,7 @@
 package com.gxa.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.util.Date;
 public class Supplier {
 
     @ApiModelProperty("供应商编号")
+    @TableId("sid")
     private Integer sid ;
 
     @ApiModelProperty("供应商引进人id")
