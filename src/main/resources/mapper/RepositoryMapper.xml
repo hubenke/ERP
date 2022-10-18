@@ -39,12 +39,16 @@
     </insert>
 
 
-<!--    <update id="updateIncrease">-->
-<!--        update stock set qty=#{}-->
-<!--    </update>-->
+    <update id="updateIncrease" parameterType="com.gxa.dto.StockUpdateDto">
+        update stock s set qty=qty+#{num},realqty=realqty+#{num}
+        WHERE s.cargo_id=(SELECT cid FROM cargo WHERE location=#{upLocation})
+    </update>
 
 
-<!--    <update id="updateDecrease"></update>-->
+    <update id="updateDecrease">
+        update stock s set qty=qty-#{num},realqty=realqty-#{num}
+        WHERE s.cargo_id=(SELECT cid FROM cargo WHERE location=#{downLocation})
+    </update>
 
 
     <resultMap id="qaMap" type="com.gxa.entity.Repository">

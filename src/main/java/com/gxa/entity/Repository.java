@@ -36,6 +36,8 @@ public class Repository {
 
 
 
+    
+
     @ApiModelProperty("商品")
      private Goods goods;
 

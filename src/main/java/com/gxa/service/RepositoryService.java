@@ -1,6 +1,7 @@
 package com.gxa.service;
 
 import com.gxa.dto.RepositoryDto;
+import com.gxa.dto.StockUpdateDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import org.apache.ibatis.annotations.Param;
@@ -28,5 +29,7 @@ public interface RepositoryService {
     List<Cargo> queryLevelByRnameCargos( String rname);
 
     void addCargo(Cargo cargo);
+
+    void updateStock(StockUpdateDto stockUpdateDto);
 
 }
