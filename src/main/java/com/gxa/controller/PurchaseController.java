@@ -44,9 +44,10 @@ public class PurchaseController {
         }
     }*/
 
-    @GetMapping("/purchase/queryByCondition")
+    @PostMapping("/purchase/queryByCondition")
+    //@GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition(PurchaseDto purchaseDto,Integer page,Integer limit) {
+    public R queryByCondition( PurchaseDto purchaseDto,Integer page,Integer limit) {
 
         try {
             PageHelper.startPage(page,limit);//进行分页
@@ -83,7 +84,7 @@ public class PurchaseController {
     public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseGoodsService.updateByPurchaseId(purchaseAddDto);
+            int i = this.purchaseGoodsService.batchUpdate(purchaseAddDto);
             if (i != 0) {
                 return R.ok("修改成功");
             } else {

@@ -6,5 +6,5 @@ public interface PurchaseGoodsService {
 
     int add(PurchaseAddDto purchaseAddDto);
 
-    int updateByPurchaseId(PurchaseAddDto purchaseAddDto);
+    int batchUpdate(PurchaseAddDto purchaseAddDto);
 }
