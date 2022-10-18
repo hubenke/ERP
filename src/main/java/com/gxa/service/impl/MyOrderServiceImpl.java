@@ -78,6 +78,7 @@ public class MyOrderServiceImpl  implements MyOrderService {
 
     @Override
     public void updateFinishes(Integer[] ids) {
+
         this.myOrderMapper.updateFinishes(ids);
     }
 

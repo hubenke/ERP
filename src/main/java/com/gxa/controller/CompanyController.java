@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.CompanyDto;
 import com.gxa.entity.Company;
@@ -23,18 +24,21 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping("/com/list")
-    @ApiOperation("查询公司接口")
-    public R queryAll(@ApiParam("条数") Integer limit) {
+    @PostMapping("/com/list")
+    @ApiOperation("查询公司接口")//失败
+    public R queryAll( CompanyDto companyDto,Integer page,Integer limit) {
+        try{
+            PageHelper.startPage(page, limit);
 
+            List<Company> companies = this.companyService.queryAll(companyDto);
+            Map<String,Object> map =new HashMap<>();
+            map.put("companies", companies);
+            return R.ok(map);
+        }catch (Exception e){
+            return R.error("查询失败");
+        }
 
 //        List list = new ArrayList()
-        List<Company> companies = this.companyService.queryAll();
-        Map map = new HashMap();
-        map.put("companies", companies);
-//
-        return R.ok(map);
-
 
     }
 
@@ -44,6 +48,7 @@ public class CompanyController {
     public R addCompany(@RequestBody Company company) {
 
         try {
+            this.companyService.add(company);
             return R.ok("添加成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,13 +61,13 @@ public class CompanyController {
 
     @GetMapping("/com/job")
     @ApiOperation("拉取4步负责人，编辑可重复使用")
-    public R qureyJob(@RequestBody Company company) {
+    public R qureyJob( Company company) {
         try {
             Company company1=new Company();
-            company.setCompno(1);
-            company.setId(1);
-            company.setJob("销售代表");
-            company.setName("公司名称");
+            company1.setCompno(1);
+            company1.setId(1);
+            company1.setJob("销售代表");
+            company1.setName("公司名称");
 
             Map map=new HashMap();
             map.put("company1",company1);
@@ -90,16 +95,16 @@ public class CompanyController {
 
 
 
-    @PutMapping("/com/upjob")
-    @ApiOperation("修改接口")
-    public R update(@RequestBody CompanyDto companyDto) {
+//    @PostMapping("/com/upjob")
+//    @ApiOperation("修改接口")
+//    public R update(CompanyDto companyDto) {
 //      this.companyService.update();
-        return R.ok("修改成功");
-    }
+//        return R.ok("修改成功");
+//    }
 
-    @PutMapping("com/updateid")
+    @PostMapping("/com/updateid")
     @ApiOperation("根据id编辑")
-    public R updateById(Integer id) {
+    public R updateById( Integer id) {
         try {
             this.companyService.updateById(id);
             return R.ok("修改成功");
@@ -109,10 +114,11 @@ public class CompanyController {
         }
 
     }
-    @GetMapping("/com/{byid}")
+    @GetMapping("/cm/byido")//失败
     @ApiOperation("通过id查询")
-    public R querById(@PathVariable("byid") Integer byid){
+    public R querById( Integer id){
         try {
+            this.companyService.querById(id);
             return R.ok("查询成功");
         }catch (Exception e){
             e.printStackTrace();

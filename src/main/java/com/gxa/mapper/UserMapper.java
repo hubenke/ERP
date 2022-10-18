@@ -15,18 +15,18 @@ public interface UserMapper extends BaseMapper<User> {
 //
     User queryByUserNameAndPwd(@Param("uname")String uname, @Param("password") SimpleHash password);
 
-    void add(User user);//添加操作
+    int add(User user);//添加操作
 
 
 
-    void queryByUid(Integer uid);//根据id查找
+    List<User> queryByUid(Integer uid);//根据id查找
 
-    void updateById(Integer uid);//根据id修改
+    int updateById(Integer uid);//根据id修改
 
      List<User> queryAll(UserDto userDto);
 
 //     List<User> queryById();//根据
-    void  updateNameAndPwd(User user);
+    int updateNameAndPwd(User user);
 
 
 

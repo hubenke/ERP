@@ -11,15 +11,15 @@ public interface CompanyMapper  extends BaseMapper<Company> {
 //  void  add();//添加操作
 
 //  List<Company> queryAll(CompanyDto companyDto);
-  List<Company> queryByCondition( CompanyDto companyDto);
+//  List<Company> queryByCondition( CompanyDto companyDto);
 
   List<Company> queryAll();
 
-  void  add(Company company);//添加操作
+  int add(Company company);//添加操作
 
-  void  updateById(Integer id);//根据id去编辑
+  int updateById(Integer id);//根据id去编辑
 
-  void  queryById(Integer id);//根据id去查询
+  List<Company> queryById(Integer id);//根据id去查询
 
 //  void  queryByCondit
 

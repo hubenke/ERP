@@ -14,46 +14,64 @@
     insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
 
-    <update id="updateById" parameterType="" >
+    <update id="updateById">
         UPDATE company
-        SET  compno =#{compno},name=#{name},job =#{job}
+        SET compno =#{compno},name=#{name},job =#{job}
         WHERE id =#{id}
     </update>
 
-    <select id="queryAll" resultType="com.gxa.entity.Company" resultMap="companyResultMap">
-        SELECT id,compno,name,job
-        FROM company
-    </select>
 
-    <select id="queryByCondition" resultMap="companyResultMap">
-      SELECT c.id,c.compno,c.name,c.job
-      FROM company c
-        <where>
-             <if test="id !=null">
-                     c.id =#{id}
-             </if>
-
-              <if test="compno !=null">
-                     c.compno=#{compno}
-             </if>
-
-             <if test="name !=null">
-                     c.name=#{name}
-             </if>
-
-             <if test="job !=null">
-                     c.job=#{job}
-             </if>>
-
-
-        </where>
-    </select>
-
-    <select id="queryById">
+    <select id="queryById" resultMap="companyResultMap" >
     SELECT c.id,c.compno,c.name,c.job
     FROM company c
     WHERE id =#{id}
     </select>
+
+    <select id="queryAll" resultMap="companyResultMap">
+        SELECT c.id,c.compno,c.name,c.job
+        FROM company c
+        <if test="id !=null"  >
+                c.id=#{id}
+        </if>
+
+        <if test="company!=null">
+                c.compno=#{compno}
+        </if>
+
+        <if test="name !=null">
+                c.name=#{name}
+        </if>
+
+        <if test="job !=null">
+                c.job=#{job}
+        </if>
+    </select>
+
+<!--    <select id="queryByCondition" resultMap="companyResultMap">-->
+<!--      SELECT c.id,c.compno,c.name,c.job-->
+<!--      FROM company c-->
+<!--        <where>-->
+<!--             <if test="id !=null">-->
+<!--                     c.id =#{id}-->
+<!--             </if>-->
+
+<!--              <if test="compno !=null">-->
+<!--                     c.compno=#{compno}-->
+<!--             </if>-->
+
+<!--             <if test="name !=null">-->
+<!--                     c.name=#{name}-->
+<!--             </if>-->
+
+<!--             <if test="job !=null">-->
+<!--                     c.job=#{job}-->
+<!--             </if>>-->
+
+
+<!--        </where>-->
+<!--    </select>-->
+
+
 
 
 

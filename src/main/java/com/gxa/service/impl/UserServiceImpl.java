@@ -1,11 +1,8 @@
 package com.gxa.service.impl;
 
 import com.gxa.common.uitls.GyUitls;
-import com.gxa.common.uitls.R;
-import com.gxa.entity.MyOrder;
 import com.gxa.entity.User;
 import com.gxa.mapper.UserMapper;
-import com.gxa.service.MyOrderService;
 import com.gxa.service.UserService;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +20,29 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void add(User user) {
+    public Integer add(User user) {
+        int add = userMapper.add(user);
+        return add;
+
 
     }
 
     @Override
-    public void updateById(Integer uid) {
+    public Integer updateById(Integer uid) {
+        int updateById = userMapper.updateById(uid);
+        return updateById;
+
 
     }
 
 
 
-        @Override
-    public void queryByUid(Integer uid) {
+    @Override
+    public List<User> queryByUid(Integer uid) {
+        List<User> users =this.userMapper.queryByUid(uid);
+        return users;
+
+
 
     }
 
@@ -47,6 +54,13 @@ public class UserServiceImpl implements UserService {
         SimpleHash mm = GyUitls.salt(password);
         User u= userMapper.queryByUserNameAndPwd(uname, mm);
         return u;
+
+    }
+
+    @Override
+    public Integer updateNameAndPwd(User user) {
+       int updateNameAndPwd = userMapper.updateNameAndPwd(user);
+       return updateNameAndPwd;
 
     }
 }

@@ -12,15 +12,15 @@ public interface UserService {
 
 //    User login(String uname,String password);
 
-    void  add(User user);
+    Integer add(User user);
 
-    void updateById(Integer uid);
+    Integer updateById(Integer uid);
 
-    void queryByUid(Integer uid);
+    List<User> queryByUid(Integer uid);
 
     User login(User user);
 
-    void updateNameAndPwd(User user);
+    Integer updateNameAndPwd(User user);
 
 
 

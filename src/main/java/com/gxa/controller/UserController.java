@@ -39,11 +39,15 @@ public class UserController {
     @ApiOperation("用户登录")
     @PostMapping("/user/login")
     public R login(User user){
-        User login = this.userService.login(user);
-        if (login !=null){
-            return R.ok("redirect:/main.html");
-        }else {
-            return R.error("redirect:/index.html");
+        try {
+           this.userService.login(user);//测试失败
+//        if (login !=null){
+            return R.ok("登录成功");
+//        }else {
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("登录失败");
         }
 
 
@@ -64,25 +68,49 @@ public class UserController {
 
   @ApiOperation("用户修改")
   @PostMapping("/user/updat")
-  public  R update(){
-       return R.ok("修改成功");
+  public  R update(Integer id){
+        try {
+            this.userService.updateById(id);
+            return R.ok("修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
+
   }
 
 
 
     @GetMapping("/user/loginout")
     @ApiOperation("退出登陆")
-    public R loginout(){
-        return  R.ok("redirect:/index.html");
+    public R loginout(User user){//测试失败
+        try {
+            this.userService.login(user);
+            return  R.ok("退出登录成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("退出登录失败");
+        }
+
+    }
+
+    @PostMapping("/user/add")
+    @ApiOperation("添加权限分配")
+    public R add( User user){
+       try {
+           this.userService.add(user);
+           return R.ok("添加成功");
+       }catch (Exception e){
+           e.printStackTrace();
+           return R.error("添加失败");
+       }
 
     }
 
 
-
-
-    @PutMapping("/user/{uid}")
+    @PutMapping("/user/uid")
     @ApiOperation("修改用户信息")
-    public R updateById(@PathVariable("uid") Integer uid){
+    public R updateById(Integer uid){
         try {
           this.userService.updateById(uid);
             return R.ok("修改成功");
@@ -107,16 +135,18 @@ public class UserController {
     }
 
 
+    @GetMapping("/uesr/queryId")
+    @ApiOperation("根据id查询用户")
+    public R queryByUid( Integer id) {
+        try {
+            this.userService.queryByUid(id);
+            return R.ok("查询成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
 
-
-
-
-
-
-
-
-
-
+    }
 
 
     //盐值计算

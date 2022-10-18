@@ -8,15 +8,15 @@ import java.awt.*;
 import java.util.List;
 
 public interface CompanyService {
-    List<Company> queryAll(); //查询所有
+    List<Company> queryAll(CompanyDto companyDto); //查询所有
 
 //    List<Company> queryAllCompanyDto (CompanyDto companyDto);
 
-    void add(Company company); //添加操作
+    Integer add(Company company); //添加操作
 
-    void  updateById(Integer id);// 进行修改
+    Integer updateById(Integer id);// 进行修改
 
-    void querById(Integer id);//根据id查询
+    List<Company> querById(Integer id);//根据id查询
 
 
 }
