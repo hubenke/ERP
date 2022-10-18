@@ -91,7 +91,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM myorder WHERE id=#{id}
+        DELETE FROM myorder WHERE orderno=#{id}
     </delete>
 
     <delete id="deleteMyOrders" parameterType="Integer">
@@ -102,12 +102,12 @@
     </delete>
 
     <select id="queryAll" resultMap="myOrderResultMap">
-    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id
+    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty
     FROM myorder o
     </select>
 
     <select id="queryByCondition" resultMap="myOrderResultMap">
-        SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id
+        SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty
         FROM myorder o
         <where>
             <if test="orderno != null">
@@ -157,7 +157,7 @@
     </select>
 
     <insert id="add">
-        INSERT INTO myorder(id,orderno,money,payment,status,submit_time,source,type,receiver,tel,saleqty,goods_id)
-        VALUES(#{id},#{orderno},#{money},#{payment},#{status},#{submitTime},#{source},#{type},#{receiver},#{tel},#{saleqty},#{goods.gid})
+        INSERT INTO myorder(id,orderno,money,payment,status,submit_time,source,type,receiver,tel,saleqty)
+        VALUES(#{id},#{orderno},#{money},#{payment},#{status},#{submitTime},#{source},#{type},#{receiver},#{tel},#{saleqty})
     </insert>
 </mapper>

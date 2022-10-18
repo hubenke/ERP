@@ -33,7 +33,7 @@ public interface MyOrderMapper extends BaseMapper<MyOrder> {
 
     void updateFinishes(Integer[] ids);
 
-    void delete(Integer id);
+    void delete(String id);
 
     void deleteMyOrders(Integer[] ids);
 

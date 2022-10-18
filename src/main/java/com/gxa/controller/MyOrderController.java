@@ -71,9 +71,9 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
-            List<MyOrder> myOrders = this.myOrderService.queryAll();
-            int size = myOrders.size();
-            myOrder.setId(size+1);
+            //List<MyOrder> myOrders = this.myOrderService.queryAll();
+            //int size = myOrders.size();
+            //myOrder.setId(size+1);
             this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {
@@ -147,7 +147,7 @@ public class MyOrderController {
 
     @PutMapping("/orders/out")
     @ApiOperation("批量修改订单发货")
-    public R updateOuts(Integer[] ids){
+    public R updateOuts(@ApiParam("批量ids数组")Integer[] ids){
         System.out.println("updateOuts:----------"+ids);
         try {
             this.myOrderService.updateOuts(ids);
@@ -184,8 +184,8 @@ public class MyOrderController {
 
     @DeleteMapping("/orders/deleteById")
     @ApiOperation("根据id删除订单")
-    public R deleteById(Integer id){
-
+    public R deleteById(String id){
+        System.out.println("id------------------"+id);
         try {
             this.myOrderService.delete(id);
             return R.ok("删除成功");
