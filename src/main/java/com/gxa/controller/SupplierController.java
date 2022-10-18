@@ -31,7 +31,7 @@ public class SupplierController {
     private SupplierService supplierService;
     @ApiOperation("点击供应商管理，供应商页面数据展示")
     @PostMapping("/suppiler/slist")
-    public R queryAll(@RequestBody SupplierDto supplierDto,@ApiParam("页数") Integer page,@ApiParam("条数") Integer limit) {
+    public R queryAll(SupplierDto supplierDto,@ApiParam("页数") Integer page,@ApiParam("条数") Integer limit) {
 
         PageHelper.startPage(page, limit);  //使用此方法进行分页
 

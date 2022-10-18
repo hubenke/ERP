@@ -22,4 +22,7 @@ public class EmpDto {
 
     @ApiModelProperty("员工编号")
     private Integer eid;
+
+    @ApiModelProperty("部门")
+    private String department;
 }

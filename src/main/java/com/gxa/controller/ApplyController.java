@@ -1,7 +1,9 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
+import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
 import com.gxa.entity.ApplyGoods;
 import com.gxa.entity.Emp;
@@ -23,6 +25,7 @@ public class ApplyController {
 
     @Autowired
     private ApplyService applyService;
+
 
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @PostMapping("/apply/applylist")
@@ -54,6 +57,20 @@ public class ApplyController {
         Map<String,Object> map =new HashMap<>();
         map.put("emps",emps);
         return R.ok(map);
+    }
+
+    @ApiOperation("查询人员")
+    @PostMapping("/apply/emp")
+    public R queryEmp(EmpDto empDto){
+
+//        PageHelper.startPage(page, limit);  //使用此方法进行分页
+
+        List<Emp> emps = this.applyService.queryEmp(empDto);
+
+        Map<String,Object> map =new HashMap<>();
+        map.put("emps",emps);
+
+        return  R.ok(map);
     }
 
 
