@@ -21,7 +21,7 @@
     <update id="updateCheck">
           UPDATE apply
           SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
-          WHERE id = #{id}
+          WHERE applyno = #{applyno}
     </update>
 
     <select id="queryAll" resultMap="applyResultMap">
@@ -47,5 +47,26 @@
     <select id="queryDept" resultType="com.gxa.entity.Emp">
         SELECT e.eid,e.department
         FROM emp e
+    </select>
+    <resultMap id="empResultMap" type="emp">
+        <id property="eid" column="eid"></id>
+        <result property="ename" column="ename"></result>
+        <result property="department" column="department"></result>
+    </resultMap>
+
+    <select id="queryEmp" resultMap="empResultMap">
+        SELECT e.eid,e.ename,e.department
+        FROM emp e
+        <where>
+            <if test="eid != null">
+                e.eid = #{eid}
+            </if>
+            <if test="ename != null AND ename != ''">
+              AND  e.ename = #{ename}
+            </if>
+            <if test="department != null AND department != ''">
+              AND  e.department = #{department}
+            </if>
+        </where>
     </select>
 </mapper>

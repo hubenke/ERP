@@ -1,7 +1,9 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
+import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
 import com.gxa.entity.ApplyGoods;
 import com.gxa.entity.Emp;
@@ -24,9 +26,10 @@ public class ApplyController {
     @Autowired
     private ApplyService applyService;
 
+
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @PostMapping("/apply/applylist")
-    public R queryAll(ApplyDto applyDto) {
+    public R queryAll(@RequestBody ApplyDto applyDto) {
 
         List<Apply> applies = this.applyService.queryAll(applyDto);
 
@@ -38,16 +41,11 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody ApplyGoods applyGoods){
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    public R applyGoodsAdd(@RequestBody Apply apply){
 
+        this.applyService.addApply();
 
-        return R.ok(map);
+        return R.ok();
     }
 
     @ApiOperation("查询部门")
@@ -61,11 +59,25 @@ public class ApplyController {
         return R.ok(map);
     }
 
+    @ApiOperation("查询人员")
+    @PostMapping("/apply/emp")
+    public R queryEmp(EmpDto empDto){
+
+//        PageHelper.startPage(page, limit);  //使用此方法进行分页
+
+        List<Emp> emps = this.applyService.queryEmp(empDto);
+
+        Map<String,Object> map =new HashMap<>();
+        map.put("emps",emps);
+
+        return  R.ok(map);
+    }
+
 
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd(@RequestBody Apply apply){
+    public R applyAdd( Apply apply){
 
         Map<String,Object> map =new HashMap<>();
 
@@ -126,14 +138,13 @@ public class ApplyController {
     }
 
 
-    @ApiOperation("审核通过确定，返回当前请购单编号")
+    @ApiOperation("审核通过确定，返回当前请购单编号，0不通过，1表示通过，不通过请添加说明remark")
     @PutMapping("/apply/check")
-    public R updateCheck(@ApiParam("当前点击审核的用户,")Apply apply) {
+    public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
         this.applyService.updateCheck(apply);
-        Map<String,Object> map =new HashMap<>();
 
-        return R.ok(map);
+        return R.ok();
     }
 
 

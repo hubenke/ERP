@@ -42,9 +42,10 @@ public class ReturnController {
         }
     }*/
 
-    @GetMapping("/queryByCondition/list")
+    //@GetMapping("/return/queryByCondition")
+    @PostMapping("/return/queryByCondition")
     @ApiOperation("根据条件查询所有满足条件的退货单")
-    public R queryReturnByCondition(ReturnBillDto returnBillDto,Integer page,Integer limit){
+    public R queryReturnByCondition(ReturnBillDto returnBillDto, Integer page,Integer limit){
         try {
             PageHelper.startPage(page,limit);//进行分页
 
