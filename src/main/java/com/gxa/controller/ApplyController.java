@@ -4,6 +4,7 @@ import com.gxa.common.uitls.R;
 import com.gxa.dto.ApplyDto;
 import com.gxa.entity.Apply;
 import com.gxa.entity.ApplyGoods;
+import com.gxa.entity.Emp;
 import com.gxa.service.ApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +26,7 @@ public class ApplyController {
 
     @ApiOperation("点击请购单，请购单页面数据展示,与搜索使用一个接口")
     @PostMapping("/apply/applylist")
-    public R queryAll(ApplyDto applyDto) {
+    public R queryAll(@RequestBody ApplyDto applyDto) {
 
         List<Apply> applies = this.applyService.queryAll(applyDto);
 
@@ -37,38 +38,32 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody ApplyGoods applyGoods){
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    public R applyGoodsAdd(@RequestBody Apply apply){
 
+        this.applyService.addApply();
 
-        return R.ok(map);
+        return R.ok();
     }
 
     @ApiOperation("查询部门")
     @GetMapping("/apply/dept")
     public R queryDepts(){
 
-        this.applyService.queryDeot();
-        return R.ok();
+        List<Emp> emps = this.applyService.queryDeot();
+
+        Map<String,Object> map =new HashMap<>();
+        map.put("emps",emps);
+        return R.ok(map);
     }
 
 
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd(@RequestBody Apply apply){
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
+    public R applyAdd( Apply apply){
 
         Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+
 
 
 
@@ -126,33 +121,14 @@ public class ApplyController {
     }
 
 
-    @ApiOperation("审核通过确定，返回当前请购单编号")
-    @PutMapping("/apply/update/auditPass")
-    public R auditPass(@ApiParam("当前点击审核的用户") String aduitMan) {
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    @ApiOperation("审核通过确定，返回当前请购单编号，0不通过，1表示通过，不通过请添加说明remark")
+    @PutMapping("/apply/check")
+    public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
+        this.applyService.updateCheck(apply);
 
-
-        return R.ok(map);
+        return R.ok();
     }
 
-    @ApiOperation("审核未通过确定,返回当前请购单编号和审核不通过理由")
-    @PutMapping("/apply/update/auditFailed")
-    public R auditFailed(@PathVariable("applyno") Integer applyno,@ApiParam("审核不通过的理由") String reason) {
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
 
-
-
-        return R.ok(map);
-    }
 }

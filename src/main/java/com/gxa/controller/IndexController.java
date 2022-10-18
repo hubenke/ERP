@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class IndexController {
 
     @GetMapping("/index/ordersSum")
     @ApiOperation("查询订单统计总量")
-    public R ordersSum(){
+    public R ordersSum(@ApiParam("日期") Date date){
         try {
             Map<String,Object> map = new HashMap<>();
             map.put("week",200);

@@ -102,9 +102,8 @@
     </delete>
 
     <select id="queryAll" resultMap="myOrderResultMap">
-    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id,g.gname,g.picture,g.sale_price,g.buy_price,g.brand,g.status AS gstatus
-    FROM myorder o LEFT JOIN goods g
-    ON o.goods_id = g.gid
+    SELECT o.id,o.orderno,o.money,o.payment,o.status,o.submit_time,o.source,o.type,o.receiver,o.tel,o.saleqty,o.goods_id
+    FROM myorder o
     </select>
 
     <select id="queryByCondition" resultMap="myOrderResultMap">

@@ -10,4 +10,8 @@ public interface ApplyService {
     List<Apply> queryAll(ApplyDto applyDto);
 
     List<Emp> queryDeot();
+
+    void updateCheck(Apply apply);
+
+    void addApply();
 }

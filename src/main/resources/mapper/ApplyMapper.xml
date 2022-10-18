@@ -11,21 +11,25 @@
         <result property="applyChecker" column="apply_launch"></result>
         <result property="applyLaunch" column="apply_checker"></result>
         <result property="remark" column="remark"></result>
-        <result property="status" column="status"></result>
+        <result property="state" column="state"></result>
 
         <association property="emp" column="eid" javaType="emp">
             <result property="eid" column="eid"></result>
             <result property="ename" column="ename"></result>
         </association>
     </resultMap>
+    <update id="updateCheck">
+          UPDATE apply
+          SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
+          WHERE applyno = #{applyno}
+    </update>
 
     <select id="queryAll" resultMap="applyResultMap">
-        SELECT a.create_time,a.applyno,p.`status`,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
+        SELECT a.create_time,a.applyno,a.state,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
         FROM apply a
         LEFT JOIN emp e ON e.eid = a.apply_launch
         LEFT JOIN emp ON emp.eid = a.apply_checker
         LEFT JOIN emp em ON em.eid = a.principal
-        LEFT JOIN purchase p ON p.apply_id = a.id
         <where>
             <if test="createTime != null">
                 a.create_time = #{createTime}
@@ -41,6 +45,7 @@
         </where>
     </select>
     <select id="queryDept" resultType="com.gxa.entity.Emp">
-
+        SELECT e.eid,e.department
+        FROM emp e
     </select>
 </mapper>
