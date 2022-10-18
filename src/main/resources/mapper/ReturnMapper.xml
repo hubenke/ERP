@@ -37,28 +37,7 @@
                 and rs.rname = #{rname}
             </if>
         </where>
-        limit #{page},#{limit}
+
     </select>
 
-    <select id="count" resultType="java.lang.Integer">
-        select count(r.id)
-        from returnbill r
-        left join repository rs on r.repository_id = rs.rid
-        left join supplier s on r.supplier_id = s.sid
-        left join emp e on e.eid = r.initiator
-        <where>
-            <if test="status != null">
-                r.status = #{status}
-            </if>
-            <if test="createTime != null">
-                and r.create_time = #{createTime}
-            </if>
-            <if test="sname != null and sname != ''">
-                and s.sname = #{sname}
-            </if>
-            <if test="rname != null and rname != ''">
-                and rs.rname = #{rname}
-            </if>
-        </where>
-    </select>
 </mapper>

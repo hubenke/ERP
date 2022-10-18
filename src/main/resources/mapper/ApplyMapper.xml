@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.ApplyMapper">
-    <resultMap id="applyResultMap" type="apply">
+    <resultMap id="applyResultMap" type="applyDto">
         <id property="id" column="id"></id>
         <result property="applyno" column="applyno"></result>
         <result property="createTime" column="create_time"></result>
@@ -12,12 +12,35 @@
         <result property="applyLaunch" column="apply_checker"></result>
         <result property="remark" column="remark"></result>
         <result property="state" column="state"></result>
-
+        <result property="spec" column="spec"></result>
+        <result property="unit" column="unit"></result>
+        <result property="requestqty" column="requestqty"></result>
+        <result property="realqty" column="realqty"></result>
+        <result property="qty" column="qty"></result>
+        <result property="gid" column="gid"></result>
+        <result property="gname" column="gname"></result>
         <association property="emp" column="eid" javaType="emp">
             <result property="eid" column="eid"></result>
             <result property="ename" column="ename"></result>
         </association>
     </resultMap>
+
+    <insert id="addGoods">
+        <foreach collection="applyGoodsList" item="gd" index="index" separator="union all">
+            insert into apply_goods(goods_id,requestqty,apply_id)
+            select
+            #{gd.goodsId},
+            #{gd.requestqty},
+            #{applyId}
+            from apply_goods
+        </foreach>
+    </insert>
+
+    <insert id="addapply">
+        insert into apply(applyno,create_time,address,principal)
+        values (#{applyno},#{createTime},#{address},#{eid})
+    </insert>
+
     <update id="updateCheck">
           UPDATE apply
           SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
@@ -79,4 +102,19 @@
             </if>
         </where>
     </select>
+
+    <select id="queryGoogs" resultMap="applyResultMap">
+        SELECT g.gid,g.gname,gd.spec,gd.unit,ag.requestqty,s.realqty,s.qty
+        FROM goods g
+        LEFT JOIN goods_detail gd ON gd.goods_id = g.gid
+        LEFT JOIN apply_goods ag ON ag.goods_id = g.gid
+        LEFT JOIN stock s ON s.goodsdetail_id = gd.did
+    </select>
+
+    <select id="queryApplyId" resultType="java.lang.Integer">
+        SELECT a.id
+        FROM apply a
+        WHERE applyno = #{applyno}
+    </select>
+
 </mapper>

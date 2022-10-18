@@ -12,13 +12,17 @@ public interface ApplyService {
 
     List<Emp> queryDeot();
 
-    void updateCheck(Apply apply);
+    int updateCheck(Apply apply);
 
-    void addApply();
+    int addApply(ApplyDto applyDto);
 
     List<Emp> queryEmp(EmpDto empDto);
 
-    void assign(Integer applyno,Integer eid);
+    int assign(Integer applyno,Integer eid);
 
-    void backout(Integer applyno);
+    int backout(Integer applyno);
+
+    List<ApplyDto> queryGoods();
+
+    int addGoods(ApplyDto applyDto);
 }
