@@ -43,18 +43,20 @@ public class GoodsController {
     }
 
 
-    @GetMapping("/goodsByGoodsDto/list")
+    @PostMapping("/goodsByGoodsDto/list")
     @ApiOperation("根据商品条件查询")
     public R queryByCondition(@RequestBody GoodsDto goodsDto){
-        try {
+//        try {
             List<Goods> goodsList = this.goodsService.queryAllByGoodsDto(goodsDto);
             Map<String,Object> map = new HashMap<>();
             map.put("goods",goodsList);
             return R.ok(map);
-        }catch (Exception e){
-            e.printStackTrace();
-            return R.error("查询失败");
-        }
+
+//        }catch (Exception e){
+//
+//            e.printStackTrace();
+//            return R.error("查询失败");
+//        }
 
     }
 

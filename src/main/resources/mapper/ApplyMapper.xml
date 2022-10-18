@@ -21,7 +21,7 @@
     <update id="updateCheck">
           UPDATE apply
           SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
-          WHERE id = #{id}
+          WHERE applyno = #{applyno}
     </update>
 
     <select id="queryAll" resultMap="applyResultMap">

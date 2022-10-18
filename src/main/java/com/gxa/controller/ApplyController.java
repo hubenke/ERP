@@ -126,14 +126,13 @@ public class ApplyController {
     }
 
 
-    @ApiOperation("审核通过确定，返回当前请购单编号")
+    @ApiOperation("审核通过确定，返回当前请购单编号，0不通过，1表示通过，不通过请添加说明remark")
     @PutMapping("/apply/check")
-    public R updateCheck(@ApiParam("当前点击审核的用户,")Apply apply) {
+    public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
         this.applyService.updateCheck(apply);
-        Map<String,Object> map =new HashMap<>();
-
-        return R.ok(map);
+        
+        return R.ok();
     }
 
 
