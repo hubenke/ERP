@@ -1,6 +1,7 @@
 package com.gxa.controller;
 
 import com.gxa.common.uitls.R;
+import com.gxa.entity.Index;
 import com.gxa.service.IndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,13 +39,14 @@ public class IndexController {
         }
     }
 
-    @GetMapping("/index/ordersSum")
-    @ApiOperation("查询订单统计总量")
-    public R ordersSum(@ApiParam("日期") Date date){
+    @GetMapping("/index/ordersMoneySum")
+    @ApiOperation("查询订单统计总金额")
+    public R ordersSum(){
         try {
+            Integer ordersMoneySum = this.indexService.queryOrdersMoneySum();
             Map<String,Object> map = new HashMap<>();
-            map.put("week",200);
-            map.put("decrease",0.1);
+            map.put("ordersMoneySum",ordersMoneySum);
+            //map.put("decrease",0.1);
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,13 +55,13 @@ public class IndexController {
         }
     }
 
-    @GetMapping("/index/ordersDaySum")
-    @ApiOperation("查询订单统计每天的总量")
-    public R ordersDaySum(){
+    @GetMapping("/index/ordersTypeSum")
+    @ApiOperation("查询订单统计每类别的金额和销量以及占比")
+    public R ordersTypeSum(){
         try {
+            List<Index> indices = this.indexService.queryOrdersTypeSum();
             Map<String,Object> map = new HashMap<>();
-            map.put("week",200);
-            map.put("decrease",0.1);
+            map.put("indices",indices);
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,18 +70,18 @@ public class IndexController {
         }
     }
 
-    @GetMapping("/index/classifySum")
-    @ApiOperation("查询热门分类比例")
-    public R classifySum(){
-        try {
-            Map<String,Object> map = new HashMap<>();
-            map.put("week",200);
-            map.put("decrease",0.1);
-            return R.ok(map);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return R.error("请求异常");
-        }
-    }
+//    @GetMapping("/index/classifySum")
+//    @ApiOperation("查询热门分类比例")
+//    public R classifySum(){
+//        try {
+//            Map<String,Object> map = new HashMap<>();
+//            map.put("week",200);
+//            map.put("decrease",0.1);
+//            return R.ok(map);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//            return R.error("请求异常");
+//        }
+//    }
 }
