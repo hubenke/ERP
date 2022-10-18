@@ -14,10 +14,14 @@ class StockUpdateDto {
 
 
     @ApiModelProperty("增加的货位名")
-    protected  Integer upLocation;
+    protected  String upLocation;
 
     @ApiModelProperty("减少的货位名")
-    protected  Integer downLocation;
+    protected  String downLocation;
+
+    
+
+
 
 
 }

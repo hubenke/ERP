@@ -123,7 +123,7 @@ public class RepositoryController {
 
     @PostMapping("/repository/warehouse")
     @ApiOperation("点击仓储管理，呈现数据,且按条件查询")
-    public R  queryWarehouse(@RequestBody RepositoryDto repositoryDto){
+    public R  queryWarehouse(RepositoryDto repositoryDto){
 
 
 
@@ -208,7 +208,7 @@ public class RepositoryController {
 
     @PutMapping("/repository/Allocate")
     @ApiOperation("调拨确定")
-    public R updateAllocate (StockUpdateDto stockUpdateDto) {
+    public R updateAllocate (@ RequestBody  StockUpdateDto stockUpdateDto) {
         repositoryService.updateStock(stockUpdateDto);
         try {
             return R.ok("调拨完成");
