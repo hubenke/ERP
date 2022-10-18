@@ -14,7 +14,7 @@ public interface CompanyService {
 
     void add(Company company); //添加操作
 
-    void  update();// 进行修改
+    void  updateById(Integer id);// 进行修改
 
     void querById(Integer id);//根据id查询
 

@@ -47,10 +47,5 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Cargo> insertCargo();
 
 
-
-
-
-
-
-
+    void addCargo(Cargo cargo);
 }

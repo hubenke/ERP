@@ -7,10 +7,9 @@ import com.gxa.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,15 +22,16 @@ public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
+
     @GetMapping("/com/list")
     @ApiOperation("查询公司接口")
-    public R queryAll(){
+    public R queryAll(@ApiParam("条数") Integer limit) {
 
 
 //        List list = new ArrayList()
         List<Company> companies = this.companyService.queryAll();
         Map map = new HashMap();
-        map.put("companies",companies);
+        map.put("companies", companies);
 //
         return R.ok(map);
 
@@ -41,48 +41,84 @@ public class CompanyController {
     @PutMapping("/com/add")
     @ApiOperation("添加公司接口")
 
-    public R addCompany(Company company){
+    public R addCompany(@RequestBody Company company) {
 
-        System.out.println(company);
+        try {
+            return R.ok("添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error("添加失败");
+        }
 
-        this.companyService.add(company);
-
-        return R.ok("添加成功");
-
-//        return R.ok("添加成功");
 
     }
 
 
     @GetMapping("/com/job")
     @ApiOperation("拉取4步负责人，编辑可重复使用")
-    public R qureyJob(Company company){
+    public R qureyJob(@RequestBody Company company) {
+        try {
+            Company company1=new Company();
+            company.setCompno(1);
+            company.setId(1);
+            company.setJob("销售代表");
+            company.setName("公司名称");
 
-        List list = new ArrayList();
-        list.add("销售代表");
-        list.add("销售经理");
-        list.add("总经理");
-        list.add("财务");
+            Map map=new HashMap();
+            map.put("company1",company1);
 
-        Map map = new HashMap();
-        map.put("4步负责人",list);
-        return  R.ok();
+            return  R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+
+        }
+
+
+    }
+
+//        List list = new ArrayList();
+//
+//
+//        Map map = new HashMap();
+//        map.put("4步负责人", list);
+//        return R.ok();
 
 //        List<Company> companies =this.companyService.querById();
 //        Map map =new HashMap();
 //        map.put("companies",companies);
-//        return  R.ok(map);
 
-    }
+
 
     @PutMapping("/com/upjob")
     @ApiOperation("修改接口")
-    public R update(CompanyDto companyDto){
+    public R update(@RequestBody CompanyDto companyDto) {
 //      this.companyService.update();
         return R.ok("修改成功");
     }
 
+    @PutMapping("com/updateid")
+    @ApiOperation("根据id编辑")
+    public R updateById(Integer id) {
+        try {
+            this.companyService.updateById(id);
+            return R.ok("修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("修改失败");
+        }
 
+    }
+    @GetMapping("/com/{byid}")
+    @ApiOperation("通过id查询")
+    public R querById(@PathVariable("byid") Integer byid){
+        try {
+            return R.ok("查询成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
 
-
+        }
 }
+

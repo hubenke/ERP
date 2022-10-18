@@ -14,8 +14,9 @@
     insert into company(id,compno,name,job) value (#{id},#{compno},#{name},#{job})
 </insert>
 
-    <update id="update"  >
-        UPDATE company  SET  id =#{id}
+    <update id="updateById" parameterType="" >
+        UPDATE company
+        SET  compno =#{compno},name=#{name},job =#{job}
         WHERE id =#{id}
     </update>
 
