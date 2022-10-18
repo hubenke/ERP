@@ -25,6 +25,9 @@ class Apply {
     @ApiModelProperty("备注")
     private String remark;
 
+    @ApiModelProperty("到货地址")
+    private String address;
+
     @ApiModelProperty("请购发起人")
     private String applyLaunch;
 
