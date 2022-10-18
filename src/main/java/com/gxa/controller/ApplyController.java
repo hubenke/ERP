@@ -65,6 +65,8 @@ public class ApplyController {
 
 //        PageHelper.startPage(page, limit);  //使用此方法进行分页
 
+        System.out.println("接收的数据是-----------"+empDto);
+
         List<Emp> emps = this.applyService.queryEmp(empDto);
 
         Map<String,Object> map =new HashMap<>();
@@ -77,11 +79,9 @@ public class ApplyController {
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd( Apply apply){
+    public R applyAdd(Apply apply){
 
         Map<String,Object> map =new HashMap<>();
-
-
 
 
         return R.ok(map);
@@ -106,35 +106,21 @@ public class ApplyController {
 
 
     @ApiOperation("指派员工保存，返回当前请购单编号和指派的员工姓名")
-    @PutMapping("/apply/edit/{applyno}")
-    public R updateEmp(@PathVariable("applyno") Integer applyno, @ApiParam("指派的员工姓名") String ename) {
-
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    @PutMapping("/apply/edit")
+    public R updateEmp(@ApiParam("请购单编号") Integer applyno, @ApiParam("指派的员工id") Integer eid) {
 
 
-
-        return R.ok(map);
+        this.applyService.assign(applyno,eid);
+        return R.ok();
     }
 
-    @ApiOperation("撤销确定，返回当前撤销的请购单编号")
-    @DeleteMapping("/apply/delete/{applyno}")
-    public R DeleteEmp(@PathVariable("applyno") Integer applyno,@ApiParam("撤销的员工姓名") String ename) {
+    @ApiOperation("撤销接口，需要给到请购单编号")
+    @PutMapping("/apply/delete")
+    public R DeleteEmp(@ApiParam("请购单编号") Integer applyno) {
 
-        List list =new ArrayList();
-        list.add("123");
-        list.add("456");
+        this.applyService.backout(applyno);
 
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
-
-
-
-        return R.ok(map);
+        return R.ok();
     }
 
 

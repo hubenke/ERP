@@ -23,6 +23,16 @@
           SET state = #{state},apply_checker=#{applyChecker},remark=#{remark}
           WHERE applyno = #{applyno}
     </update>
+    <update id="assign">
+        UPDATE apply
+        SET principal = #{eid}
+        WHERE applyno = #{applyno}
+    </update>
+    <update id="backout">
+        UPDATE apply
+        SET principal = null
+        WHERE applyno = #{applyno}
+    </update>
 
     <select id="queryAll" resultMap="applyResultMap">
         SELECT a.create_time,a.applyno,a.state,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
@@ -61,11 +71,11 @@
             <if test="eid != null">
                 e.eid = #{eid}
             </if>
-            <if test="ename != null AND ename != ''">
-              AND  e.ename = #{ename}
+            <if test="ename != null and ename != ''">
+                AND e.ename = #{ename}
             </if>
-            <if test="department != null AND department != ''">
-              AND  e.department = #{department}
+            <if test="department != null and department != ''">
+                AND e.department = #{department}
             </if>
         </where>
     </select>

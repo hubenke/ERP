@@ -17,4 +17,8 @@ public interface ApplyService {
     void addApply();
 
     List<Emp> queryEmp(EmpDto empDto);
+
+    void assign(Integer applyno,Integer eid);
+
+    void backout(Integer applyno);
 }

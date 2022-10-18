@@ -48,4 +48,15 @@ public class ApplyServiceImpl implements ApplyService {
         return emps;
     }
 
+    @Override
+    public void assign(Integer applyno,Integer eid) {
+        this.applyMapper.assign(applyno,eid);
+    }
+
+    @Override
+    public void backout(Integer applyno) {
+
+        this.applyMapper.backout(applyno);
+    }
+
 }

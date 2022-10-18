@@ -3,6 +3,7 @@ package com.gxa.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ class Apply {
     @ApiModelProperty("采购单状态，0：待审核；1：审核通过")
     private Integer state;
 
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")   //转换时间类型
     @ApiModelProperty("创建时间")
     private Date createTime;
 
