@@ -16,6 +16,7 @@
         <result property="sname" column="sname"></result>
         <result property="initiatorName" column="ename"></result>
     </resultMap>
+
     <select id="queryAllReturnBill" resultType="java.util.List" resultMap="returnResultMap">
         select r.id,r.returnno,r.status,r.type,r.create_time,r.return_time,r.contact,rs.rname,s.sname,e.ename
         from returnbill r
