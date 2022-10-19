@@ -18,7 +18,7 @@ public class Outbound {
     private Integer id;
 
     @ApiModelProperty("出库编号")
-    private Integer outno;
+    private String outno;
 
     @ApiModelProperty("配送方式")
     private Integer type;

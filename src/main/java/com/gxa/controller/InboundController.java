@@ -44,7 +44,7 @@ public class InboundController {
 
    //完成入库
    @ApiOperation("入库完成接口")
-   @PutMapping("/inbound/updateStatus")
+   @PostMapping("/inbound/updateStatus")
    public R updateInboundStatus(@RequestBody Inbound inbound){
       try {
          this.inboundService.updateInboundStatus(inbound);
