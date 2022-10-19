@@ -8,9 +8,9 @@
 
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        <foreach collection="purchaseGoodsList" item="pg" index="index" separator="union all">
-        insert into purchase_goods(buyqty,goods_id,purchase_id)
-        values (#{pg.buyQty},#{pg.goodsDetailId},select id from purchase where purchaseno = #{purchase.purchaseNo})
+        insert into purchase_goods(buyqty,goods_detail_id,purchase_id) values
+        <foreach collection="purchaseGoodsList" item="pg" index="index" separator=",">
+        (#{pg.buyQty},#{pg.goodsDetailId},(select id from purchase where purchaseno = #{purchase.purchaseNo}))
         </foreach>
     </insert>
 
