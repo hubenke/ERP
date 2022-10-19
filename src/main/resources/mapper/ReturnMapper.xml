@@ -17,6 +17,24 @@
         <result property="initiatorName" column="ename"></result>
     </resultMap>
 
+    <insert id="insertReturnBill" useGeneratedKeys="true" keyProperty="returnBill.id">
+        insert into returnbill(type,status,create_time,return_time,address,contact,phone,initiator,remark,supplier_id,repository_id)
+        values (#{returnBill.type},1,#{returnBill.createTime},#{returnBill.returnTime},#{returnBill.address},#{returnBill.contact},#{returnBill.phone},#{returnBill.initiatorId},#{returnBill.remark},#{sid},#{repositoryId})
+    </insert>
+
+    <update id="updateStatus">
+        update returnbill
+        /*审核通过*/
+        <if test="btnNum == 1">
+        set status = 2
+        </if>
+        /*审核不通过*/
+        <if test="btnNum == 2">
+            set status = 3
+        </if>
+        where id = #{id}
+    </update>
+
     <select id="queryAllReturnBill" resultType="java.util.List" resultMap="returnResultMap">
         select r.id,r.returnno,r.status,r.type,r.create_time,r.return_time,r.contact,rs.rname,s.sname,e.ename
         from returnbill r
@@ -38,6 +56,10 @@
             </if>
         </where>
 
+    </select>
+
+    <select id="queryReturnType">
+        select distinct type from returnbill
     </select>
 
 </mapper>

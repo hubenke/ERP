@@ -8,15 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-/**
- * @author:
- * @ClassName:Goods
- * @Package:com.gxa.entity.Goods
- * @Description:
- * @CreateDate:2022年10月12日
- * @Version:
- **/
-import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 @Data
@@ -37,21 +29,9 @@ public class Goods {
     @TableField("picture")
     private  String picture;
 
-    @ApiModelProperty("商品销售价格")
-    @TableField("sale_price")
-    private double salePrice;
-
-    @ApiModelProperty("商品采购价格")
-    @TableField("buy_price")
-    private  double buyPrice;
-
     @ApiModelProperty("商品品牌")
     @TableField("brand")
     private  String brand;
-
-    @ApiModelProperty("状态 1:上架 0:下架")
-    @TableField("status")
-    private  Integer status;
 
     @ApiModelProperty("商品详情实体类")
     private GoodsDetail goodsDetail;

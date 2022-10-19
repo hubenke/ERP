@@ -6,6 +6,7 @@ import com.gxa.mapper.ReturnMapper;
 import com.gxa.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,18 @@ public class ReturnServiceImpl implements ReturnService {
     public List<ReturnQueryDto> queryAllReturnBill(ReturnBillDto returnBillDto) {
         List<ReturnQueryDto> returnList = returnMapper.queryAllReturnBill(returnBillDto);
         return returnList;
+    }
+
+    @Override
+    public int[] queryReturnType() {
+        int[] types = returnMapper.queryReturnType();
+        return types;
+    }
+
+    @Transactional
+    @Override
+    public void updateStatus(Integer id, Integer btnNum) {
+        returnMapper.updateStatus(id,btnNum);
     }
 
 }

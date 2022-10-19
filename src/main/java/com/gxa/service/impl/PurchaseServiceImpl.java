@@ -31,20 +31,17 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int add(PurchaseAddDto purchaseAddDto) {
-        int i = purchaseMapper.insert(purchaseAddDto);
-        return i;
+    public void add(PurchaseAddDto purchaseAddDto) {
+        //purchaseMapper.insertPurchase(purchaseAddDto.getPurchase());
     }
 
     @Override
-    public int update(PurchaseAddDto purchaseAddDto) {
-        //int i = this.purchaseMapper.updateById(purchase);
-        return 0;
+    public void update(PurchaseAddDto purchaseAddDto) {
+        //this.purchaseMapper.updateById(purchase);
     }
 
     @Override
-    public int updateStatus(Integer id, Integer btnNum) {
-        int i = purchaseMapper.updateStatus(id, btnNum);
-        return i;
+    public void updateStatus(Integer id, Integer btnNum) {
+        purchaseMapper.updateStatus(id, btnNum);
     }
 }

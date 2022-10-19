@@ -11,5 +11,5 @@ package com.gxa.service;
 public interface GoodsDetailService {
     GoodsDetailService queryById(Integer did);//根据id查询
 
-    void  add(GoodsDetailService goodsDetail);//添加商品
+    void   add(GoodsDetailService goodsDetail);//添加商品
 }

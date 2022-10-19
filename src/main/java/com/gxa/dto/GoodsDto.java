@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @ApiModel("商品")
 public class GoodsDto {
     @ApiModelProperty("商品编号")
-    private Integer gid;
+    private Integer did;
 
     @ApiModelProperty("商品名称")
     private String gname;
@@ -23,4 +23,10 @@ public class GoodsDto {
 
     @ApiModelProperty("状态 1:上架 0:下架")
     private Integer status;
+
+    @ApiModelProperty("页数")
+    private Integer page;
+
+    @ApiModelProperty("条数")
+    private Integer limit;
 }

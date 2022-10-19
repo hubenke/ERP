@@ -34,6 +34,6 @@ public class Stock {
     private Cargo cargo;
 
     @ApiModelProperty("商品实体类")
-    private Goods goods;
+    private GoodsDetail goodsDetail;
 
 }

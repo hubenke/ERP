@@ -2,25 +2,32 @@ package com.gxa.service;
 
 
 import com.gxa.dto.GoodsDto;
+import com.gxa.dto.GoodsQueryDto;
+import com.gxa.dto.GoodsTypeConditionDto;
+import com.gxa.dto.GoodsTypeQueryDto;
 import com.gxa.entity.Goods;
+import com.gxa.entity.GoodsDetail;
 
 import java.util.List;
 
 
 public interface GoodsService {
-    List<Goods> queryGoods(); //查询所有
 
-    List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
+    List<GoodsQueryDto> queryGoodsList();
 
-    void updateShelves(Integer gid);
+    List<GoodsQueryDto> queryAll(GoodsDto goodsDto);
 
-    void add(Goods goods );;//添加商品
+    List<GoodsDetail> selectType();
 
-//    void  queryGoods();//查询商品表
+    void updateShelves(Integer did);
 
-    void  update(Goods goods);//修改
+    int addGoods(Goods goods);;//添加商品
 
-    void delete(Integer gid);//删除指定商品
+    void updateGoodsById(GoodsDetail goodsDetail);
+
+    List<GoodsTypeQueryDto> queryGoodsAttribute(GoodsTypeConditionDto goodsTypeConditionDto);
+
+    void updateGoodsAttribute(GoodsTypeQueryDto goodsTypeQueryDto);
 
 
 }

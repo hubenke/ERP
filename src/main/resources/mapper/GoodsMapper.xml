@@ -3,53 +3,134 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.GoodsMapper">
-    <resultMap id="GoodsResultMap" type="goods">
-        <id column="gid" property="gid"/>
+<!--    <resultMap id="GoodsResultMap" type="goods">-->
+<!--        <id column="gid" property="gid"/>-->
+<!--        <result column="gname" property="gname"/>-->
+<!--        <result column="sale_price" property="salePrice"/>-->
+<!--        <result column="buy_price" property="buyPrice"/>-->
+<!--        <result column="brand" property="brand"/>-->
+<!--        <result column="status" property="status"/>-->
+<!--        <result column="color" property="goodsDetail.color"/>-->
+<!--        <result column="size" property="goodsDetail.size"/>-->
+<!--        <result column="spec" property="goodsDetail.spec"/>-->
+<!--        <result column="realqty" property="stock.realQty"/>-->
+<!--    </resultMap>-->
+
+<!--    <select id="queryGoods" resultMap="GoodsResultMap">-->
+<!--        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty-->
+<!--        FROM goods g-->
+<!--        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid-->
+<!--        LEFT JOIN stock s ON  s.goods_id = g.gid-->
+
+<!--    </select>-->
+
+<!--    <select id="queryAllByGoodsDto" resultMap="GoodsResultMap">-->
+<!--        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty-->
+<!--        FROM goods g-->
+<!--        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid-->
+<!--        LEFT JOIN stock s ON  s.goods_id = g.gid-->
+<!--        <where>-->
+<!--            <if test="gid != null">-->
+<!--                g.gid = #{gid}-->
+<!--            </if>-->
+<!--            <if test="gname != null and gname != ''">-->
+<!--                g.gname = #{gname}-->
+<!--            </if>-->
+<!--            <if test="brand != null and brand != ''">-->
+<!--                g.brand = #{brand}-->
+<!--            </if>-->
+<!--            <if test="status != null">-->
+<!--                g.status = #{status}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+    <resultMap id="GoodsResultMap" type="goodsQueryDto">
+        <id column="did" property="did"/>
         <result column="gname" property="gname"/>
-        <result column="sale_price" property="salePrice"/>
-        <result column="buy_price" property="buyPrice"/>
+        <result column="selling_price" property="sellingPrice"/>
         <result column="brand" property="brand"/>
+        <result column="size" property="size"/>
+        <result column="color" property="color"/>
+        <result column="spec" property="spec"/>
+        <result column="realqty" property="realQty"/>
         <result column="status" property="status"/>
-        <result column="color" property="goodsDetail.color"/>
-        <result column="size" property="goodsDetail.size"/>
-        <result column="spec" property="goodsDetail.spec"/>
-        <result column="realqty" property="stock.realQty"/>
     </resultMap>
 
+    <resultMap id="GoodsDetailMap" type="goodsDetail">
+        <id column="did" property="did"/>
+        <result column="type_a" property="typeA"/>
+        <result column="type_b" property="typeB"/>
+        <result column="color" property="color"/>
+        <result column="size" property="size"/>
+        <result column="spec" property="spec"/>
+        <result column="unit" property="unit"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="buy_price" property="buyPrice"/>
+        <result column="selling_price" property="sellingPrice"/>
+        <result column="status" property="status"/>
+        <result column="goods_id" property="goods.gid"/>
+    </resultMap>
 
-    <select id="queryGoods" resultMap="GoodsResultMap">
-        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty
-        FROM goods g
-        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid
-        LEFT JOIN stock s ON  s.goods_id = g.gid
-
+    <select id="queryAll" resultMap="GoodsResultMap">
+            SELECT gd.did,g.gname,gd.sale_price,gd.buy_price,gd.selling_price,g.brand,gd.status,gd.color,gd.size,gd.spec,s.realqty
+            FROM goods_detail gd
+            LEFT JOIN  goods g ON  gd.goods_id = g.gid
+            LEFT JOIN stock s ON  s.goodsdetail_id = gd.did
+            <where>
+                <if test="did != null">
+                    gd.did = #{did}
+                </if>
+                 <if test="gname != null and gname != ''">
+                    and g.gname = #{gname}
+                 </if>
+                <if test="brand != null and brand != ''">
+                    and g.brand = #{brand}
+                </if>
+                <if test="status != null">
+                    and gd.status = #{status}
+                </if>
+            </where>
     </select>
 
-    <select id="queryAllByGoodsDto" resultMap="GoodsResultMap">
-        SELECT g.gid,g.gname,g.sale_price,g.buy_price,g.brand,g.status,gd.color,gd.size,gd.spec,s.realqty
-        FROM goods g
-        LEFT JOIN goods_detail gd ON  gd.goods_id = g.gid
-        LEFT JOIN stock s ON  s.goods_id = g.gid
+    <select id="selectType" resultMap="GoodsDetailMap">
+        SELECT DISTINCT type_a,type_b FROM goods_detail
+    </select>
+
+    <select id="queryGoodsList" resultMap="GoodsResultMap">
+        SELECT gd.did,g.gname,gd.sale_price,gd.buy_price,g.brand,gd.status,gd.color,gd.size,gd.spec,s.realqty
+        FROM goods_detail gd
+        LEFT JOIN  goods g ON  gd.goods_id = g.gid
+        LEFT JOIN stock s ON  s.goodsdetail_id = gd.did
+    </select>
+
+    <select id="queryGoodsAttribute" resultType="goodsTypeQueryDto">
+        SELECT gd.did,g.gname,gd.color,gd.size,gd.spec
+        FROM goods_detail gd,goods g
         <where>
-            <if test="gid != null">
-                g.gid = #{gid}
-            </if>
+            gd.goods_id=g.gid
             <if test="gname != null and gname != ''">
-                g.gname = #{gname}
-            </if>
-            <if test="brand != null and brand != ''">
-                g.brand = #{brand}
-            </if>
-            <if test="status != null">
-                g.status = #{status}
+                and gname=#{gname}
             </if>
         </where>
     </select>
 
 
-  <update id="updateShelves">
-      UPDATE goods SET status=0 WHERE gid=#{gid}
+    <update id="updateShelves">
+      UPDATE goods_detail SET status=0 WHERE did=#{did}
   </update>
 
+
+    <insert id="addGoods">
+    INSERT INTO goods(gname,brand) VALUES(#{gname},#{brand});
+    </insert>
+
+    <update id="updateGoodsById">
+        UPDATE goods_detail SET selling_price=#{sellingPrice},color=#{color},size=#{size},spec=#{spec} WHERE did=#{did}
+    </update>
+
+    <update id="updateGoodsAttribute">
+        UPDATE goods_detail SET color=#{color},size=#{size},spec=#{spec} WHERE did=#{did}
+    </update>
 
 </mapper>

@@ -27,9 +27,9 @@ public class GoodsDetailController {
     @ApiOperation("查询列表商品")
     public R queryAllDetail(){
         Goods goods =new Goods();
-        GoodsDetail goodsDetail = new GoodsDetail(1,1,"男鞋","黑色",39,"板鞋","双",goods );
+//        GoodsDetail goodsDetail = new GoodsDetail(1,1,"男鞋","黑色",39,"板鞋","双",goods );
         List<GoodsDetail> lists = new ArrayList<>();
-        lists.add(goodsDetail);
+//        lists.add(goodsDetail);
         Map<String,Object> map = new HashMap<>();
         map.put("lists",lists);
 

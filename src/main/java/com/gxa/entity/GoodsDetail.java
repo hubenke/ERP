@@ -33,7 +33,7 @@ public class GoodsDetail {
 
     @ApiModelProperty("尺寸")
     @TableField("size")
-    private  Integer size;
+    private  String size;
 
     @ApiModelProperty("规格")
     @TableField("spec")
@@ -42,6 +42,22 @@ public class GoodsDetail {
     @ApiModelProperty("单位")
     @TableField("unit")
     private String unit;
+
+    @ApiModelProperty("商品销售价格")
+    @TableField("sale_price")
+    private double salePrice;
+
+    @ApiModelProperty("商品采购价格")
+    @TableField("buy_price")
+    private  double buyPrice;
+
+    @ApiModelProperty("商品预售价格")
+    @TableField("selling_price")
+    private double sellingPrice;
+
+    @ApiModelProperty("状态 1:上架 0:下架")
+    @TableField("status")
+    private  Integer status;
 
     @ApiModelProperty("商品实体类")
     private Goods goods;

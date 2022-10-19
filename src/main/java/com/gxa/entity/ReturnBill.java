@@ -18,7 +18,7 @@ public class ReturnBill {
     @ApiModelProperty("退货单状态")
     private Integer status;
 
-    @ApiModelProperty("退货方式")
+    @ApiModelProperty("退货方式 1：物流 2：自配 3：自提")
     private Integer type;
 
     @ApiModelProperty("退货单创建日期")
