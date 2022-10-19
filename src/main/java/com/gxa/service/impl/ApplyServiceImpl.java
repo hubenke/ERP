@@ -1,5 +1,6 @@
 package com.gxa.service.impl;
 
+import com.gxa.dto.ApplyAddDto;
 import com.gxa.dto.ApplyDto;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
@@ -39,14 +40,20 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public int addApply(ApplyDto applyDto) {
+    public int addApply(ApplyAddDto applyAddDto) {
 
-        int i = this.applyMapper.addapply(applyDto);
+        int i = this.applyMapper.addapply(applyAddDto);
 
         if (i != 0){
 
-            Integer applyId = this.applyMapper.queryApplyId(applyDto);
-            this.applyMapper.addGoods(applyDto,applyId);
+            Integer applyId = this.applyMapper.queryApplyId(applyAddDto);
+            int j = this.applyMapper.addGoods(applyAddDto, applyId);
+            if( j != 0){
+                return j;
+            }else {
+                //说明第一条语句执行成功，第二条没成功，事务回滚
+                return 0;
+            }
 
         }
 
@@ -75,8 +82,8 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public List<ApplyDto> queryGoods() {
-        List<ApplyDto> googs = this.applyMapper.queryGoogs();
+    public List<ApplyDto> queryGoods(ApplyAddDto applyAddDto) {
+        List<ApplyDto> googs = this.applyMapper.queryGoogs(applyAddDto);
         return googs;
     }
 
@@ -84,11 +91,15 @@ public class ApplyServiceImpl implements ApplyService {
     public int addGoods(ApplyDto applyDto) {
 
 
+        return 0;
+    }
 
+    @Override
+    public int deleteApply(ApplyAddDto applyAddDto) {
 
+        this.applyMapper.deleteApply(applyAddDto);
 
-
-
+        this.applyMapper.deleteApplyGoods(applyAddDto);
         return 0;
     }
 

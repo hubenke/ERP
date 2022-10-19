@@ -57,8 +57,15 @@
         WHERE applyno = #{applyno}
     </update>
 
+    <delete id="deleteApply">
+        DELETE FROM apply WHERE id = #{id}
+    </delete>
+    <delete id="deleteApplyGoods">
+        DELETE apply_goods WHERE apply_id =#{id}
+    </delete>
+
     <select id="queryAll" resultMap="applyResultMap">
-        SELECT a.create_time,a.applyno,a.state,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
+        SELECT a.id,a.create_time,a.applyno,a.state,em.ename AS principal,e.ename AS apply_launch ,emp.ename AS apply_checker ,a.remark
         FROM apply a
         LEFT JOIN emp e ON e.eid = a.apply_launch
         LEFT JOIN emp ON emp.eid = a.apply_checker
@@ -109,6 +116,11 @@
         LEFT JOIN goods_detail gd ON gd.goods_id = g.gid
         LEFT JOIN apply_goods ag ON ag.goods_id = g.gid
         LEFT JOIN stock s ON s.goodsdetail_id = gd.did
+        <where>
+            <if test="id != null">
+                ag.apply_id = #{id}
+            </if>
+        </where>
     </select>
 
     <select id="queryApplyId" resultType="java.lang.Integer">

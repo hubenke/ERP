@@ -1,5 +1,6 @@
 package com.gxa.service;
 
+import com.gxa.dto.ApplyAddDto;
 import com.gxa.dto.ApplyDto;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
@@ -14,7 +15,7 @@ public interface ApplyService {
 
     int updateCheck(Apply apply);
 
-    int addApply(ApplyDto applyDto);
+    int addApply(ApplyAddDto applyAddDto);
 
     List<Emp> queryEmp(EmpDto empDto);
 
@@ -22,7 +23,9 @@ public interface ApplyService {
 
     int backout(Integer applyno);
 
-    List<ApplyDto> queryGoods();
+    List<ApplyDto> queryGoods(ApplyAddDto applyAddDto);
 
     int addGoods(ApplyDto applyDto);
+
+    int deleteApply(ApplyAddDto applyAddDto);
 }

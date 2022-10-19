@@ -2,6 +2,7 @@ package com.gxa.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
+import com.gxa.dto.ApplyAddDto;
 import com.gxa.dto.ApplyDto;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
@@ -43,12 +44,15 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody ApplyDto applyDto){
+    public R applyGoodsAdd(@RequestBody ApplyAddDto applyAddDto){
 
-        System.out.println("接收到的数据是-------"+applyDto);
-        this.applyService.addApply(applyDto);
+        System.out.println("接收到的数据是-------"+applyAddDto);
+        int i = this.applyService.addApply(applyAddDto);
+        if(i != 0){
+            return R.ok("添加成功");
+        }
 
-            return R.ok();
+        return R.error("添加失败");
     }
 
     @ApiOperation("查询部门")
@@ -82,9 +86,9 @@ public class ApplyController {
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd(){
+    public R applyAdd(ApplyAddDto applyAddDto){
 
-        List<ApplyDto> goods = this.applyService.queryGoods();
+        List<ApplyDto> goods = this.applyService.queryGoods(applyAddDto);
 
         Map<String,Object> map =new HashMap<>();
         map.put("goods",goods);
@@ -98,13 +102,13 @@ public class ApplyController {
     @PutMapping("/apply/update")
     public R applyupdate(ApplyDto applyDto) {
 
-        int i = this.applyService.addGoods(applyDto);
 
-        if (i != 0){
-            return R.ok();
-        }else {
+
+//        if (i != 0){
+//            return R.ok();
+//        }else {
             return R.error();
-        }
+//        }
     }
 
 
@@ -149,6 +153,15 @@ public class ApplyController {
             return R.error();
         }
 
+    }
+
+    @ApiOperation("删除接口")
+    @DeleteMapping("/apply/del")
+    private R deleteApply(ApplyAddDto applyAddDto){
+
+        this.applyService.deleteApply(applyAddDto);
+
+        return R.ok();
     }
 
 
