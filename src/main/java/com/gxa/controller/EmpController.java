@@ -17,6 +17,7 @@ import java.util.Map;
 public class EmpController {
 //    @Autowired
 //    private EmpService empService;
+//    private
 
     @GetMapping("/emp/list")
     @ApiOperation("员工数据")
@@ -73,4 +74,18 @@ public class EmpController {
             return R.error("修改失败");
         }
     }
+
+//    @PutMapping("/emp/{tel}")
+//    @ApiOperation("修改手机号")
+//    public R uptatel(@PathVariable("tel") Integer tel) {
+//        try {
+//            return R.ok("修改成功");
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return R.error("修改失败");
+//        }
+//
+//    }
+
+
 }

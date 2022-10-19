@@ -45,13 +45,8 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Cargo> queryAreaByRnameCargos(String rname);
 
 
+    List<Cargo> insertCargo();
+
+
     void addCargo(Cargo cargo);
-
-
-
-
-
-
-
-
 }
