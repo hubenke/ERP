@@ -28,7 +28,8 @@ public class GoodsServiceImpl  implements GoodsService {
 
     @Override
     public void updateShelves(Integer gid){
-       this.goodsMapper.updateShelves(gid);
+
+        this.goodsMapper.updateShelves(gid);
     }
 
     @Override

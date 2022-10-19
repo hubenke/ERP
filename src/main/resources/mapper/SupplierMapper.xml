@@ -87,7 +87,7 @@
             <if test="sname != null">
                AND s.sname = #{sname}
             </if>
-            <if test="range != null">
+            <if test="scope != null">
               AND  s.scope = #{scope}
             </if>
             <if test="contact != null">

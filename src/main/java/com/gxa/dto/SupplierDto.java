@@ -4,6 +4,7 @@ import com.gxa.entity.Region;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -24,15 +25,20 @@ public class SupplierDto {
     private String sname;
 
     @ApiModelProperty("经营范围")
-    private String range ;
+    private String scope;
 
     @ApiModelProperty("联系人")
     private String contact;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty("建档时间")
     private Date createTime;
 
+    @ApiModelProperty("页数")
+    private Integer page;
 
+    @ApiModelProperty("条数")
+    private Integer limit;
 
 
 

@@ -47,16 +47,16 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-   void addNew(Repository repository) {
-         this.repositoryMapper.addNew(repository);
-
+   int addNew(Repository repository) {
+       int i=  this.repositoryMapper.addNew(repository);
+        return i;
     }
 
     @Override
     public
-    void addArea(Cargo cargo) {
-      this.repositoryMapper.addArea(cargo);
-
+    int addArea(Cargo cargo) {
+        int i=  this.repositoryMapper.addArea(cargo);
+        return i;
     }
 
     @Override
@@ -68,14 +68,29 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-    void addCargo(Cargo cargo) {
-        this.repositoryMapper.addCargo(cargo);
+    int addCargo(Cargo cargo) {
+        int i=   this.repositoryMapper.addCargo(cargo);
+        return i;
     }
+
 
     @Override
     public
-    void updateStock(StockUpdateDto stockUpdateDto) {
-        this.repositoryMapper.updateDecrease(stockUpdateDto);
-        this.repositoryMapper.updateIncrease(stockUpdateDto);
+    int updateStock(StockUpdateDto stockUpdateDto) {
+        int i=    this.repositoryMapper.updateDecrease(stockUpdateDto);
+        if (i!=0){
+            int j = this.repositoryMapper.updateIncrease(stockUpdateDto);
+             if (j!=0){
+                 return j;
+             }else {
+                 return 0;}
+
+
+
+
+
+        }else {return 0;}
+
+
     }
 }

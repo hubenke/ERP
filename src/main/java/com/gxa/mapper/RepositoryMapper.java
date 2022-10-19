@@ -26,9 +26,9 @@ interface RepositoryMapper extends BaseMapper<Repository> {
     List<Repository> queryStoreAndArea();
 
 
-    void updateIncrease(StockUpdateDto stockUpdateDto);
+    int updateIncrease(StockUpdateDto stockUpdateDto);
 
-    void updateDecrease(StockUpdateDto stockUpdateDto);
+    int updateDecrease(StockUpdateDto stockUpdateDto);
 
 //    仓储结构页面
     List<Repository> queryStructure();
@@ -36,16 +36,16 @@ interface RepositoryMapper extends BaseMapper<Repository> {
 
 
 //    新增仓库
-    void addNew(Repository repository);
+    int addNew(Repository repository);
 
 
-    void addArea(Cargo cargo);
+    int addArea(Cargo cargo);
 
 
     List<Cargo> queryAreaByRnameCargos(String rname);
 
 
-    void addCargo(Cargo cargo);
+    int addCargo(Cargo cargo);
 
 
 

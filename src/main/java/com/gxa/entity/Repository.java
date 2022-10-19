@@ -75,6 +75,12 @@ public class Repository {
     private Integer realQty;
 
 
+    @ApiModelProperty("page")
+    private Integer page;
+
+    @ApiModelProperty("limit")
+    private Integer limit;
+
 
 
 
