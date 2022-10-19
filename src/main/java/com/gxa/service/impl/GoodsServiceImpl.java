@@ -23,17 +23,7 @@ public class GoodsServiceImpl  implements GoodsService {
     private GoodsDetailMapper goodsDetailMapper;
     @Autowired
     private StockMapper stockMapper;
-//    @Override
-//    public List<Goods> queryGoods() { //查询所有
-//        List<Goods> goods = this.goodsMapper.queryGoods();
-//        return goods;
-//    }
-//
-//    @Override
-//    public List<Goods> queryAllByGoodsDto(GoodsDto goodsDto) {
-//        List<Goods> goodsList = this.goodsMapper.queryAllByGoodsDto(goodsDto);
-//        return goodsList;
-//    }
+
 
     @Override
     public List<GoodsQueryDto> queryGoodsList() {
@@ -79,18 +69,10 @@ public class GoodsServiceImpl  implements GoodsService {
 
     }
 
-//    @Override
-//    public void queryGoods() { //查询商品
-//
-//    }
-
     @Override
-    public void update(Goods goods) { //修改
-
+    public void updateGoodsById(GoodsDetail goodsDetail) {
+        this.goodsMapper.updateGoodsById(goodsDetail);
     }
 
-    @Override
-    public void delete(Integer gid) { //根据id删除
 
-    }
 }

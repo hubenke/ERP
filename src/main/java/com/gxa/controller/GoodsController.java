@@ -29,37 +29,6 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-//    @GetMapping("/goods/list")
-//    @ApiOperation("商品的列表")
-//    public R queryAll(){
-//
-//        try {
-//            List<Goods> goodsList = this.goodsService.queryGoods();
-//            Map<String,Object> map = new HashMap<>();
-//            map.put("goods",goodsList);
-//            return R.ok(map);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return R.error("请求异常");
-//        }
-//
-//    }
-//
-//
-//    @GetMapping("/goodsByGoodsDto/list")
-//    @ApiOperation("根据商品条件查询")
-//    public R queryByCondition(GoodsDto goodsDto){
-//        try {
-//            List<Goods> goodsList = this.goodsService.queryAllByGoodsDto(goodsDto);
-//            Map<String,Object> map = new HashMap<>();
-//            map.put("goods",goodsList);
-//            return R.ok(map);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return R.error("查询失败");
-//        }
-//
-//    }
     @GetMapping("/goods/queryAll")
     @ApiOperation("查询所有商品")
     public R queryGoodsList(){
@@ -92,6 +61,7 @@ public class GoodsController {
     }
 
     @GetMapping("/goods/queryType")
+    @ApiOperation("查询所有分类")
     public  R selectType(){
         try {
             List<GoodsDetail> goodsDetailList = this.goodsService.selectType();
@@ -109,7 +79,6 @@ public class GoodsController {
     @PostMapping("/goods/add")
     @ApiOperation("商品的添加操作")
     public R addGoods(@RequestBody Goods goods){
-//        Result result=new Result(0,"增加操作",null,null);
         int i = this.goodsService.addGoods(goods);
         if(i != 0){
             return R.ok();
@@ -117,12 +86,19 @@ public class GoodsController {
             return R.error("添加失败");
         }
     }
+
     //根据id编辑
-    @PostMapping("goods/updats")
-    @ApiOperation("根据id查询商品")
-    public R update(Integer gid){
-//        Result result =new Result(0,"修改操作",null,null);
-        return R.ok();
+    @PutMapping("goods/update")
+    @ApiOperation("根据id修改商品")
+    public R update(@RequestBody GoodsDetail goodsDetail){
+        try {
+            this.goodsService.updateGoodsById(goodsDetail);
+            return R.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error("修改失败");
+        }
+
     }
 
     //根据id下架商品

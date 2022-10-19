@@ -10,9 +10,7 @@ import java.util.List;
 
 
 public interface GoodsService {
-//    List<Goods> queryGoods(); //查询所有
-//
-//    List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
+
     List<GoodsQueryDto> queryGoodsList();
 
     List<GoodsQueryDto> queryAll(GoodsDto goodsDto);
@@ -21,13 +19,9 @@ public interface GoodsService {
 
     void updateShelves(Integer did);
 
-    int addGoods(Goods goods );;//添加商品
+    int addGoods(Goods goods);;//添加商品
 
-//    void  queryGoods();//查询商品表
-
-    void  update(Goods goods);//修改
-
-    void delete(Integer gid);//删除指定商品
+    void updateGoodsById(GoodsDetail goodsDetail);
 
 
 }

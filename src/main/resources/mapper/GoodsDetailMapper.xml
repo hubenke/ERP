@@ -23,6 +23,6 @@
     <insert id="addGoodsDetail">
     INSERT INTO goods_detail(type_a,type_b,color,size,spec,unit,selling_price,status,goods_id)
     VALUES(#{goodsDetail.typeA},#{goodsDetail.typeB},#{goodsDetail.color},#{goodsDetail.size},#{goodsDetail.spec},#{goodsDetail.unit},
-           #{goodsDetail.sellingPrice},1,SELECT gid FROM goods WHERE gname=#{gname});
+           #{goodsDetail.sellingPrice},1,(SELECT gid FROM goods WHERE gname=#{gname}));
     </insert>
 </mapper>

@@ -10,16 +10,21 @@ import java.util.List;
 
 public interface GoodsMapper {
 
-//    List<Goods> queryGoods();
-//
-//    List<Goods> queryAllByGoodsDto(GoodsDto goodsDto);
+    //查询所有商品详情
     List<GoodsQueryDto> queryGoodsList();
 
+    //根据条件和分页查询满足条件的商品详情
     List<GoodsQueryDto> queryAll(GoodsDto goodsDto);
 
+    //查询所有分类
     List<GoodsDetail> selectType();
 
+    //根据id下架商品
     void updateShelves(Integer did);
 
+    //添加商品
     int addGoods(Goods goods);
+
+    //编辑商品
+    void updateGoodsById(GoodsDetail goodsDetail);
 }

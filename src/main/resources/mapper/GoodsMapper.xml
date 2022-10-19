@@ -67,6 +67,7 @@
         <result column="unit" property="unit"/>
         <result column="sale_price" property="salePrice"/>
         <result column="buy_price" property="buyPrice"/>
+        <result column="selling_price" property="sellingPrice"/>
         <result column="status" property="status"/>
         <result column="goods_id" property="goods.gid"/>
     </resultMap>
@@ -112,4 +113,9 @@
     <insert id="addGoods">
     INSERT INTO goods(gname,brand) VALUES(#{gname},#{brand});
     </insert>
+
+    <update id="updateGoodsById">
+        UPDATE goods_detail SET selling_price=#{sellingPrice},color=#{color},size=#{size},spec=#{spec} WHERE did=#{did}
+    </update>
+
 </mapper>

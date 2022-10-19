@@ -21,11 +21,11 @@
     </resultMap>
 
     <insert id="addStock">
-        INSERT INTO stock(minqty,goods_id)
-        VALUES(#{stock.minQty},SELECT goods_id FROM goods_detail
-                                <where>
-                                    type_a=#{goodsDetail.typeA}
-                                    and type_b=#{goodsDetail.typeB}
+        INSERT INTO stock(minqty,goodsdetail_id)
+        VALUES(#{stock.minQty},(SELECT did FROM goods_detail
+                                    <where>
+                                        type_a=#{goodsDetail.typeA}
+                                        and type_b=#{goodsDetail.typeB}
                                     <if test="goodsDetail.color != null and goodsDetail.color != ''">
                                         and color=#{goodsDetail.color}
                                     </if>
@@ -33,10 +33,10 @@
                                         and size=#{goodsDetail.size}
                                     </if>
                                     <if test="goodsDetail.spec != null and goodsDetail.spec != ''">
-                                        and color=#{goodsDetail.spec}
+                                        and spec=#{goodsDetail.spec}
                                     </if>
 
                                 </where>
-        );
+        ));
     </insert>
 </mapper>
