@@ -3,6 +3,7 @@ package com.gxa.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
+import com.gxa.dto.ReturnAddDto;
 import com.gxa.dto.ReturnBillDto;
 import com.gxa.dto.ReturnQueryDto;
 import com.gxa.entity.ReturnBill;
@@ -64,7 +65,7 @@ public class ReturnController {
 
     @PostMapping("/return/add")
     @ApiOperation("添加退货单")
-    public R addReturn(@RequestBody ReturnBill returnBill){
+    public R addReturnBill(@RequestBody ReturnAddDto returnAddDto){
 
         try{
             return R.ok("添加成功");
