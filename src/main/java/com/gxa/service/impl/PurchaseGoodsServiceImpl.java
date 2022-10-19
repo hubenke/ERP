@@ -26,91 +26,68 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
     private PurchaseGoodsMapper purchaseGoodsMapper;
 
     @Override
-    public int add(PurchaseAddDto purchaseAddDto) {
-        int i = purchaseMapper.insert(purchaseAddDto);
-        //i:插入语句影响的行数
-        if (i != 0) {
-            //通过采购单编号查询插入第一条语句的自增id
-            int purchaseid = purchaseMapper.queryIdByNo(purchaseAddDto.getPurchase().getPurchaseNo());
+    public void add(PurchaseAddDto purchaseAddDto) {
+        purchaseMapper.insert(purchaseAddDto);
 
-            //第一条语句插入成功，第二条语句没有插入成功的话就要回滚
-            int j = purchaseGoodsMapper.insert(purchaseAddDto,purchaseid);
-            if (j != 0) {
-                return 1;
-            } else {
-                //强制手动事务回滚
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return 0;
-            }
-        }else{
-            //强制手动事务回滚
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return 0;
-        }
+        //通过采购单编号查询插入第一条语句的自增id
+        //int purchaseid = purchaseMapper.queryIdByNo(purchaseAddDto.getPurchase().getPurchaseNo());
+
+        //第一条语句插入成功，第二条语句没有插入成功的话就要回滚
+        purchaseGoodsMapper.insert(purchaseAddDto);
     }
 
     @Override
-    public int batchUpdate(PurchaseAddDto purchaseAddDto) {
+    public void batchUpdate(PurchaseAddDto purchaseAddDto) {
         //首先查询数据库的采购单中有哪些商品
-        int[] ids = purchaseGoodsMapper.queryGoodsId(purchaseAddDto.getPurchase().getId());
+        int[] ids = purchaseGoodsMapper.queryGoodsDetailId(purchaseAddDto.getPurchase().getId());
 
-        //编辑之后传过来的商品id
+        //编辑之后传过来的商品detailId
         int[] goodses = new int[30];
         List<PurchaseGoods> purchaseGoodsList = purchaseAddDto.getPurchaseGoodsList();
         for(int i = 0;i < purchaseGoodsList.size();i++){
             PurchaseGoods purchaseGoods = purchaseGoodsList.get(i);
-            Integer goodsId = purchaseGoods.getGoodsId();
-            goodses[i] = goodsId;
+            Integer goodsDetailId = purchaseGoods.getGoodsDetailId();
+            goodses[i] = goodsDetailId;
         }
 
         //先更新数据,数量一样的话说明没有删除过商品，数量少了的话就删除有差异的商品id
-        int k = purchaseGoodsMapper.batchUpdate(purchaseAddDto);
-        if(k != 0) {
-            if (ids.length != goodses.length) {
-                //比较id数组的差异
-                int m = 10;
-                int[] a = new int[30];
-                int[] b = new int[30];
-            /*HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
-            for (int i = 0; i < goodses.length; i++) {
-                int index = goodses[i] / m;
-                if (!map.containsKey(index)) {
-                    map.put(index, new ArrayList<Integer>());
-                }
-                map.get(index).add(goodses[i]);
+        purchaseGoodsMapper.batchUpdate(purchaseAddDto);
+        if (ids.length != goodses.length) {
+            //比较id数组的差异
+            int m = 10;
+            int[] a = new int[30];
+            int[] b = new int[30];
+        /*HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < goodses.length; i++) {
+            int index = goodses[i] / m;
+            if (!map.containsKey(index)) {
+                map.put(index, new ArrayList<Integer>());
             }
-            for (int i = 0; i < ids.length; i++) {
-                int index = ids[i] / m;
-                if (!map.get(index).contains(ids[i])) {
-                    System.out.println("不包含的数:" + ids[i]);
-                    a[i] = ids[i];
-                }
-            }*/
-
-                for (int i = 0; i < ids.length; i++) {
-                    int result = 0;
-                    for (int j = 0; j < goodses.length; j++) {
-                        if (ids[i] == goodses[j]) {
-                            result = 1;
-                        }
-                    }
-                    if (result == 0) {
-                        a[i] = ids[i];//在界面上删除的商品id(不包含的数)
-                    }
-                }
-                String s = Arrays.toString(a);
-
-                //删除多余关联的商品
-                int i = purchaseGoodsMapper.deleteById(s);
-                if(i != 0){
-                    return 1;
-                }else{
-                    return 0;
-                }
-            }
+            map.get(index).add(goodses[i]);
         }
+        for (int i = 0; i < ids.length; i++) {
+            int index = ids[i] / m;
+            if (!map.get(index).contains(ids[i])) {
+                System.out.println("不包含的数:" + ids[i]);
+                a[i] = ids[i];
+            }
+        }*/
 
-        return 0;
+            for (int i = 0; i < ids.length; i++) {
+                int result = 0;
+                for (int j = 0; j < goodses.length; j++) {
+                    if (ids[i] == goodses[j]) {
+                        result = 1;
+                    }
+                }
+                if (result == 0) {
+                    a[i] = ids[i];//在界面上删除的商品id(不包含的数)
+                }
+            }
+            String s = Arrays.toString(a);
+
+            //删除多余关联的商品
+            purchaseGoodsMapper.deleteById(s);
+        }
     }
-
 }

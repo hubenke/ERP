@@ -17,6 +17,6 @@ public class PurchaseGoods {
     //数据库中有这个字段，但是采购单实体类中有采购单id了----“id”
     private Integer purchaseId;
 
-    @ApiModelProperty("商品id")
-    private Integer goodsId;
+    @ApiModelProperty("商品详情id")
+    private Integer goodsDetailId;
 }

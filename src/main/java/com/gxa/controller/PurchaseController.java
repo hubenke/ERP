@@ -67,16 +67,17 @@ public class PurchaseController {
 
     @PostMapping("/purchase/add")
     @ApiOperation("添加采购单")
-    public R addPurchase(PurchaseAddDto purchaseAddDto) {
+    public R addPurchase(@RequestBody PurchaseAddDto purchaseAddDto) {
         //构建采购单编号
         String purchaseNo = this.createPurchaseNo();
         purchaseAddDto.getPurchase().setPurchaseNo(purchaseNo);
 
-        int i = this.purchaseGoodsService.add(purchaseAddDto);
-        if (i == 1) {
+        try {
+            this.purchaseGoodsService.add(purchaseAddDto);
             return R.ok("添加成功");
-        } else {
-            return R.error(1, "添加失败");
+        }catch (Exception e) {
+            e.printStackTrace();
+            return R.error("添加失败");
         }
     }
 
@@ -85,12 +86,8 @@ public class PurchaseController {
     public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseGoodsService.batchUpdate(purchaseAddDto);
-            if (i != 0) {
-                return R.ok("修改成功");
-            } else {
-                return R.error(1, "修改失败");
-            }
+            this.purchaseGoodsService.batchUpdate(purchaseAddDto);
+            return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("修改失败");
@@ -104,15 +101,11 @@ public class PurchaseController {
     public R updatePurchaseStatus(@ApiParam("采购单id") Integer id, @ApiParam("按钮id")Integer btnNum) {
 
         try {
-            int i = purchaseService.updateStatus(id, btnNum);
-            if(i != 0){
-                return R.ok(btnNum == 1 ? "审核通过" : "已终止");
-            }else{
-                return R.error("操作失败");
-            }
+            purchaseService.updateStatus(id, btnNum);
+            return R.ok(btnNum == 1 ? "审核通过" : "已终止");
         } catch (Exception e) {
             e.printStackTrace();
-            return R.error("审核失败");
+            return R.error(btnNum == 1 ? "审核失败" : "终止失败");
         }
     }
 

@@ -15,7 +15,7 @@ public class ReturnGoods {
     private Integer returnQty;
 
     @ApiModelProperty("商品id")
-    private Integer goodsId;
+    private Integer goodsDetailId;
 
     @ApiModelProperty("退货单id")
     //数据库中有这个字段，但是退货单实体类中有id---"id"

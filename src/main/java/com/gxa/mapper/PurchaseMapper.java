@@ -15,10 +15,10 @@ public interface PurchaseMapper extends BaseMapper<Purchase> {
 
     int queryIdByNo(String purchaseNo);
 
-    int insert(PurchaseAddDto purchaseAddDto);
+    void insert(PurchaseAddDto purchaseAddDto);
 
-    int updateById(PurchaseAddDto purchaseAddDto);
+    void updateById(PurchaseAddDto purchaseAddDto);
 
-    int updateStatus(@Param("id") Integer id, @Param("btnNum") Integer btnNum);
+    void updateStatus(@Param("id") Integer id, @Param("btnNum") Integer btnNum);
 
 }
