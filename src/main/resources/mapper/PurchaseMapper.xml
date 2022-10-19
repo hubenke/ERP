@@ -30,6 +30,17 @@
         where id=#{id}
     </update>
 
+    <update id="updateStatus">
+        update from purchase
+        <if test="btnNum == 1">
+            set status = 2
+        </if>
+        <if test="btnNum == 2">
+            set status = 3
+        </if>
+        where id = #{id}
+    </update>
+
     <select id="queryAll" resultMap="purchaseResultMap">
         select p.id,p.create_time,p.purchaseno,p.status,s.sid,s.sname,e.ename principal,e1.ename purchase_handler,e2.ename purchase_checker,e3.ename finance_checker
         from purchase p
@@ -44,13 +55,13 @@
                     p.status = #{status}
                 </if>
                 <if test="createTime != null">
-                    p.create_time = #{createTime}
+                    and p.create_time = #{createTime}
                 </if>
                 <if test="sname != null and sname != ''">
-                    s.sname = #{sname}
+                    and s.sname = #{sname}
                 </if>
-                <if test="principal != null">
-                    a.principal = #{principal}
+                <if test="principal != null and principal != ''">
+                    and a.principal = #{principal}
                 </if>
         </where>
     </select>
@@ -58,5 +69,6 @@
     <select id="queryIdByNo" resultType="java.lang.Integer">
         select id from purchase where purchaseno = #{purchaseNo}
     </select>
+
 
 </mapper>

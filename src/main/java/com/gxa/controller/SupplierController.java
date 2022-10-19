@@ -1,5 +1,7 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.gxa.dto.RegionDto;
 import com.gxa.dto.SupplierDto;
 import com.gxa.common.uitls.R;
@@ -29,14 +31,18 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
     @ApiOperation("点击供应商管理，供应商页面数据展示")
-    @GetMapping("/suppiler/slist")
+    @PostMapping("/suppiler/slist")
     public R queryAll(@RequestBody SupplierDto supplierDto) {
+
+        System.out.println("前端的数据是-----------"+supplierDto);
+
+        Page<Map<String,Object>> pageHelperList = PageHelper.startPage(supplierDto.getPage(), supplierDto.getLimit());  //使用此方法进行分页
 
         List<Supplier> suppliers = this.supplierService.queryAll(supplierDto);//调用service
 
         Map map =new HashMap();
         map.put("suppliers",suppliers);//将数据放入map
-
+        map.put("count",pageHelperList.getTotal());
         return R.ok(map);//返回数据
     }
 
@@ -46,9 +52,14 @@ public class SupplierController {
 
         System.out.println(supplier);
 
-        this.supplierService.addSuppiler(supplier);
+        int i = this.supplierService.addSuppiler(supplier);
 
-        return R.ok("保存成功");
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
     }
 
 
@@ -84,9 +95,13 @@ public class SupplierController {
 
         System.out.println("ids是----"+ids+"sid是+----"+sid);
 
-        this.supplierService.addGoods(ids,sid);
+        int i = this.supplierService.addGoods(ids, sid);
 
-        return R.ok("保存成功");
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
 
     }
 
@@ -111,27 +126,26 @@ public class SupplierController {
     @PutMapping("/suppiler/update")
     public R updateSupplier(Supplier supplier){
 
-        try {
-            this.supplierService.updateSupplier(supplier);
+        int i = this.supplierService.updateSupplier(supplier);
+
+        if (i != 0){
             return R.ok();
-
-        }catch (Exception e){
-
-            e.printStackTrace();
+        }else {
             return R.error();
         }
-
-
     }
 
     @ApiOperation("编辑供应商关联商品接口")
     @PutMapping("/sippiler/editgoods")
     public R editGoods(@ApiParam("商品编号构成的字符串，逗号隔开") String ids,Integer sid){
 
-        this.supplierService.updateGoods(ids,sid);
+        int i = this.supplierService.updateGoods(ids, sid);
 
-        return R.ok();
-
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
     }
 
     @GetMapping("/sippiler/introducer")

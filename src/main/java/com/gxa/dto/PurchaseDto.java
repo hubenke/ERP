@@ -3,6 +3,7 @@ package com.gxa.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -12,6 +13,7 @@ public class PurchaseDto {
     @ApiModelProperty("采购单状态")
     private Integer status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty("采购单创建日期")
     private Date createTime;
 
@@ -19,5 +21,9 @@ public class PurchaseDto {
     private String sname;
 
     @ApiModelProperty("请购负责人")
-    private Integer principal ;
+    private String principal ;
+
+    private Integer page;
+
+    private Integer limit;
 }

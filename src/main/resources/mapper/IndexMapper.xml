@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.IndexMapper">
+    <resultMap type="index" id="indexResultMap">
+        <!--    左 数据库 右 实体类-->
+        <result column="type_a" property="type"/>
+
+        <result column="salePrice" property="salePrice"/>
+
+        <result column="buyqty" property="buyqty"/>
+
+        <result column="pro" property="pro"/>
+
+    </resultMap>
+
+
+    <select id="queryDepositSum" resultType="java.lang.Integer">
+        SELECT COUNT(i.status)
+        FROM inbound i
+        WHERE i.status = 0
+    </select>
+
+    <select id="queryOutBoundSum" resultType="java.lang.Integer">
+        SELECT COUNT(o.status)
+        FROM outbound o
+        WHERE o.status=0
+    </select>
+
+    <select id="queryOrdersMoneySum" resultType="java.lang.Integer">
+        SELECT SUM(gd.sale_price)
+        FROM goods_detail gd
+    </select>
+
+    <select id="queryOrdersTypeSum" resultMap="indexResultMap">
+        SELECT gd.type_a,SUM(gd.sale_price) AS salePrice,    SUM(buyqty) AS buyqty  ,concat(left(SUM(buyqty)/t.v*100,5),'%')as pro
+from  goods_detail gd
+		left join goods g on g.gid=gd.goods_id
+		left join purchase_goods pg on g.gid=pg.goods_id
+		 join  (
+
+
+			SELECT SUM(buyqty) AS v
+			FROM goods_detail gd,goods g,purchase_goods pg
+			WHERE g.gid=pg.goods_id AND g.gid=gd.goods_id
+
+
+		) t
+		GROUP BY gd.type_a
+        ORDER BY gd.type_a
+    </select>
+
+</mapper>

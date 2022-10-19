@@ -1,6 +1,7 @@
 package com.gxa.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.MyOrderDto;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -31,28 +33,32 @@ public class MyOrderController {
     @ApiOperation("查询所有销售订单")
     public R list(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
-            PageHelper.startPage(page, limit);
+            //PageHelper.startPage(page, limit);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(page, limit);
             List<MyOrder> myOrders = this.myOrderService.queryAll();
-            System.out.println("myOrders:----------"+myOrders.toString());
+            System.out.println("myOrders:----------" + myOrders.toString());
+            System.out.println("count:----------" + pageHelperList.getTotal());
             Map<String,Object> map = new HashMap<>();
             map.put("myOrders",myOrders);
+           map.put("count",pageHelperList.getTotal());
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
-
             return R.error("请求异常");
         }
     }
+
 
     @GetMapping("/orders/return")
     @ApiOperation("查询所有退换货订单")
     public R listReturn(@ApiParam("页数") Integer page, @ApiParam("条数") Integer limit){
         try {
-            PageHelper.startPage(page, limit);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(page, limit);
             List<MyOrder> myOrdersReturn = this.myOrderService.queryAllReturn();
             System.out.println("myOrdersReturn:----------"+myOrdersReturn.toString());
             Map<String,Object> map = new HashMap<>();
             map.put("myOrdersReturn",myOrdersReturn);
+            map.put("count",pageHelperList.getTotal());
             return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,9 +71,9 @@ public class MyOrderController {
     @ApiOperation("添加销售订单")
     public R addUser(@RequestBody MyOrder myOrder){
         try {
-            List<MyOrder> myOrders = this.myOrderService.queryAll();
-            int size = myOrders.size();
-            myOrder.setId(size+1);
+            //List<MyOrder> myOrders = this.myOrderService.queryAll();
+            //int size = myOrders.size();
+            //myOrder.setId(size+1);
             this.myOrderService.add(myOrder);
             return R.ok("添加成功");
         } catch (Exception e) {
@@ -141,7 +147,7 @@ public class MyOrderController {
 
     @PutMapping("/orders/out")
     @ApiOperation("批量修改订单发货")
-    public R updateOuts(Integer[] ids){
+    public R updateOuts(@ApiParam("批量ids数组")Integer[] ids){
         System.out.println("updateOuts:----------"+ids);
         try {
             this.myOrderService.updateOuts(ids);
@@ -178,8 +184,8 @@ public class MyOrderController {
 
     @DeleteMapping("/orders/deleteById")
     @ApiOperation("根据id删除订单")
-    public R deleteById(Integer id){
-
+    public R deleteById(String id){
+        System.out.println("id------------------"+id);
         try {
             this.myOrderService.delete(id);
             return R.ok("删除成功");

@@ -16,4 +16,6 @@ public interface EmpService {
 
     void updateEmpByEid(Emp emp);
 
+//    void updatel(Integer id);
+
 }

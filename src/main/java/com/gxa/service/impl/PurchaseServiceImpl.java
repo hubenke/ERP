@@ -41,4 +41,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         //int i = this.purchaseMapper.updateById(purchase);
         return 0;
     }
+
+    @Override
+    public int updateStatus(Integer id, Integer btnNum) {
+        int i = purchaseMapper.updateStatus(id, btnNum);
+        return i;
+    }
 }

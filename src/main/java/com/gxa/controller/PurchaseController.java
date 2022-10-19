@@ -1,20 +1,19 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
 import com.gxa.dto.PurchaseQueryDto;
-import com.gxa.entity.Purchase;
 import com.gxa.service.PurchaseGoodsService;
 import com.gxa.service.PurchaseService;
-import com.gxa.service.impl.PurchaseServiceImpl;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -46,17 +45,20 @@ public class PurchaseController {
         }
     }*/
 
-    @GetMapping("/purchase/queryByCondition")
+    @PostMapping("/purchase/queryByCondition")
+    //@GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition(PurchaseDto purchaseDto) {
+    public R queryByCondition(@RequestBody PurchaseDto purchaseDto) {
 
         try {
-        List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(purchaseDto.getPage(),purchaseDto.getLimit());//进行分页
+            List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("purchases", purchases);
+            Map<String, Object> map = new HashMap<>();
+            map.put("purchases", purchases);
+            map.put("count",pageHelperList.getTotal());
 
-        return R.ok(map);
+            return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("查询失败");
@@ -83,8 +85,8 @@ public class PurchaseController {
     public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseGoodsService.updateByPurchaseId(purchaseAddDto);
-            if (i == 0) {
+            int i = this.purchaseGoodsService.batchUpdate(purchaseAddDto);
+            if (i != 0) {
                 return R.ok("修改成功");
             } else {
                 return R.error(1, "修改失败");
@@ -95,40 +97,22 @@ public class PurchaseController {
         }
     }
 
-    @PutMapping("/purchase/check/{id}")
-    @ApiOperation("根据id审核采购单")
-    public R checkPurchase(@PathVariable("id") Integer id) {
+    @PutMapping("/purchase/updateStatus")
+    @ApiOperation("根据id审核/终止采购单")
+    //根据按钮来判断点击的是审核还是终止
+    //btnNum  1:审核  2：终止
+    public R updatePurchaseStatus(@ApiParam("采购单id") Integer id, @ApiParam("按钮id")Integer btnNum) {
 
         try {
-            return R.ok("审核通过");
+            int i = purchaseService.updateStatus(id, btnNum);
+            if(i != 0){
+                return R.ok(btnNum == 1 ? "审核通过" : "已终止");
+            }else{
+                return R.error("操作失败");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("审核失败");
-        }
-    }
-
-
-    @PutMapping("/purchase/suspend")
-    @ApiOperation("根据id终止采购单")
-    public R suspendPurchase(@PathVariable("id") Integer id) {
-
-        try {
-            return R.ok("终止成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error("终止失败");
-        }
-    }
-
-    @PostMapping("/purchase/save")
-    @ApiOperation("根据id终止采购单")
-    public R stopPurchase(@PathVariable("id") Integer id) {
-
-        try {
-            return R.ok("终止成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error("终止失败");
         }
     }
 

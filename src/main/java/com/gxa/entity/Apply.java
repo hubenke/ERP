@@ -3,6 +3,7 @@ package com.gxa.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -14,40 +15,42 @@ class Apply {
     private Integer id;
 
     @ApiModelProperty("请购单编号")
-    private Integer applyno;
+    private String applyno;
 
+    @ApiModelProperty("采购单状态，0：待审核；1：审核通过")
+    private Integer state;
 
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")   //转换时间类型
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
-    @ApiModelProperty(value = "创建时间",name = "创建时间")
-    private
-    Date createTime;
-
-
-    @ApiModelProperty(value = "备注",name = "备注")
+    @ApiModelProperty("备注")
     private String remark;
 
+    @ApiModelProperty("到货地址")
+    private String address;
 
+    @ApiModelProperty("请购发起人")
+    private String applyLaunch;
 
-    @ApiModelProperty(value = "请购发起人",name = "请购发起人")
-    private String apply_launch;
-
-
-
-    @ApiModelProperty(value = "负责人",name = "负责人")
+    @ApiModelProperty("负责人")
     private String principal;
 
-    @ApiModelProperty(value = "审核人",name = "审核人")
-    private String apply_checker;
+    @ApiModelProperty("负责人ID")
+    private Integer principalId;
 
-    @ApiModelProperty(value = "员工",name = "员工")
+    @ApiModelProperty("审核人")
+    private String applyChecker;
+
+    @ApiModelProperty("员工")
     private Emp emp;
 
-
-    @ApiModelProperty(value = "商品",name ="商品" )
+    @ApiModelProperty("商品应用" )
     private Goods goods;
 
     @ApiModelProperty("请购商品详情对象列表")
-    private List< ApplyDetail> applyDetail;
+    private List<ApplyGoods> applyGoods;
+
 
 
 }
