@@ -55,18 +55,36 @@ public class GoodsController {
 
     }
 
+<<<<<<< HEAD
     @GetMapping("/goods/queryType")
     @ApiOperation("查询所有分类")
     public  R selectType(){
         try {
             List<GoodsDetail> goodsDetailList = this.goodsService.selectType();
+=======
+
+    @PostMapping("/goodsByGoodsDto/list")
+    @ApiOperation("根据商品条件查询")
+    public R queryByCondition(@RequestBody GoodsDto goodsDto){
+//        try {
+            List<Goods> goodsList = this.goodsService.queryAllByGoodsDto(goodsDto);
+>>>>>>> 033975baa0d77849647d3329ed9d4eaa67bf80cc
             Map<String,Object> map = new HashMap<>();
             map.put("type",goodsDetailList);
             return R.ok(map);
+<<<<<<< HEAD
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("查询失败");
         }
+=======
+
+//        }catch (Exception e){
+//
+//            e.printStackTrace();
+//            return R.error("查询失败");
+//        }
+>>>>>>> 033975baa0d77849647d3329ed9d4eaa67bf80cc
 
     }
 

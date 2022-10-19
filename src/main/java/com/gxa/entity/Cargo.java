@@ -16,6 +16,12 @@ public class Cargo {
     @ApiModelProperty("货区")
     private String area;
 
+    @ApiModelProperty("仓库名")
+    private String rname;
+
+
+
+
     @ApiModelProperty(value = "仓库",name = "仓库")
     private Repository repository;
 

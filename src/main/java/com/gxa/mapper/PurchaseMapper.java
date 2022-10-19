@@ -5,6 +5,7 @@ import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
 import com.gxa.dto.PurchaseQueryDto;
 import com.gxa.entity.Purchase;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,7 +13,12 @@ public interface PurchaseMapper extends BaseMapper<Purchase> {
 
     List<PurchaseQueryDto> queryAll(PurchaseDto purchaseDto);
 
-    int queryIdByNo(int purchaseNo);
+    int queryIdByNo(String purchaseNo);
 
-    int insert(PurchaseAddDto purchaseAddDto);
+    void insertPurchase(PurchaseAddDto purchaseAddDto);
+
+    void updateById(PurchaseAddDto purchaseAddDto);
+
+    void updateStatus(@Param("id") Integer id, @Param("btnNum") Integer btnNum);
+
 }

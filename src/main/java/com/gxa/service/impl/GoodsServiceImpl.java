@@ -34,9 +34,15 @@ public class GoodsServiceImpl  implements GoodsService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<GoodsQueryDto> queryAll(GoodsDto goodsDto) {
         List<GoodsQueryDto> goodsList = this.goodsMapper.queryAll(goodsDto);
         return goodsList;
+=======
+    public void updateShelves(Integer gid){
+
+        this.goodsMapper.updateShelves(gid);
+>>>>>>> 033975baa0d77849647d3329ed9d4eaa67bf80cc
     }
 
     @Override

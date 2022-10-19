@@ -4,5 +4,7 @@ import com.gxa.dto.PurchaseAddDto;
 
 public interface PurchaseGoodsService {
 
-    int add(PurchaseAddDto purchaseAddDto);
+    void add(PurchaseAddDto purchaseAddDto);
+
+    void batchUpdate(PurchaseAddDto purchaseAddDto);
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Date;
@@ -32,6 +33,7 @@ public class MyOrder {
     private Integer status;
 
     @ApiModelProperty("提交时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("submit_time")
     private Date submitTime;
 

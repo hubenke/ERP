@@ -1,23 +1,21 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.PurchaseAddDto;
 import com.gxa.dto.PurchaseDto;
 import com.gxa.dto.PurchaseQueryDto;
-import com.gxa.entity.Purchase;
 import com.gxa.service.PurchaseGoodsService;
 import com.gxa.service.PurchaseService;
-import com.gxa.service.impl.PurchaseServiceImpl;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @Api(tags = "采购单接口")
@@ -48,17 +46,20 @@ public class PurchaseController {
         }
     }*/
 
-    @GetMapping("/purchase/queryByCondition")
+    @PostMapping("/purchase/queryByCondition")
+    //@GetMapping("/purchase/queryByCondition")
     @ApiOperation("根据条件查询满足条件的采购单")
-    public R queryByCondition(PurchaseDto purchaseDto) {
+    public R queryByCondition(@RequestBody PurchaseDto purchaseDto) {
 
         try {
-        List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(purchaseDto.getPage(),purchaseDto.getLimit());//进行分页
+            List<PurchaseQueryDto> purchases = purchaseService.queryAll(purchaseDto);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("purchases", purchases);
+            Map<String, Object> map = new HashMap<>();
+            map.put("purchases", purchases);
+            map.put("count",pageHelperList.getTotal());
 
-        return R.ok(map);
+            return R.ok(map);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("查询失败");
@@ -67,67 +68,65 @@ public class PurchaseController {
 
     @PostMapping("/purchase/add")
     @ApiOperation("添加采购单")
-    public R addPurchase(PurchaseAddDto purchaseAddDto) {
-        int i = this.purchaseGoodsService.add(purchaseAddDto);
-        if (i == 1) {
+    public R addPurchase(@RequestBody PurchaseAddDto purchaseAddDto) {
+        //构建采购单编号
+        String purchaseNo = this.createPurchaseNo();
+        purchaseAddDto.getPurchase().setPurchaseNo(purchaseNo);
+
+        try {
+            this.purchaseGoodsService.add(purchaseAddDto);
             return R.ok("添加成功");
-        } else {
-            return R.error(1, "添加失败");
+        }catch (Exception e) {
+            e.printStackTrace();
+            return R.error("添加失败");
         }
     }
 
     @PutMapping("/purchase/edit")
     @ApiOperation("修改采购单")
-    public R updatePurchaseById(PurchaseAddDto purchase) {
+    public R updatePurchaseById(PurchaseAddDto purchaseAddDto) {
 
         try {
-            int i = this.purchaseService.update(purchase);
-            if (i == 0) {
-                return R.ok("修改成功");
-            } else {
-                return R.error(1, "修改失败");
-            }
+            this.purchaseGoodsService.batchUpdate(purchaseAddDto);
+            return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("修改失败");
         }
     }
 
-    @PutMapping("/purchase/check/{id}")
-    @ApiOperation("根据id审核采购单")
-    public R checkPurchase(@PathVariable("id") Integer id) {
+    @PutMapping("/purchase/updateStatus")
+    @ApiOperation("根据id审核/终止采购单")
+    //根据按钮来判断点击的是审核还是终止
+    //btnNum  1:审核  2：终止
+    public R updatePurchaseStatus(@ApiParam("采购单id") Integer id, @ApiParam("按钮id")Integer btnNum) {
 
         try {
-            return R.ok("审核通过");
+            purchaseService.updateStatus(id, btnNum);
+            return R.ok(btnNum == 1 ? "审核通过" : "已终止");
         } catch (Exception e) {
             e.printStackTrace();
-            return R.error("审核失败");
+            return R.error(btnNum == 1 ? "审核失败" : "终止失败");
         }
     }
 
+    //构建采购单编号
+    private String createPurchaseNo(){
+        StringBuilder sb = new StringBuilder();
 
-    @PutMapping("/purchase/suspend")
-    @ApiOperation("根据id终止采购单")
-    public R suspendPurchase(@PathVariable("id") Integer id) {
+        //获取当前日期
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1;
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        sb.append("CG" + year + month + day);
 
-        try {
-            return R.ok("终止成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error("终止失败");
-        }
-    }
+        Random random = new Random();
+        int ends = random.nextInt(99);
+        String format = String.format("%02d", ends);//如果不足两位，前面补0
+        sb.append(format);
 
-    @PostMapping("/purchase/save")
-    @ApiOperation("根据id终止采购单")
-    public R stopPurchase(@PathVariable("id") Integer id) {
-
-        try {
-            return R.ok("终止成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error("终止失败");
-        }
+        return sb.toString();
     }
 
 }

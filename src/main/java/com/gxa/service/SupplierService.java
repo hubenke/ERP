@@ -15,18 +15,18 @@ public interface SupplierService {
 
     List<Region> querySite(RegionDto regionDto); //查询省市
 
-    void addSuppiler(Supplier supplier);  //添加供应商
+    int addSuppiler(Supplier supplier);  //添加供应商
 
     List<GoodsDetail> queryGoogs();//  查询商品
 
 
     List<Supplier> queryById(Integer sid); //编辑页面查询
 
-    void updateGoods(String str, Integer sid);  //修改供应商关联商品
+    int updateGoods(String ids, Integer sid);  //修改供应商关联商品
 
-    void addGoods(String ids, Integer sid);  //添加供应商关联商品
+    int addGoods(String ids, Integer sid);  //添加供应商关联商品
 
-    void updateSupplier(Supplier supplier);  //修改供应商信息
+    int updateSupplier(Supplier supplier);  //修改供应商信息
 
     List<Emp> queryIntroducer();
 }

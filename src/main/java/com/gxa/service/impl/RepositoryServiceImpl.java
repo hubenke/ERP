@@ -1,6 +1,7 @@
 package com.gxa.service.impl;
 
 import com.gxa.dto.RepositoryDto;
+import com.gxa.dto.StockUpdateDto;
 import com.gxa.entity.Cargo;
 import com.gxa.entity.Repository;
 import com.gxa.mapper.RepositoryMapper;
@@ -28,6 +29,17 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
+    List<Repository> queryStoreAndArea() {
+        List<Repository> repositories = this.repositoryMapper.queryStoreAndArea();
+        return repositories;
+    }
+
+
+
+
+
+    @Override
+    public
     List<Repository> queryStructure() {
         List<Repository> repositories = this.repositoryMapper.queryStructure();
         return repositories;
@@ -35,16 +47,16 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-   void insertNew(Repository repository) {
-         this.repositoryMapper.insertNew(repository);
-
+   int addNew(Repository repository) {
+       int i=  this.repositoryMapper.addNew(repository);
+        return i;
     }
 
     @Override
     public
-    void insertArea(Cargo cargo) {
-      this.repositoryMapper.insertArea(cargo);
-
+    int addArea(Cargo cargo) {
+        int i=  this.repositoryMapper.addArea(cargo);
+        return i;
     }
 
     @Override
@@ -56,7 +68,29 @@ public class   RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public
-    void insertCargo(Cargo cargo) {
-        this.repositoryMapper.insertCargo();
+    int addCargo(Cargo cargo) {
+        int i=   this.repositoryMapper.addCargo(cargo);
+        return i;
+    }
+
+
+    @Override
+    public
+    int updateStock(StockUpdateDto stockUpdateDto) {
+        int i=    this.repositoryMapper.updateDecrease(stockUpdateDto);
+        if (i!=0){
+            int j = this.repositoryMapper.updateIncrease(stockUpdateDto);
+             if (j!=0){
+                 return j;
+             }else {
+                 return 0;}
+
+
+
+
+
+        }else {return 0;}
+
+
     }
 }

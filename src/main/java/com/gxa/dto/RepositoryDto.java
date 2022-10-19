@@ -1,5 +1,7 @@
 package com.gxa.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gxa.entity.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,21 +11,39 @@ import java.util.Date;
 @ApiModel("按条件筛选仓储")
 public
 class RepositoryDto {
+    @JsonProperty(value = "rname")
+    @ApiModelProperty("仓库名称")
+    private String rname;
 
-    @ApiModelProperty("所属仓库，id")
-    private Integer repositoryId;
+    @JsonProperty(value = "area")
+    @ApiModelProperty("所属区域")
+    private String area;
 
-    @ApiModelProperty("所属区域，id")
-    private Date regionId;
 
-    @ApiModelProperty("商品品类，对应商品表一级类")
-    private String type;
+    @JsonProperty(value = "typeA")
+    @ApiModelProperty("商品品类，对应商品一级类")
+    private Integer typeA;
 
-    @ApiModelProperty("商品名称 ")
+    @JsonProperty(value = "goodsName")
+    @ApiModelProperty("商品名称")
     private String goodsName;
 
+
+    @JsonProperty(value = "brand")
     @ApiModelProperty("商品品牌")
     private String brand;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
