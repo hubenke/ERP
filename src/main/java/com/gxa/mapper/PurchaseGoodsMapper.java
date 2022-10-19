@@ -14,5 +14,5 @@ public interface PurchaseGoodsMapper extends BaseMapper<PurchaseGoods> {
     int[] queryGoodsDetailId(int purchaseId);
 
     //删除采购单商品
-    void deleteById(String ids);
+    void deleteById(int[] ids);
 }

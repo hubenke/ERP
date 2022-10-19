@@ -32,7 +32,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void add(PurchaseAddDto purchaseAddDto) {
-        purchaseMapper.insert(purchaseAddDto);
+        //purchaseMapper.insertPurchase(purchaseAddDto.getPurchase());
     }
 
     @Override

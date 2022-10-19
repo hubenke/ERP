@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -114,10 +115,10 @@ public class PurchaseController {
         StringBuilder sb = new StringBuilder();
 
         //获取当前日期
-        Date date = new Date(System.currentTimeMillis());
-        int year = date.getYear();
-        int month = date.getMonth();
-        int day = date.getDay();
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1;
+        int day = now.get(Calendar.DAY_OF_MONTH);
         sb.append("CG" + year + month + day);
 
         Random random = new Random();

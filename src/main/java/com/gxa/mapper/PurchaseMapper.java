@@ -15,7 +15,7 @@ public interface PurchaseMapper extends BaseMapper<Purchase> {
 
     int queryIdByNo(String purchaseNo);
 
-    void insert(PurchaseAddDto purchaseAddDto);
+    void insertPurchase(PurchaseAddDto purchaseAddDto);
 
     void updateById(PurchaseAddDto purchaseAddDto);
 

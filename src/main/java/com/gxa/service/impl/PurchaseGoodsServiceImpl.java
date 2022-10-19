@@ -27,7 +27,7 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
 
     @Override
     public void add(PurchaseAddDto purchaseAddDto) {
-        purchaseMapper.insert(purchaseAddDto);
+        purchaseMapper.insertPurchase(purchaseAddDto);
 
         //通过采购单编号查询插入第一条语句的自增id
         //int purchaseid = purchaseMapper.queryIdByNo(purchaseAddDto.getPurchase().getPurchaseNo());
@@ -84,10 +84,9 @@ public class PurchaseGoodsServiceImpl implements PurchaseGoodsService {
                     a[i] = ids[i];//在界面上删除的商品id(不包含的数)
                 }
             }
-            String s = Arrays.toString(a);
 
             //删除多余关联的商品
-            purchaseGoodsMapper.deleteById(s);
+            purchaseGoodsMapper.deleteById(a);
         }
     }
 }
