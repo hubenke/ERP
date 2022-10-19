@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.RepositoryDto;
 import com.gxa.dto.StockUpdateDto;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,8 @@ public class RepositoryController {
    private RepositoryService repositoryService ;
     @GetMapping("/repository/structure")
     @ApiOperation("点击仓库结构，呈现数据")
-    public R queryStructure(){
+    public R queryStructure(Integer page,Integer limit){
+        PageHelper.startPage(page,limit);
         List<Repository> repositories = repositoryService.queryStructure();
         Map<String,Object> map = new HashMap();
         map.put("repositories",repositories);
