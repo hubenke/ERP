@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.EmpMapper">
+    <resultMap id="EmpMap" type="Emp">
+        <id property="eid" column="eid"/>
+        <result property="ename" column="ename"/>
+        <result property="account" column="account"/>
+        <result property="department" column="department"/>
+        <result property="tel" column="tel"/>
+        <result property="status" column="status"/>
+        <result property="sex" column="sex"/>
+        <result property="mgr" column="mgr"/>
+    </resultMap>
+
+    <insert id="addEmp" parameterType="com.gxa.entity.Emp">
+        INSERT INTO emp(ename,account,sex,tel,department,mgr,company_id)values(#{ename},#{account},#{sex},#{tel},#{department},#{mgr},#{companyId})
+    </insert>
+
+    <update id="updateEmpByEid" parameterType="com.gxa.entity.Emp">
+        UPDATE emp
+        SET ename=#{ename},account=#{account},department=#{department},tel=#{tel},status=#{status},sex=#{sex},mgr=#{mgr},company_id=#{companyId}
+        WHERE eid=#{eid}
+    </update>
+
+    <select id="queryEmpDto" resultType="com.gxa.entity.Emp">
+        SELECT e.eid,e.ename,e.account,e.department,c.job,e.tel,e.status,e.sex,e.mgr
+        FROM emp e
+        LEFT JOIN company c ON c.id=e.company_id
+        <where>
+            <if test="account != null and account != ''">
+                and e.account = #{account}
+            </if>
+            <if test="ename != null and ename != ''">
+                and e.ename = #{ename}
+            </if>
+            <if test="post != null and post != ''">
+                and e.post = #{post}
+            </if>
+            <if test="status != null">
+                and e.status = #{status}
+            </if>
+           </where>
+    </select>
+</mapper>

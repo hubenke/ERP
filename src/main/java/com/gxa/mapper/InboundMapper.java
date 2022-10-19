@@ -1,20 +1,22 @@
 package com.gxa.mapper;
 
+import com.gxa.dto.AssignDto;
+import com.gxa.dto.InboundDto;
+import com.gxa.entity.Emp;
 import com.gxa.entity.Inbound;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 
 public interface InboundMapper {
-//    User queryMyuserNameAndPwd1(@Param("userName") String userName,@Param("pwd") String pwd);
-      List<Inbound> queryAll();
+      List<Inbound> queryInboundDto(InboundDto inboundDto);
 
-      void add();  //入库  添加操作
+      void updateInboundStatus(Inbound inbound);
 
-      void queryEmps();   //查询员工 emp表
+      List<Emp> queryEmp(AssignDto assignDto);
 
-      void eidSet();  //指派员工 添加
+      void updateAssignById(Inbound inbound);
 
-      void eidRepeal(Integer eid);  //撤回指派
-
+      void updateRepealById(Integer id);
 }

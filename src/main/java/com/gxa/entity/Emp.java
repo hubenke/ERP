@@ -1,7 +1,7 @@
 package com.gxa.entity;
 
 
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.annotations.ApiModel;
@@ -15,7 +15,6 @@ import lombok.Data;
 @ApiModel("员工表实体类")
 public class Emp {
     @ApiModelProperty("员工编号")
-    @TableId(value = "eid")
     private Integer eid;
 
     @ApiModelProperty("员工姓名")
@@ -39,11 +38,16 @@ public class Emp {
     @ApiModelProperty("直属上级")
     private String mgr;
 
-    @ApiModelProperty("职位引用")
+    @ApiModelProperty("公司id")
+    @TableField("company_id")
+    private Integer companyId;
+
+    @ApiModelProperty("用户id")
+    private User user;
+
+    @ApiModelProperty("岗位引用")
     private Company company;
 
-//    @ApiModelProperty("用户id")
-//    private User user;
 }
 
 

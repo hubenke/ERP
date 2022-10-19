@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,8 +21,9 @@ public class Outbound {
     private Integer outno;
 
     @ApiModelProperty("配送方式")
-    private String type;
+    private Integer type;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty("出库日期")
     @TableField("out_time")
     private Date outTime;
@@ -32,10 +34,16 @@ public class Outbound {
     @ApiModelProperty("联系方式")
     private String tel;
 
-    @ApiModelProperty("仓库")
+    @ApiModelProperty("出库状态")
+    private Integer status;
+
+    @ApiModelProperty("仓库对象")
     private Repository repository;
 
-    @ApiModelProperty("区域")
+    @ApiModelProperty("区域对象")
     private Region region;
+
+    @ApiModelProperty("指派人")
+    private Integer principal;
 
 }

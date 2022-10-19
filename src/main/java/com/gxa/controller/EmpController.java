@@ -1,10 +1,14 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Emp;
+import com.gxa.service.EmpService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,36 +19,19 @@ import java.util.Map;
 @Api(tags = "员工接口")
 @RestController
 public class EmpController {
-//    @Autowired
-//    private EmpService empService;
+    @Autowired
+    private EmpService empService;
 
-    @GetMapping("/emp/list")
+    @PostMapping("/empDto/list")
     @ApiOperation("员工数据")
-    public R queryAll(){
-//            List<Outbound> outbounds = this.outboundService.queryOutbound();
+    public R queryEmpDto(@RequestBody EmpDto empDto){
+
         try {
-            List outbounds = new ArrayList();
-            outbounds.add("s");
-            outbounds.add("2");
-            outbounds.add("p");
-            Map map = new HashMap();
-            map.put("outbounds",outbounds);
-            return R.ok(map);
-        }catch (Exception e){
-            e.printStackTrace();
-            return R.error("查询失败");
-        }
-    }
-    @GetMapping("/empDto/list")
-    @ApiOperation("员工条件查询")
-        public R queryByEmpDto(@RequestBody EmpDto empDto){
-        try {
-            List outbounds = new ArrayList();
-            outbounds.add("s");
-            outbounds.add("2");
-            outbounds.add("p");
-            Map map = new HashMap();
-            map.put("outbounds",outbounds);
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(empDto.getPage(), empDto.getLimit());
+            List<Emp> emps = this.empService.queryEmpDto(empDto);
+            Map<String,Object> map = new HashMap<>();
+            map.put("emps",emps);
+            map.put("count",pageHelperList.getTotal());
             return R.ok(map);
         }catch (Exception e){
             e.printStackTrace();
@@ -55,18 +42,18 @@ public class EmpController {
     @ApiOperation("添加员工")
     public R addEmp(@RequestBody Emp emp) {
         try {
-
+            this.empService.addEmp(emp);
             return R.ok("添加成功");
         } catch (Exception e) {
             e.printStackTrace();
             return R.error("添加失败");
         }
     }
-    @PutMapping("/emp/{eid}")
-    @ApiOperation("根据id修改员工数据")
-    public R updateEmp(@PathVariable("eid") Integer eid) {
+    @PostMapping("/emp/update")
+    @ApiOperation("根据员工编号修改员工数据")
+    public R updateEmp(@RequestBody Emp emp) {
         try {
-
+            this.empService.updateEmpByEid(emp);
             return R.ok("修改成功");
         } catch (Exception e) {
             e.printStackTrace();

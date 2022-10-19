@@ -3,6 +3,7 @@ package com.gxa.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class Inbound {
     @ApiModelProperty("入库表id")
     private Integer id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty("入库时间")
     private Date inTime;
 
@@ -20,7 +22,7 @@ public class Inbound {
     private String inboundno;
 
     @ApiModelProperty("入库状态")
-    private String status;
+    private Integer status;
 
     @ApiModelProperty("入库类型")
     private Integer type;
@@ -34,4 +36,6 @@ public class Inbound {
     @ApiModelProperty("仓库")
     private Repository repository;
 
+    @ApiModelProperty("指派人")
+    private Integer principal;
 }

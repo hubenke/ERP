@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.OutboundMapper">
+    <resultMap id="OutboundMap" type="Outbound">
+        <id property="id" column="id"/>
+        <result property="outno" column="outno"/>
+        <result property="type" column="type"/>
+        <result property="outTime" column="out_time"/>
+        <result property="receiver" column="receiver"/>
+        <result property="tel" column="tel"/>
+        <result property="repository.rname" column="rname"/>
+        <result property="repository.storeManager" column="storeManager"/>
+        <result property="region.town" column="address"/>
+    </resultMap>
+    <resultMap id="EmpMap" type="Emp">
+        <id property="eid" column="eid"/>
+        <result property="ename" column="ename"/>
+        <result property="company.job" column="job"/>
+    </resultMap>
+    <resultMap id="GoodsMap" type="OutboundGoods">
+        <id property="id" column="id"/>
+        <result property="outbound.outno" column="outno"/>
+        <result property="outqty" column="outqty"/>
+        <result property="goods.gid" column="gid"/>
+        <result property="goods.gname" column="gname"/>
+        <result property="goodsDetail.unit" column="unit"/>
+    </resultMap>
+    <insert id="addOutbound" parameterType="com.gxa.entity.Outbound">
+        INSERT INTO outbound(out_time,outno,town,repository_id,receiver,tel) VALUES(#{outTime},#{outno},
+        #{town},#{repositoryId},#{receiver},#{tel})
+    </insert>
+
+    <insert id="addOutboundGoods" parameterType="com.gxa.entity.OutboundGoods">
+        INSERT INTO outbound_goods(id,outqty,goods_detail_id,outbound_id)VALUES(#{id},#{outqty},#{goods_detail_id},#{outbound_id})
+    </insert>
+
+    <update id="updateAssignById" parameterType="com.gxa.entity.Outbound">
+        UPDATE outbound
+        SET principal=#{principal}
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateOutboundStatus" parameterType="com.gxa.entity.Outbound">
+        UPDATE outbound
+        SET status=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateRepealById" parameterType="com.gxa.entity.Outbound">
+        UPDATE outbound
+        SET principal=null
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteOutboundGoodsById" parameterType="com.gxa.entity.OutboundGoods">
+        DELETE FORM outbound_goods WHERE id=#{id}
+    </delete>
+
+    <select id="queryAllOutboundDto" resultMap="OutboundMap">
+        SELECT o.id,o.outno,o.type,o.out_time,o.receiver,o.tel,rep.rname,rep.storemanager,reg.town
+        FROM outbound o
+        LEFT JOIN repository rep ON o.repository_id=rep.rid
+        LEFT JOIN region reg ON o.region_id=reg.id
+        <where>
+            <if test="type != null">
+                o.type = #{type}
+            </if>
+            <if test="outTime != null">
+                o.out_time = #{outTime}
+            </if>
+            <if test="rid != null and rid != ''">
+                rep.rid = #{rid}
+            </if>
+            <if test="outno != null">
+                o.outno = #{outno}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryEmp" resultMap="EmpMap">
+        SELECT e.eid,e.ename,c.job
+        FROM emp e
+        LEFT JOIN company c ON c.id=e.company_id
+        <where>
+            <if test="ename != null and ename != ''">
+                and e.ename=#{ename}
+            </if>
+            <if test="eid != null">
+                and e.eid = #{eid}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryGoods" resultType="com.gxa.entity.OutboundGoods">
+        SELECT o.outno,g.gid,g.gname,og.outqty,gd.unit
+        FROM outbound_goods og
+        LEFT JOIN outbound o ON o.id = og.outbound_id
+        LEFT JOIN goods_detail gd ON og.goods_detail_id=gd.did
+        LEFT JOIN goods g ON gd.goods_id = g.gid
+    </select>
+
+</mapper>
