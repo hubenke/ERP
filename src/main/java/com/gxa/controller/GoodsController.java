@@ -2,21 +2,16 @@ package com.gxa.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
-import com.gxa.dto.GoodsDetailsDto;
 import com.gxa.dto.GoodsDto;
 import com.gxa.dto.GoodsQueryDto;
 import com.gxa.entity.Goods;
 import com.gxa.entity.GoodsDetail;
-import com.gxa.entity.Stock;
 import com.gxa.service.GoodsService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,11 +109,6 @@ public class GoodsController {
         }
 
     }
-
-
-
-
-
 
 
 

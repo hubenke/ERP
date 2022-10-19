@@ -3,6 +3,8 @@ package com.gxa.service;
 
 import com.gxa.dto.GoodsDto;
 import com.gxa.dto.GoodsQueryDto;
+import com.gxa.dto.GoodsTypeConditionDto;
+import com.gxa.dto.GoodsTypeQueryDto;
 import com.gxa.entity.Goods;
 import com.gxa.entity.GoodsDetail;
 
@@ -22,6 +24,10 @@ public interface GoodsService {
     int addGoods(Goods goods);;//添加商品
 
     void updateGoodsById(GoodsDetail goodsDetail);
+
+    List<GoodsTypeQueryDto> queryGoodsAttribute(GoodsTypeConditionDto goodsTypeConditionDto);
+
+    void updateGoodsAttribute(GoodsTypeQueryDto goodsTypeQueryDto);
 
 
 }

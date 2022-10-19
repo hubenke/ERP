@@ -2,6 +2,8 @@ package com.gxa.service.impl;
 
 import com.gxa.dto.GoodsDto;
 import com.gxa.dto.GoodsQueryDto;
+import com.gxa.dto.GoodsTypeConditionDto;
+import com.gxa.dto.GoodsTypeQueryDto;
 import com.gxa.entity.Goods;
 import com.gxa.entity.GoodsDetail;
 import com.gxa.mapper.GoodsDetailMapper;
@@ -72,6 +74,17 @@ public class GoodsServiceImpl  implements GoodsService {
     @Override
     public void updateGoodsById(GoodsDetail goodsDetail) {
         this.goodsMapper.updateGoodsById(goodsDetail);
+    }
+
+    @Override
+    public List<GoodsTypeQueryDto> queryGoodsAttribute(GoodsTypeConditionDto goodsTypeConditionDto) {
+        List<GoodsTypeQueryDto> goodsAttribute = this.goodsMapper.queryGoodsAttribute(goodsTypeConditionDto);
+        return goodsAttribute;
+    }
+
+    @Override
+    public void updateGoodsAttribute(GoodsTypeQueryDto goodsTypeQueryDto) {
+        this.goodsMapper.updateGoodsAttribute(goodsTypeQueryDto);
     }
 
 

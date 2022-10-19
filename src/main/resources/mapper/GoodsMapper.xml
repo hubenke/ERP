@@ -104,6 +104,17 @@
         LEFT JOIN stock s ON  s.goodsdetail_id = gd.did
     </select>
 
+    <select id="queryGoodsAttribute" resultType="goodsTypeQueryDto">
+        SELECT gd.did,g.gname,gd.color,gd.size,gd.spec
+        FROM goods_detail gd,goods g
+        <where>
+            gd.goods_id=g.gid
+            <if test="gname != null and gname != ''">
+                and gname=#{gname}
+            </if>
+        </where>
+    </select>
+
 
     <update id="updateShelves">
       UPDATE goods_detail SET status=0 WHERE did=#{did}
@@ -116,6 +127,10 @@
 
     <update id="updateGoodsById">
         UPDATE goods_detail SET selling_price=#{sellingPrice},color=#{color},size=#{size},spec=#{spec} WHERE did=#{did}
+    </update>
+
+    <update id="updateGoodsAttribute">
+        UPDATE goods_detail SET color=#{color},size=#{size},spec=#{spec} WHERE did=#{did}
     </update>
 
 </mapper>
