@@ -20,16 +20,16 @@ public interface RepositoryService {
 
 
 //新增仓库
-    void addNew(Repository repository);
+    int addNew(Repository repository);
 
 
 
-    void addArea(Cargo cargo);
+    int addArea(Cargo cargo);
 
     List<Cargo> queryLevelByRnameCargos( String rname);
 
-    void addCargo(Cargo cargo);
+    int addCargo(Cargo cargo);
 
-    void updateStock(StockUpdateDto stockUpdateDto);
+    int updateStock(StockUpdateDto stockUpdateDto);
 
 }

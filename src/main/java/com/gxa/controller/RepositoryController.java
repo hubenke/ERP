@@ -42,17 +42,20 @@ public class RepositoryController {
     @ApiOperation("添加仓库确定")
     public R addNew(@RequestBody Repository repository){
 
-        repositoryService.addNew(repository);
-        Map<String,Object> map = new HashMap();
-        map.put("repositories",repository);
-
         try {
-            return R.ok("添加成功");
-        }catch (Exception e){
+            int i = repositoryService.addNew(repository);
+
+            if (i != 0) {
+                return R.ok("添加成功");
+            } else {
+                return R.error(1, "添加失败");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return R.error("添加失败");
         }
     }
+
 
 
 
@@ -61,12 +64,16 @@ public class RepositoryController {
     @ApiOperation("添加仓库结构区域数据")
     public R addArea(@RequestBody Cargo cargo){
 
-        repositoryService.addArea(cargo);
+        try{
+        int i = repositoryService.addArea(cargo);
 
 
-        try {
-            return R.ok("添加成功");
-        }catch (Exception e){
+            if (i != 0) {
+                return R.ok("添加成功");
+            } else {
+                return R.error(1, "添加失败");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return R.error("添加失败");
         }
@@ -77,7 +84,8 @@ public class RepositoryController {
 
 
 
-    @GetMapping
+
+
     @ApiOperation("点击新增货架，根据当前仓库名称给所属仓库赋值，并且返回仓库名称，接收查询到的区域名称集合")
     @PostMapping("/repository/queryArea")
     public R queryArea(@ApiParam("仓库名称") String rname){
@@ -97,10 +105,14 @@ public class RepositoryController {
     @PostMapping("/repository/cargoAdd")
     @ApiOperation("点击添加仓库结构货架数据，返回当前仓库名称，货架名称，区域名称")
     public R addCargo(@RequestBody Cargo cargo){
-        repositoryService.addCargo(cargo);
-        try {
-            return R.ok("添加成功");
-        }catch (Exception e){
+        try { int i = repositoryService.addCargo(cargo);
+
+            if (i != 0) {
+                return R.ok("添加成功");
+            } else {
+                return R.error(1, "添加失败");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return R.error("添加失败");
         }
@@ -123,11 +135,12 @@ public class RepositoryController {
 
     @PostMapping("/repository/warehouse")
     @ApiOperation("点击仓储管理，呈现数据,且按条件查询")
-    public R  queryWarehouse(RepositoryDto repositoryDto){
+    public R  queryWarehouse(@RequestBody RepositoryDto repositoryDto){
 
 
 
-      try {List<Repository> repositories = this.repositoryService.queryAll(repositoryDto);
+      try {
+          List<Repository> repositories = this.repositoryService.queryAll(repositoryDto);
 
           Map<String,Object> map = new HashMap<>();
           map.put("repositories",repositories);
@@ -209,14 +222,17 @@ public class RepositoryController {
     @PutMapping("/repository/Allocate")
     @ApiOperation("调拨确定")
     public R updateAllocate (@ RequestBody  StockUpdateDto stockUpdateDto) {
-        repositoryService.updateStock(stockUpdateDto);
-        try {
-            return R.ok("调拨完成");
-
+        try { int i = repositoryService.updateStock(stockUpdateDto);
+            if (i != 0) {
+                return R.ok("修改成功");
+            } else {
+                return R.error(1, "修改失败");
+            }
         } catch (Exception e) {
-            return R.error("调拨失败");
+            e.printStackTrace();
+            return R.error("修改失败");
         }
-
+    }
 
 //    @GetMapping("/repository/warehouse")
 //    @ApiOperation("仓库报表，呈现数据")
@@ -244,4 +260,4 @@ public class RepositoryController {
 
     }
 
-}
+
