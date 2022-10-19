@@ -30,23 +30,31 @@
     <select id="queryAll" resultMap="companyResultMap">
         SELECT c.id,c.compno,c.name,c.job
         FROM company c
+
+    </select>
+
+    <select id="queryByCondition" resultMap="companyResultMap">
+        SELECT c.id,c.compno,c.name,c.job
+        FROM company c
         <if test="id !=null"  >
-                c.id=#{id}
+            c.id=#{id}
         </if>
 
         <if test="company!=null">
-                c.compno=#{compno}
+            c.compno=#{compno}
         </if>
 
         <if test="name !=null">
-                c.name=#{name}
+            c.name=#{name}
         </if>
 
         <if test="job !=null">
-                c.job=#{job}
+            c.job=#{job}
         </if>
+
     </select>
 
+</mapper>
 <!--    <select id="queryByCondition" resultMap="companyResultMap">-->
 <!--      SELECT c.id,c.compno,c.name,c.job-->
 <!--      FROM company c-->
@@ -75,4 +83,3 @@
 
 
 
-</mapper>

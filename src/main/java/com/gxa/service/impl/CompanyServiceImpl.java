@@ -23,8 +23,14 @@ public class CompanyServiceImpl  implements CompanyService {
 //        return  companies;
 //    }
 
+//    @Override
+//    public List<Company> queryAll(CompanyDto companyDto) {
+//        List<Company> companies =this.companyMapper.queryAll();
+//        return companies;
+//    }
+
     @Override
-    public List<Company> queryAll(CompanyDto companyDto) {
+    public List<Company> queryAll() {
         List<Company> companies =this.companyMapper.queryAll();
         return companies;
     }
@@ -37,9 +43,8 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public int updateById(Integer id) {
-        int updateById =companyMapper.updateById(id);
-        return updateById;
+    public void updateById(Integer id) {
+      this.companyMapper.updateById(id);
 
 
     }
@@ -50,5 +55,11 @@ public class CompanyServiceImpl  implements CompanyService {
         return companies;
 
 
+    }
+
+    @Override
+    public List<Company> queryByCondition(CompanyDto companyDto) {
+        List<Company> queryByConditionCompanys =this.queryByCondition(companyDto);
+        return queryByConditionCompanys;
     }
 }

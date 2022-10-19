@@ -22,6 +22,7 @@ public interface CompanyMapper  extends BaseMapper<Company> {
   List<Company> queryById(Integer id);//根据id去查询
 
 //  void  queryByCondit
+  List<Company> queryByCondition(CompanyDto companyDto);
 
 
 

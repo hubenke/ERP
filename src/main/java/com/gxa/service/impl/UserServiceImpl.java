@@ -58,9 +58,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer updateNameAndPwd(User user) {
-       int updateNameAndPwd = userMapper.updateNameAndPwd(user);
-       return updateNameAndPwd;
+    public void updateNameAndPwd(User user) {
+       this.userMapper.updateNameAndPwd(user);
+//       return updateNameAndPwd;
 
+    }
+
+    @Override
+    public List<User> queryAll() {
+        List<User> users =this.userMapper.queryAll();
+        return users;
     }
 }

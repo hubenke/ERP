@@ -20,7 +20,9 @@ public interface UserService {
 
     User login(User user);
 
-    Integer updateNameAndPwd(User user);
+    void updateNameAndPwd(User user);
+
+    List<User> queryAll();
 
 
 

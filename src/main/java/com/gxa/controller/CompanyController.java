@@ -1,5 +1,6 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.dto.CompanyDto;
@@ -24,28 +25,51 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @PostMapping("/com/list")
-    @ApiOperation("查询公司接口")//失败
-    public R queryAll( CompanyDto companyDto,Integer page,Integer limit) {
+    @GetMapping("/com/list")
+    @ApiOperation("查询所有公司")
+    public R queryAll(@ApiParam("页数") Integer page,@ApiParam("条数") Integer limit) {
         try{
-            PageHelper.startPage(page, limit);
+           // PageHelper.startPage(page, limit);
 
-            List<Company> companies = this.companyService.queryAll(companyDto);
+            Page<Map<String,Object>> PageHelperList =PageHelper.startPage(page,limit);
+            List<Company> companies = this.companyService.queryAll();
+            System.out.println("company:------------"+companies.toString());
+            System.out.println("count:--------"+PageHelperList.getTotal());
             Map<String,Object> map =new HashMap<>();
-            map.put("companies", companies);
+            map.put("company", companies);
+            map.put("count",PageHelperList.getTotal());
             return R.ok(map);
         }catch (Exception e){
+            e.printStackTrace();
             return R.error("查询失败");
         }
 
 //        List list = new ArrayList()
-
+//
     }
+
+    @GetMapping("/com/queryByCondition")
+    @ApiOperation("根据条件模块名称查询")
+    public R queryByCondition(@RequestBody CompanyDto companyDto){
+        try {
+            List<Company> queryByConditionCompanys =this.companyService.queryByCondition(companyDto);
+
+            System.out.println("companyDto---------"+companyDto.toString());
+            Map<String,Object> map =new HashMap<>();
+            map.put("result",queryByConditionCompanys);
+            R r =R.ok(map);
+            return r;
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
+    }
+
 
     @PostMapping("/com/add")
     @ApiOperation("添加公司接口")
 
-    public R addCompany( @RequestBody Company company) {
+    public R addCompany( Company company) {
 
 
         try {
@@ -115,7 +139,7 @@ public class CompanyController {
         }
 
     }
-    @GetMapping("/cm/byido")//失败
+    @GetMapping("/com/byido")
     @ApiOperation("通过id查询操作")
     public R querById( Integer id){
         try {

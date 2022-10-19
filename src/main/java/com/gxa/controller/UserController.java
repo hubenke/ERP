@@ -1,5 +1,7 @@
 package com.gxa.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
 import com.gxa.entity.User;
 import com.gxa.service.UserService;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -67,7 +70,7 @@ public class UserController {
  }
 
   @ApiOperation("用户修改")
-  @PostMapping("/user/updat")
+  @PostMapping("/user/updat") //测试失败
   public  R update(Integer id){
         try {
             this.userService.updateById(id);
@@ -92,6 +95,24 @@ public class UserController {
             return R.error("退出登录失败");
         }
 
+    }
+
+    @GetMapping("/user")
+    @ApiOperation("查询所有用户")
+    public R List(@ApiParam("页数") Integer page,@ApiParam("条数") Integer limit){
+        try {
+            Page<Map<String,Object>> pageHelperList = PageHelper.startPage(page,limit);
+            List<User> users =this.userService.queryAll();
+            System.out.println("users:-------" +users.toString());
+            System.out.println("count:------"+pageHelperList.getTotal());
+            Map<String,Object> map =new HashMap<>();
+            map.put("user",users);
+            map.put("count",pageHelperList.getTotal());
+            return R.ok(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("查询失败");
+        }
     }
 
     @PostMapping("/user/add")
@@ -137,7 +158,7 @@ public class UserController {
 
     @GetMapping("/uesr/queryId")
     @ApiOperation("根据id查询用户")
-    public R queryByUid( Integer id) {
+    public R queryByUid( Integer id) {//失败
         try {
             this.userService.queryByUid(id);
             return R.ok("查询成功");
@@ -148,17 +169,6 @@ public class UserController {
 
     }
 
-
     //盐值计算
-
-
-    //验证码代码
-
-
-
-
-
-
-
 
 }

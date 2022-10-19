@@ -15,11 +15,14 @@
         NISERT INTO USER(uid,uname,password,salt,LIMIT) value (#{uid},#{uname},#{password},#{salt},#{limit})
     </insert>
 
+
+
     <update id="updateById" >
         UPDATE user
         SET limit = #{limt}
         WHERE uid = #{uid}
     </update>
+
     <update id="updateNameAndPwd">
         UPDATE `user`
         set uname,`password`
@@ -32,7 +35,7 @@
         WHERE uname=#{uname}
     </select>
 
-    <select id="queryByUid" >
+    <select id="queryByUid"  resultMap="userResultMap">
         SELECT u.uid,u.uname,u.limit
         FROM user u
         WHERE u.uid = #{uid}
