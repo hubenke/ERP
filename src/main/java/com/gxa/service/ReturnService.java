@@ -9,4 +9,7 @@ public interface ReturnService {
 
     List<ReturnQueryDto> queryAllReturnBill(ReturnBillDto returnBillDto);
 
+    int[] queryReturnType();
+
+    void updateStatus(Integer id,Integer btnNum);
 }

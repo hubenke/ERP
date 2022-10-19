@@ -25,13 +25,13 @@
     </insert>
 
     <update id="updateById">
-        update from purchase
+        update purchase
         set status=#{status},purchase_handler=#{purchaseHandlerId},remark=#{remark},address=#{address},apply_id=#{apply_id}
         where id=#{id}
     </update>
 
     <update id="updateStatus">
-        update from purchase
+        update purchase
         <if test="btnNum == 1">
             set status = 2
         </if>

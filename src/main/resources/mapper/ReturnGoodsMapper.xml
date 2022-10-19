@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.ReturnGoodsMapper">
+
+    <insert id="insertReturnGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into return_goods(returnqty,goods_detail_id,returnbill_id) values
+        <foreach collection="returnGoodsList" item="rg" index="index" separator=",">
+            (#{rg.returnqty},#{rg.goodsDetailId},(select id from returnbill where returnno = #{returnBill.returnNo}))
+        </foreach>
+    </insert>
+
+</mapper>
