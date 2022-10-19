@@ -2,6 +2,7 @@ package com.gxa.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.gxa.common.uitls.R;
+import com.gxa.dto.ApplyAddDto;
 import com.gxa.dto.ApplyDto;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
@@ -31,6 +32,8 @@ public class ApplyController {
     @PostMapping("/apply/applylist")
     public R queryAll(@RequestBody ApplyDto applyDto) {
 
+        PageHelper.startPage(applyDto.getPage(),applyDto.getLimit());  //使用此方法进行分页
+
         List<Apply> applies = this.applyService.queryAll(applyDto);
 
         Map<String,Object> map =new HashMap<>();
@@ -41,11 +44,15 @@ public class ApplyController {
 
     @PostMapping("/apply/applyAdd")
     @ApiOperation("新增请购单的保存")
-    public R applyGoodsAdd(@RequestBody Apply apply){
+    public R applyGoodsAdd(@RequestBody ApplyAddDto applyAddDto){
 
-        this.applyService.addApply();
+        System.out.println("接收到的数据是-------"+applyAddDto);
+        int i = this.applyService.addApply(applyAddDto);
+        if(i != 0){
+            return R.ok("添加成功");
+        }
 
-        return R.ok();
+        return R.error("添加失败");
     }
 
     @ApiOperation("查询部门")
@@ -65,6 +72,8 @@ public class ApplyController {
 
 //        PageHelper.startPage(page, limit);  //使用此方法进行分页
 
+        System.out.println("接收的数据是-----------"+empDto);
+
         List<Emp> emps = this.applyService.queryEmp(empDto);
 
         Map<String,Object> map =new HashMap<>();
@@ -77,12 +86,12 @@ public class ApplyController {
 
     @GetMapping("/apply/goods")
     @ApiOperation("查询商品")
-    public R applyAdd( Apply apply){
+    public R applyAdd(ApplyAddDto applyAddDto){
+
+        List<ApplyDto> goods = this.applyService.queryGoods(applyAddDto);
 
         Map<String,Object> map =new HashMap<>();
-
-
-
+        map.put("goods",goods);
 
         return R.ok(map);
     }
@@ -91,50 +100,44 @@ public class ApplyController {
 
     @ApiOperation("请购单编辑保存")
     @PutMapping("/apply/update")
-    public R applyupdate(@RequestBody Apply apply) {
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+    public R applyupdate(ApplyDto applyDto) {
 
 
 
-        return R.ok(map);
+//        if (i != 0){
+//            return R.ok();
+//        }else {
+            return R.error();
+//        }
     }
 
 
     @ApiOperation("指派员工保存，返回当前请购单编号和指派的员工姓名")
-    @PutMapping("/apply/edit/{applyno}")
-    public R updateEmp(@PathVariable("applyno") Integer applyno, @ApiParam("指派的员工姓名") String ename) {
+    @PutMapping("/apply/edit")
+    public R updateEmp(@ApiParam("请购单编号") Integer applyno, @ApiParam("指派的员工id") Integer eid) {
 
-        List list =new ArrayList();
-        list.add("可以传");
-        list.add("123");
-        list.add("456");
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+        int i = this.applyService.assign(applyno, eid);
 
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
 
-
-        return R.ok(map);
     }
 
-    @ApiOperation("撤销确定，返回当前撤销的请购单编号")
-    @DeleteMapping("/apply/delete/{applyno}")
-    public R DeleteEmp(@PathVariable("applyno") Integer applyno,@ApiParam("撤销的员工姓名") String ename) {
+    @ApiOperation("撤销接口，需要给到请购单编号")
+    @PutMapping("/apply/delete")
+    public R DeleteEmp(@ApiParam("请购单编号") Integer applyno) {
 
-        List list =new ArrayList();
-        list.add("123");
-        list.add("456");
+        int i = this.applyService.backout(applyno);
 
-        Map<String,Object> map =new HashMap<>();
-        map.put("list",list);
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
 
-
-
-        return R.ok(map);
     }
 
 
@@ -142,7 +145,21 @@ public class ApplyController {
     @PutMapping("/apply/check")
     public R updateCheck(@ApiParam("用来接收的模型")Apply apply) {
 
-        this.applyService.updateCheck(apply);
+        int i = this.applyService.updateCheck(apply);
+
+        if (i != 0){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
+    }
+
+    @ApiOperation("删除接口")
+    @DeleteMapping("/apply/del")
+    private R deleteApply(ApplyAddDto applyAddDto){
+
+        this.applyService.deleteApply(applyAddDto);
 
         return R.ok();
     }

@@ -16,6 +16,7 @@ import lombok.Data;
 public class Emp {
 
     @ApiModelProperty("员工编号")
+    @TableId("eid")
     private Integer eid;
 
     @ApiModelProperty("员工姓名")

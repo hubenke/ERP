@@ -35,9 +35,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void addSuppiler(Supplier supplier) {  //添加供应商
+    public int addSuppiler(Supplier supplier) {  //添加供应商
 
-        this.supplierMapper.addSupplier(supplier);
+        int i = this.supplierMapper.addSupplier(supplier);
+
+        return i;
 
     }
 
@@ -57,18 +59,26 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void updateGoods(String ids, Integer sid) {  //修改供应商关联商品
-        this.supplierMapper.updateGoods(ids,sid);
+    public int updateGoods(String ids, Integer sid) {  //修改供应商关联商品
+
+        int i = this.supplierMapper.updateGoods(ids, sid);
+
+        return i;
     }
 
     @Override
-    public void addGoods(String ids, Integer sid) {  //添加供应商关联商品
-        this.supplierMapper.addGoods(ids,sid);
+    public int addGoods(String ids, Integer sid) {  //添加供应商关联商品
+
+        int i = this.supplierMapper.addGoods(ids, sid);
+
+        return i;
     }
 
     @Override
-    public void updateSupplier(Supplier supplier) {  //修改供应商信息
-        this.supplierMapper.updateSupplier(supplier);
+    public int updateSupplier(Supplier supplier) {  //修改供应商信息
+        int i = this.supplierMapper.updateSupplier(supplier);
+
+        return i;
     }
 
     @Override

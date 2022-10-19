@@ -8,8 +8,8 @@
 
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into purchase_goods(buyqty,goods_id,purchase_id)
         <foreach collection="purchaseGoodsList" item="pg" index="index" separator="union all">
+        insert into purchase_goods(buyqty,goods_id,purchase_id)
             select
             #{pg.buyQty},
             #{pg.goodsId},

@@ -1,5 +1,6 @@
 package com.gxa.service;
 
+import com.gxa.dto.ApplyAddDto;
 import com.gxa.dto.ApplyDto;
 import com.gxa.dto.EmpDto;
 import com.gxa.entity.Apply;
@@ -12,9 +13,19 @@ public interface ApplyService {
 
     List<Emp> queryDeot();
 
-    void updateCheck(Apply apply);
+    int updateCheck(Apply apply);
 
-    void addApply();
+    int addApply(ApplyAddDto applyAddDto);
 
     List<Emp> queryEmp(EmpDto empDto);
+
+    int assign(Integer applyno,Integer eid);
+
+    int backout(Integer applyno);
+
+    List<ApplyDto> queryGoods(ApplyAddDto applyAddDto);
+
+    int addGoods(ApplyDto applyDto);
+
+    int deleteApply(ApplyAddDto applyAddDto);
 }

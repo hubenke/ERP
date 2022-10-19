@@ -11,7 +11,7 @@ public interface InboundMapper {
 
       void add();  //入库  添加操作
 
-      void queryEmps();   //查询员工 emp表
+//      void queryEmps();   //查询员工 emp表
 
       void eidSet();  //指派员工 添加
 

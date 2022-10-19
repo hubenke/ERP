@@ -58,6 +58,7 @@ public class MyOrderServiceImpl  implements MyOrderService {
 
     @Override
     public void updateStatusByOut(Integer id) {
+
         this.myOrderMapper.updateStatusByOut(id);
     }
 
@@ -78,11 +79,12 @@ public class MyOrderServiceImpl  implements MyOrderService {
 
     @Override
     public void updateFinishes(Integer[] ids) {
+
         this.myOrderMapper.updateFinishes(ids);
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         this.myOrderMapper.delete(id);
     }
 
